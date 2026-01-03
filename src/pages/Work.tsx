@@ -62,18 +62,11 @@ const ProjectCard: React.FC<{
                 className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
               >
                 <div className="w-[45%] h-[45%] bg-brand-dark p-2 shadow-2xl relative flex items-center justify-center border border-brand-gray">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={currentImageIndex}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      src={project.hoverImages[currentImageIndex]}
-                      alt=""
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </AnimatePresence>
+                  <img
+                    src={project.hoverImages[currentImageIndex]}
+                    alt=""
+                    className="max-w-full max-h-full object-contain"
+                  />
                 </div>
               </motion.div>
             )}
