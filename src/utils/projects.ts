@@ -10,20 +10,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "01",
-    title: "PayJustNow",
-    category: ["UX Design", "UI Design", "Design Strategy"],
-    description: "PayJustNow's Website Reimagined",
-    imageUrl:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop",
-    hoverImages: [
-      "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556742102-8033105617f3?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556742031-c6961e8560b0?q=80&w=2070&auto=format&fit=crop",
-    ],
-    link: "/work/payjustnow-web",
-  },
-  {
     id: "02",
     title: "Yucca Packaging",
     category: ["Brand Design", "UI Design", "UX Design"],
