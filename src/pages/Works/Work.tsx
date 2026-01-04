@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
-import { projects, categories, Project } from "../utils/projects";
+import { projects, categories, Project } from "../../utils/projects";
 import { LayoutGrid, List } from "lucide-react";
 import clsx from "clsx";
-import FooterCustom from "../components/common/footerCustom/FooterCustom";
+import FooterCustom from "../../components/common/footerCustom/FooterCustom";
+import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 
 const ProjectCard: React.FC<{
   project: Project;
@@ -127,6 +128,7 @@ const Work: React.FC = () => {
       : projects.filter((p) => p.category.includes(activeCategory));
 
   return (
+    <TransitionAnimate>
     <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
       <div className="max-w-400 mx-auto">
        
@@ -175,9 +177,10 @@ const Work: React.FC = () => {
           </div>
           <div className="self-start overflow-hidden mt-10">
             <motion.h1 
+            
               initial={{ y: 200 }}
               animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
               className=" text-6xl md:text-9xl font-light tracking-tighter mb-8 md:mb-0 text-white"
             >
             All Work
@@ -208,6 +211,7 @@ const Work: React.FC = () => {
         <FooterCustom />
       </div>
     </div>
+    </TransitionAnimate>
   );
 };
 
