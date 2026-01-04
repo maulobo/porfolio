@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects, categories, Project } from "../utils/projects";
 import { LayoutGrid, List } from "lucide-react";
 import clsx from "clsx";
@@ -8,10 +8,21 @@ import FooterCustom from "../components/common/footerCustom/FooterCustom";
 const ProjectCard: React.FC<{
   project: Project;
   viewMode: "grid" | "list";
-}> = ({ project, viewMode }) => {
+  index: number;
+}> = ({ project, viewMode, index }) => {
+  const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["center end", "end start"]
+  });
+  const yRange = index % 2 === 0 ? [0, 50] : [0, -50]; 
+
+  const smoothProgress = useSpring(scrollYProgress, { damping: 15, stiffness: 100 });
+  const y = useTransform(smoothProgress, [0, 1], yRange);
+  
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isHovered && project.hoverImages && project.hoverImages.length > 0) {
@@ -28,6 +39,8 @@ const ProjectCard: React.FC<{
 
   return (
     <motion.div
+      ref={cardRef} 
+      style={{ y: viewMode === 'grid' ? y : 0 }}
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -62,7 +75,7 @@ const ProjectCard: React.FC<{
                 transition={{ duration: 0.3 }}
                 className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none rounded-md"
               >
-                <div className="w-[45%] h-[45%] bg-brand-dark  p-2 shadow-2xl relative flex items-center justify-center border border-brand-gray">
+                <div className="w-[55%] h-[55%] bg-brand-dark rounded-md p-4 shadow-2xl relative flex items-center justify-center border border-brand-gray">
                   <img
                     src={project.hoverImages[currentImageIndex]}
                     alt=""
@@ -73,7 +86,7 @@ const ProjectCard: React.FC<{
             )}
         </AnimatePresence>
 
-        {/* Darken background on hover */}
+
         <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/40 transition-colors duration-300 pointer-events-none" />
       </div>
 
@@ -182,17 +195,16 @@ const Work: React.FC = () => {
           )}
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 viewMode={viewMode}
+                index={index}
               />
             ))}
           </AnimatePresence>
         </motion.div>
-
-        
         <FooterCustom />
       </div>
     </div>

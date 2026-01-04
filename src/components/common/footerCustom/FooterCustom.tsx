@@ -1,11 +1,24 @@
 
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionTemplate, useSpring } from 'framer-motion';
 // @ts-ignore
 import { Gradient } from '../../../utils/Gradient';
 import './FooterCustom.css';
 
 const FooterCustom = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+  
+  const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
+  
+  const y = useTransform(smoothProgress, [0, 1], [200, 0]);
+
+   const scale = useTransform(smoothProgress, [0, 1], [0.3, 1]);
+
   useEffect(() => {
     const gradient = new Gradient();
     // @ts-ignore
@@ -13,7 +26,11 @@ const FooterCustom = () => {
   }, []);
 
   return (
-    <div className="mt-32 border-t border-brand-gray footer-custom-container relative">
+    <motion.div 
+      ref={containerRef}
+      className="mt-32 border-t border-brand-gray footer-custom-container relative"
+      style={{ scale, y }}
+    >
         <canvas id="gradient-canvas" data-transition-in />
         <div className="footer-content">
           <h2 className="text-4xl md:text-6xl font-light mb-8 text-white">
@@ -27,7 +44,7 @@ const FooterCustom = () => {
             Get in touch
           </button>
         </div>
-    </div>
+    </motion.div>
   )
 }
 

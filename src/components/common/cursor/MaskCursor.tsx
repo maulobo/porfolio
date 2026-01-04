@@ -28,6 +28,14 @@ const MaskCursor = () => {
       if (
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
+        target.tagName === 'P' ||
+        target.tagName === 'H1' ||
+        target.tagName === 'H2' ||
+        target.tagName === 'H3' ||
+        target.closest('p')||
+        target.closest('h1')||
+        target.closest('h2')||
+        target.closest('h3')||
         target.closest('a') ||
         target.closest('button') ||
         target.classList.contains('clickable')
