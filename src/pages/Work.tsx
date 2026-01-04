@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projects, categories, Project } from "../utils/projects";
 import { LayoutGrid, List } from "lucide-react";
 import clsx from "clsx";
+import FooterCustom from "../components/common/footerCustom/FooterCustom";
 
 const ProjectCard: React.FC<{
   project: Project;
@@ -32,24 +33,24 @@ const ProjectCard: React.FC<{
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="group cursor-pointer"
+      className="group rounded-md"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
         className={clsx(
-          "relative overflow-hidden bg-brand-gray mb-6",
-          viewMode === "grid" ? "aspect-[4/3]" : "aspect-[21/9]"
+          "relative overflow-hidden bg-brand-gray mb-6 rounded-md",
+          viewMode === "grid" ? "aspect-4/3" : "aspect-21/9"
         )}
       >
-        {/* Main Static Image */}
+        
         <img
           src={project.imageUrl}
           alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="absolute inset-0 rounded-md w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
-        {/* Overlay Box with Carousel */}
+        
         <AnimatePresence>
           {isHovered &&
             project.hoverImages &&
@@ -59,13 +60,13 @@ const ProjectCard: React.FC<{
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+                className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none rounded-md"
               >
-                <div className="w-[45%] h-[45%] bg-brand-dark p-2 shadow-2xl relative flex items-center justify-center border border-brand-gray">
+                <div className="w-[45%] h-[45%] bg-brand-dark  p-2 shadow-2xl relative flex items-center justify-center border border-brand-gray">
                   <img
                     src={project.hoverImages[currentImageIndex]}
                     alt=""
-                    className="max-w-full max-h-full object-contain"
+                    className="max-w-full max-h-full object-contain "
                   />
                 </div>
               </motion.div>
@@ -87,7 +88,7 @@ const ProjectCard: React.FC<{
           <span className="text-xs font-mono text-brand-violet">
             0{project.id}
           </span>
-          <div className="flex flex-wrap justify-end gap-2 max-w-[200px]">
+          <div className="flex flex-wrap justify-end gap-2 max-w-50">
             {project.category.map((cat, idx) => (
               <span
                 key={idx}
@@ -113,17 +114,12 @@ const Work: React.FC = () => {
       : projects.filter((p) => p.category.includes(activeCategory));
 
   return (
-    <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-20 px-4 md:px-12 pb-20">
-      <div className="max-w-[1600px] mx-auto">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-brand-gray pb-8">
-          <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-8 md:mb-0 text-white">
-            All Work
-          </h1>
-
-          <div className="flex flex-col items-end gap-6">
-            {/* Filter Categories */}
-            <div className="flex flex-wrap justify-end gap-4 text-sm font-medium ">
+    <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
+      <div className="max-w-400 mx-auto">
+       
+        <div className="flex flex-col justify-between items-end mb-16 border-b border-brand-gray pb-8">
+          <div className="flex flex-row items-end gap-12">
+            <div className="flex flex-row justify-end gap-4 text-sm font-medium ">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -139,9 +135,7 @@ const Work: React.FC = () => {
                 </button>
               ))}
             </div>
-
-            {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-brand-gray p-1 rounded-lg">
+            <div className="flex items-center gap-2  ">
               <button
                 onClick={() => setViewMode("grid")}
                 className={clsx(
@@ -166,9 +160,20 @@ const Work: React.FC = () => {
               </button>
             </div>
           </div>
+          <div className="self-start overflow-hidden mt-10">
+            <motion.h1 
+              initial={{ y: 200 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className=" text-6xl md:text-9xl font-light tracking-tighter mb-8 md:mb-0 text-white"
+            >
+            All Work
+            </motion.h1>
+          </div>
+          
         </div>
 
-        {/* Projects Grid/List */}
+     
         <motion.div
           layout
           className={clsx(
@@ -187,19 +192,8 @@ const Work: React.FC = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* Footer Call to Action */}
-        <div className="mt-32 border-t border-brand-gray pt-16">
-          <h2 className="text-4xl md:text-6xl font-light mb-8 text-white">
-            Let's work together
-          </h2>
-          <p className="text-xl text-brand-light/60 max-w-2xl mb-8">
-            Sound like your kind of studio? Tell us about your project and let’s
-            work together to make it memorable.
-          </p>
-          <button className="text-lg border-b border-brand-pink pb-1 hover:text-brand-pink transition-colors duration-300">
-            Get in touch
-          </button>
-        </div>
+        
+        <FooterCustom />
       </div>
     </div>
   );
