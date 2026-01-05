@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { projects, categories, Project } from "../../utils/projects";
-import { LayoutGrid, List } from "lucide-react";
+import { LayoutGrid, List, ChevronDown, Check } from "lucide-react";
 import clsx from "clsx";
 import FooterCustom from "../../components/common/footerCustom/FooterCustom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
@@ -17,13 +23,16 @@ const ProjectCard: React.FC<{
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ["center end", "end start"]
+    offset: ["center end", "end start"],
   });
-  const yRange = index % 2 === 0 ? [0, 50] : [0, -50]; 
+  const yRange = index % 2 === 0 ? [0, 50] : [0, -50];
 
-  const smoothProgress = useSpring(scrollYProgress, { damping: 15, stiffness: 100 });
+  const smoothProgress = useSpring(scrollYProgress, {
+    damping: 15,
+    stiffness: 100,
+  });
   const y = useTransform(smoothProgress, [0, 1], yRange);
-  
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isHovered && project.hoverImages && project.hoverImages.length > 0) {
@@ -40,8 +49,8 @@ const ProjectCard: React.FC<{
 
   return (
     <motion.div
-      ref={cardRef} 
-      style={{ y: viewMode === 'grid' ? y : 0 }}
+      ref={cardRef}
+      style={{ y: viewMode === "grid" ? y : 0 }}
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -57,14 +66,12 @@ const ProjectCard: React.FC<{
           viewMode === "grid" ? "aspect-4/3" : "aspect-21/9"
         )}
       >
-        
         <img
           src={project.imageUrl}
           alt={project.title}
           className="absolute inset-0 rounded-md w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
-        
         <AnimatePresence>
           {isHovered &&
             project.hoverImages &&
@@ -86,7 +93,6 @@ const ProjectCard: React.FC<{
               </motion.div>
             )}
         </AnimatePresence>
-
 
         <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/40 transition-colors duration-300 pointer-events-none" />
       </div>
@@ -119,98 +125,133 @@ const ProjectCard: React.FC<{
 };
 
 const Work: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Todos");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filteredProjects =
-    activeCategory === "All"
+    activeCategory === "Todos"
       ? projects
       : projects.filter((p) => p.category.includes(activeCategory));
 
   return (
     <TransitionAnimate>
-    <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
-      <div className="max-w-400 mx-auto">
-       
-        <div className="flex flex-col justify-between items-end mb-16 border-b border-brand-gray pb-8">
-          <div className="flex flex-row items-end gap-12">
-            <div className="flex flex-row justify-end gap-4 text-sm font-medium ">
-              {categories.map((cat) => (
+      <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
+        <div className="max-w-400 mx-auto">
+          <div className="flex flex-col justify-between items-end mb-16 border-b border-brand-gray pb-8">
+            <div className="flex flex-row items-end gap-12">
+              <div className="relative z-50">
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-gray/10 border border-brand-gray/20 text-brand-light hover:border-brand-pink/50 hover:bg-brand-gray/20 transition-all duration-300"
+                >
+                  <span className="text-sm font-medium">{activeCategory}</span>
+                  <ChevronDown
+                    size={16}
+                    className={clsx(
+                      "transition-transform duration-300",
+                      isFilterOpen ? "rotate-180" : ""
+                    )}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isFilterOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-full mt-2 w-64 bg-brand-dark border border-brand-gray/20 rounded-xl shadow-2xl overflow-hidden backdrop-blur-xl"
+                    >
+                      <div className="max-h-[60vh] overflow-y-auto py-2 custom-scrollbar">
+                        {categories.map((cat) => (
+                          <button
+                            key={cat}
+                            onClick={() => {
+                              setActiveCategory(cat);
+                              setIsFilterOpen(false);
+                            }}
+                            className={clsx(
+                              "w-full text-left px-4 py-3 text-sm transition-colors flex items-center justify-between group",
+                              activeCategory === cat
+                                ? "bg-brand-pink/10 text-brand-pink"
+                                : "text-brand-light/70 hover:bg-brand-gray/10 hover:text-brand-light"
+                            )}
+                          >
+                            <span>{cat}</span>
+                            {activeCategory === cat && (
+                              <Check size={14} className="text-brand-pink" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <div className="flex items-center gap-2  ">
+                <button
+                  onClick={() => setViewMode("grid")}
                   className={clsx(
-                    "px-4 py-2 rounded-full transition-all duration-300 border  ",
-                    activeCategory === cat
-                      ? "bg-brand-pink text-white border-brand-pink"
-                      : "bg-brand-gray/20 text-brand-light/70 border-brand-gray hover:border-brand-pink hover:text-brand-pink hover:bg-brand-gray/40"
+                    "p-2 rounded-md transition-all",
+                    viewMode === "grid"
+                      ? "bg-brand-dark shadow-sm text-brand-pink"
+                      : "text-brand-light/40 hover:text-brand-light"
                   )}
                 >
-                  {cat}
+                  <LayoutGrid size={20} />
                 </button>
-              ))}
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={clsx(
+                    "p-2 rounded-md transition-all",
+                    viewMode === "list"
+                      ? "bg-brand-dark shadow-sm text-brand-pink"
+                      : "text-brand-light/40 hover:text-brand-light"
+                  )}
+                >
+                  <List size={20} />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2  ">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={clsx(
-                  "p-2 rounded-md transition-all",
-                  viewMode === "grid"
-                    ? "bg-brand-dark shadow-sm text-brand-pink"
-                    : "text-brand-light/40 hover:text-brand-light"
-                )}
+            <div className="self-start overflow-hidden mt-10">
+              <motion.h1
+                initial={{ y: 200 }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.8,
+                }}
+                className=" text-6xl md:text-9xl font-light tracking-tighter mb-8 md:mb-0 text-white"
               >
-                <LayoutGrid size={20} />
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={clsx(
-                  "p-2 rounded-md transition-all",
-                  viewMode === "list"
-                    ? "bg-brand-dark shadow-sm text-brand-pink"
-                    : "text-brand-light/40 hover:text-brand-light"
-                )}
-              >
-                <List size={20} />
-              </button>
+                Proyectos
+              </motion.h1>
             </div>
           </div>
-          <div className="self-start overflow-hidden mt-10">
-            <motion.h1 
-            
-              initial={{ y: 200 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
-              className=" text-6xl md:text-9xl font-light tracking-tighter mb-8 md:mb-0 text-white"
-            >
-            All Work
-            </motion.h1>
-          </div>
-          
-        </div>
 
-     
-        <motion.div
-          layout
-          className={clsx(
-            "grid gap-x-8 gap-y-16",
-            viewMode === "grid" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
-          )}
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                viewMode={viewMode}
-                index={index}
-              />
-            ))}
-          </AnimatePresence>
-        </motion.div>
-        <FooterCustom />
+          <motion.div
+            layout
+            className={clsx(
+              "grid gap-x-8 gap-y-16",
+              viewMode === "grid" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+            )}
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  viewMode={viewMode}
+                  index={index}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+          <FooterCustom />
+        </div>
       </div>
-    </div>
     </TransitionAnimate>
   );
 };

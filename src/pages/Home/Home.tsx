@@ -1,13 +1,11 @@
-
-
-import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate"
+import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 
 const Home = () => {
   return (
     <TransitionAnimate>
-      <div>Home</div>
+      <div>Inicio</div>
     </TransitionAnimate>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
