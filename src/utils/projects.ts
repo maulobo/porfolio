@@ -6,6 +6,7 @@ export interface Project {
   imageUrl: string;
   hoverImages?: string[];
   link: string;
+  externalUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -26,6 +27,7 @@ export const projects: Project[] = [
       "/images/projects/case/7.png",
     ],
     link: "/work/case-company",
+    externalUrl: "https://www.teamcase.ar/ar",
   },
   {
     id: "03",
@@ -41,6 +43,7 @@ export const projects: Project[] = [
       "/images/projects/vivra/4.png",
     ],
     link: "/work/vivra-guemes",
+    externalUrl: "https://www.vivraguemes.com.ar/new",
   },
   {
     id: "02",
@@ -58,6 +61,7 @@ export const projects: Project[] = [
       "/images/projects/ssi/6.png",
     ],
     link: "/work/ssi",
+    externalUrl: "https://ssi-dev-git-preview-changes-maulobos-projects.vercel.app/",
   },
   {
     id: "04",
@@ -73,6 +77,7 @@ export const projects: Project[] = [
       "/images/projects/help/5.png",
     ],
     link: "/work/helpwin",
+    externalUrl: "https://helpwin.com.ar/",
   },
   {
     id: "05",
@@ -89,6 +94,7 @@ export const projects: Project[] = [
       "/images/projects/gsg/5.png",
     ],
     link: "/work/gsg",
+    externalUrl: "https://gsg-web-v2.vercel.app/",
   },
   {
     id: "06",
@@ -103,6 +109,23 @@ export const projects: Project[] = [
       "/images/projects/ux/3.jpeg",
     ],
     link: "/work/gsg",
+  },
+  {
+    id: "07",
+    title: "Backoffice Contable",
+    category: ["Gestión de Datos", "Contabilidad", "Backoffice"],
+    description:
+      "Sistema integral de gestión para el control de compras, ventas y contabilidad empresarial.",
+    imageUrl: "/images/projects/bo-banner.jpeg",
+    hoverImages: [
+      "/images/projects/bo/1.png",
+      "/images/projects/bo/2.png",
+      "/images/projects/bo/3.png",
+      "/images/projects/bo/4.png",
+      "/images/projects/bo/5.png",
+      "/images/projects/bo/6.jpeg",
+    ],
+    link: "/work/backoffice-contable",
   },
 ];
 
@@ -120,4 +143,6 @@ export const categories = [
   "Interfaz Móvil",
   "Diseño de Apps",
   "Backoffice",
+  "Gestión de Datos",
+  "Contabilidad",
 ];

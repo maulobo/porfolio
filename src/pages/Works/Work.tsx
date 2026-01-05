@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { projects, categories, Project } from "../../utils/projects";
-import { LayoutGrid, List, ChevronDown, Check } from "lucide-react";
+import { LayoutGrid, List, ChevronDown, Check, ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import FooterCustom from "../../components/common/footerCustom/FooterCustom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
@@ -51,7 +51,6 @@ const ProjectCard: React.FC<{
     <motion.div
       ref={cardRef}
       style={{ y: viewMode === "grid" ? y : 0 }}
-      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9 }}
@@ -103,6 +102,16 @@ const ProjectCard: React.FC<{
             {project.title}
           </h3>
           <p className="text-brand-light/60 text-lg">{project.description}</p>
+          {project.externalUrl && (
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-brand-light hover:text-brand-pink transition-colors duration-300 clickable"
+            >
+              Visitar sitio <ArrowUpRight size={16} />
+            </a>
+          )}
         </div>
         <div className="flex flex-col items-end gap-2">
           <span className="text-xs font-mono text-brand-violet">
