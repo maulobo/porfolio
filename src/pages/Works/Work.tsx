@@ -7,7 +7,13 @@ import {
   useTransform,
 } from "framer-motion";
 import { projects, categories, Project } from "../../utils/projects";
-import { LayoutGrid, List, ChevronDown, Check, ArrowUpRight } from "lucide-react";
+import {
+  LayoutGrid,
+  List,
+  ChevronDown,
+  Check,
+  ArrowUpRight,
+} from "lucide-react";
 import clsx from "clsx";
 import FooterCustom from "../../components/common/footerCustom/FooterCustom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";

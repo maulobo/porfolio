@@ -61,10 +61,21 @@ export const projects: Project[] = [
       "/images/projects/ssi/6.png",
     ],
     link: "/work/ssi",
-    externalUrl: "https://ssi-dev-git-preview-changes-maulobos-projects.vercel.app/",
+    externalUrl:
+      "https://ssi-dev-git-preview-changes-maulobos-projects.vercel.app/",
   },
   {
     id: "04",
+    title: "Minimal",
+    category: ["Diseño Web", "Desarrollo Web"],
+    description: "Diseño completo y desarrollo de sitio web.",
+    imageUrl: "/images/projects/minimal-banner.png",
+    hoverImages: [],
+    link: "/work/minimal",
+    externalUrl: "https://www.minimalstudio.ar/",
+  },
+  {
+    id: "05",
     title: "Helpwin",
     category: ["Diseño Web", "Interfaz Móvil", "Diseño de Apps"],
     description: "Diseño de interfaz integral para aplicaciones web y móviles.",
@@ -80,7 +91,7 @@ export const projects: Project[] = [
     externalUrl: "https://helpwin.com.ar/",
   },
   {
-    id: "05",
+    id: "06",
     title: "GSG",
     category: ["Desarrollo Web", "Diseño Web", "Backoffice"],
     description:
@@ -97,7 +108,7 @@ export const projects: Project[] = [
     externalUrl: "https://gsg-web-v2.vercel.app/",
   },
   {
-    id: "06",
+    id: "07",
     title: "UX/UI",
     category: ["Desarrollo Web", "Diseño Web"],
     description:
@@ -111,7 +122,7 @@ export const projects: Project[] = [
     link: "/work/gsg",
   },
   {
-    id: "07",
+    id: "08",
     title: "Backoffice Contable",
     category: ["Gestión de Datos", "Contabilidad", "Backoffice"],
     description:

@@ -1,0 +1,74 @@
+import {
+  useGLTF,
+  Float,
+  Center,
+  MeshTransmissionMaterial,
+} from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import * as THREE from "three";
+
+// Componente para cargar y renderizar cada bola individualmente
+const MeshBall = ({ url, config }: { url: string; config: any }) => {
+  const { nodes } = useGLTF(url);
+  const mesh = Object.values(nodes).find(
+    (node) => (node as THREE.Mesh).isMesh
+  ) as THREE.Mesh;
+
+  if (!mesh) return null;
+
+  return (
+    <group position={new THREE.Vector3(...config.position)}>
+      <Float
+        speed={config.floatSpeed}
+        rotationIntensity={config.rotationIntensity}
+        floatIntensity={config.floatIntensity}
+        floatingRange={[-0.2, 0.2]}
+      >
+        <Center>
+          <mesh geometry={mesh.geometry} scale={config.scale}>
+            {/* 
+               MeshTransmissionMaterial optimizado para rendimiento extremo:
+               - samples={1} (o low): Crucial para FPS.
+               - resolution={256}: Reflejo borroso pero rápido.
+               - backside={false}: Reduce carga a la mitad.
+            */}
+            <MeshTransmissionMaterial
+              backside={false} // Desactivado para doblar FPS
+              samples={4} // Mínima calidad necesaria
+              resolution={1024 } // Resolución muy baja para buffer
+              thickness={1} // Fino
+              transmission={1}
+              roughness={0} // Cristal perfecto
+              ior={1.5}
+              chromaticAberration={0.05} // Efecto sutil
+              anisotropy={0} // Apagado para rendimiento
+              color="#ffffff"
+            />
+          </mesh>
+        </Center>
+      </Float>
+    </group>
+  );
+};
+
+export default function Model() {
+  // Configuración de las 3 bolas
+  const balls = [
+    {
+      url: "/3d/meshballs3.glb",
+      position: [-1, 0, 2], // Casi centrada
+      scale: 1,
+      floatSpeed: 2,
+      floatIntensity: 3,
+      rotationIntensity: 4,
+    },
+  ];
+
+  return (
+    <group dispose={null}>
+      {balls.map((config, i) => (
+        <MeshBall key={i} url={config.url} config={config} />
+      ))}
+    </group>
+  );
+}
