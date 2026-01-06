@@ -10,7 +10,7 @@ const words = [
   { text: "PROYECTOS", sub: "Que quedan" },
 ];
 
-// Componente para cada palabra animada
+
 const ScrollWord = ({
   word,
   index,
@@ -22,27 +22,23 @@ const ScrollWord = ({
   progress: MotionValue<number>;
   total: number;
 }) => {
-  // Calculamos el rango de tiempo de esta palabra específica
+
   const step = 1 / total;
   const start = index * step;
   const end = (index + 1) * step;
 
-  // Animación de entrada y salida
-  // opacity: Entra rápido, se queda, se va al final
   const opacity = useTransform(
     progress,
     [start, start + 0.1, end - 0.1, end],
     [0, 1, 1, 0]
   );
 
-  // y: Entra desde abajo, sube un poco mientras está activa, se va hacia arriba rápido
   const y = useTransform(
     progress,
     [start, start + 0.1, end],
     ["100%", "0%", "-100%"]
   );
 
-  // blur: Desenfocado al entrar/salir, nítido en el centro
   const blur = useTransform(
     progress,
     [start, start + 0.1, end - 0.1, end],
@@ -59,10 +55,10 @@ const ScrollWord = ({
         }}
         className="flex flex-col items-center"
       >
-        <h2 className="text-[12vw] leading-none font-bold text-transparent text-stroke-white md:text-white uppercase tracking-tighter">
+        <h2 className="text-5xl md:text-[12vw] leading-none font-bold  text-stroke-white text-white uppercase tracking-tighter">
           {word.text}
         </h2>
-        <p className="mt-4 text-sm md:text-xl font-mono text-brand-light/60 uppercase tracking-widest">
+        <p className="mt-4 text-xl md:text-4xl font-normal text-brand-light/60 uppercase tracking-widest">
           {word.sub}
         </p>
       </motion.div>
@@ -77,11 +73,7 @@ const ProjectReveal = () => {
     offset: ["start start", "end end"],
   });
 
-  // Usamos solo la primera parte del scroll para las palabras,
-  // y dejamos el resto como “aire” para el CTA final.
   const wordProgress = useTransform(scrollYProgress, [0, 0.7], [0, 1]);
-
-  // CTA: aparece antes y se mantiene más tiempo
   const buttonOpacity = useTransform(scrollYProgress, [0.7, 0.82], [0, 1]);
   const buttonY = useTransform(scrollYProgress, [0.7, 0.82], [14, 0]);
   const buttonScale = useTransform(scrollYProgress, [0.7, 0.82], [0.96, 1]);
@@ -94,7 +86,7 @@ const ProjectReveal = () => {
   return (
     <section ref={containerRef} className="h-[520vh] relative bg-brand-dark">
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
-        {/* Contenedor de palabras */}
+       
         <div className="relative w-full h-full flex items-center justify-center">
           {words.map((word, i) => (
             <ScrollWord
@@ -106,8 +98,6 @@ const ProjectReveal = () => {
             />
           ))}
         </div>
-
-        {/* Botón final fijo o que aparece */}
         <motion.div
           style={{
             opacity: buttonOpacity,
@@ -120,7 +110,7 @@ const ProjectReveal = () => {
         >
           <Link
             to="/work"
-            className="group relative flex items-center gap-4 px-10 py-5 border border-brand-light/30 text-brand-light rounded-md bg-transparent hover:border-brand-pink transition-colors clickable"
+            className="group relative m-6 md:m-4  flex items-center gap-4 px-10 py-5 border border-brand-light/30 text-brand-light rounded-md bg-transparent hover:border-brand-pink transition-colors clickable"
           >
             <span className="absolute inset-0 origin-left scale-x-0 bg-white/5 transition-transform duration-500 ease-out group-hover:scale-x-100" />
             <span className="relative text-lg md:text-lg font-mono uppercase tracking-[0.5rem] text-white">
@@ -133,7 +123,7 @@ const ProjectReveal = () => {
           </Link>
         </motion.div>
 
-        {/* Indicador de scroll sutil */}
+
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/20 text-xs font-mono uppercase">
           Scroll para revelar
         </div>

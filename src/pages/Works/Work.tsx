@@ -102,7 +102,7 @@ const ProjectCard: React.FC<{
         <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/40 transition-colors duration-300 pointer-events-none" />
       </div>
 
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col-reverse md:flex-row justify-between items-start">
         <div>
           <h3 className="text-2xl font-medium mb-2 group-hover:text-brand-pink transition-colors duration-300">
             {project.title}
@@ -119,11 +119,11 @@ const ProjectCard: React.FC<{
             </a>
           )}
         </div>
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-end gap-2 w-full">
           <span className="text-xs font-mono text-brand-violet">
             0{project.id}
           </span>
-          <div className="flex flex-wrap justify-end gap-2 max-w-50">
+          <div className="flex mb-4 flex-row md:flex-col justify-start md:justify-end gap-2 w-full md:max-w-50">
             {project.category.map((cat, idx) => (
               <span
                 key={idx}
@@ -154,8 +154,8 @@ const Work: React.FC = () => {
       <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
         <div className="max-w-400 mx-auto">
           <div className="flex flex-col justify-between items-end mb-16 border-b border-brand-gray pb-8">
-            <div className="flex flex-row items-end gap-12">
-              <div className="relative z-50">
+            <div className="hidden md:flex flex-row items-end gap-12">
+              <div className="relative z-10">
                 <button
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-gray/10 border border-brand-gray/20 text-brand-light hover:border-brand-pink/50 hover:bg-brand-gray/20 transition-all duration-300"

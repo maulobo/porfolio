@@ -39,6 +39,9 @@ const Narrative = () => {
           })}
         </p>
       </div>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <img src="/assets/arrowScroll.svg" alt="Scroll down" className="w-12 h-20 opacity-80" />
+      </div>
     </div>
   );
 };

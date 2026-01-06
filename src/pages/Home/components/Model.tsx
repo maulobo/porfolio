@@ -7,7 +7,7 @@ import {
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Componente para cargar y renderizar cada bola individualmente
+
 const MeshBall = ({ url, config }: { url: string; config: any }) => {
   const { nodes } = useGLTF(url);
   const mesh = Object.values(nodes).find(
@@ -52,11 +52,29 @@ const MeshBall = ({ url, config }: { url: string; config: any }) => {
 };
 
 export default function Model() {
-  // Configuración de las 3 bolas
+  const { size } = useThree();
+    const isSmall = size.width <= 400;
+  
   const balls = [
     {
       url: "/3d/meshballs3.glb",
-      position: [-1, 0, 2], // Casi centrada
+      position: [-1, 0, 2], 
+      scale: 1,
+      floatSpeed: 2,
+      floatIntensity: 3,
+      rotationIntensity: 4,
+    },
+    {
+      url: "/3d/meshballs2.glb",
+      position: isSmall ? [2, 3.5, 2] : [7, 2, 2],
+      scale: 1,
+      floatSpeed: 2,
+      floatIntensity: 3,
+      rotationIntensity: 4,
+    },
+    {
+      url: "/3d/meshballs1.glb",
+      position: [-10, -2, 2], 
       scale: 1,
       floatSpeed: 2,
       floatIntensity: 3,
