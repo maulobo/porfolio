@@ -52,7 +52,7 @@ export default function Scene() {
       <color attach="background" args={["#ffffff"]} />
       <Model />
       <AdaptiveText />
-      <Stats />
+      {/* <Stats /> */}
       <Rig />
     </Canvas>
   );

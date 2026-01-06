@@ -59,7 +59,7 @@ export default function Model() {
     // },
     {
       url: "/3d/meshballs1.glb",
-      position: isSmall ? [2, 3.5, 2] : [0, 0, 2],
+      position: isSmall ? [2, 3.5, 2] : [1, 2, 2],
       scale: 1,
       floatSpeed: 2,
       floatIntensity: 3,
