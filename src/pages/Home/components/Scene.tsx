@@ -7,12 +7,13 @@ function Rig() {
   useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
-      [state.pointer.x * 2, state.pointer.y * 2, 15],
-      0.2,
+      [-state.pointer.x * 2.5, -state.pointer.y * 1.5, 15],
+      0.3,
       delta
     );
     state.camera.lookAt(0, 0, 0);
   });
+  return null;
 }
 
 export default function Scene() {
@@ -30,17 +31,13 @@ export default function Scene() {
       {/* Fondo sólido simple: Blanco */}
       <color attach="background" args={["#ffffff"]} />
 
-      {/* Iluminación de estudio limpia (sin mapas de entorno pesados) */}
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[10, 10, 10]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} />
-
       {/* Modelos 3D */}
       <Model />
 
       {/* Texto simple: Negro */}
       <group position={[0, 0, -5]}>
         <Text
+          font="/fonts/Inter-Bold.ttf"
           fontSize={4}
           color="black"
           anchorX="center"
@@ -51,6 +48,8 @@ export default function Scene() {
           SC. STUDIO
         </Text>
       </group>
+
+      <Rig />
     </Canvas>
   );
 }

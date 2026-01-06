@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Work from "./pages/Works/Work";
 import MaskCursor from "./components/common/cursor/MaskCursor";
 import SmoothScroll from "./components/common/smoothScroll/SmoothScroll";
+import Navbar from "./components/common/navbar/Navbar";
 import "./App.css";
 import Home from "./pages/Home/Home";
 
@@ -28,6 +29,7 @@ function App() {
     <Router>
       <SmoothScroll />
       <MaskCursor />
+      <Navbar />
       <AnimatedRoutes />
     </Router>
   );

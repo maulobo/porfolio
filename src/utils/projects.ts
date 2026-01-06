@@ -96,7 +96,7 @@ export const projects: Project[] = [
     category: ["Desarrollo Web", "Diseño Web", "Backoffice"],
     description:
       "Desarrollo completo de sitio web, diseño y backoffice para gestión de productos.",
-    imageUrl: "/images/projects/gsg/1.png",
+    imageUrl: "/images/projects/gsg-banner.png",
     hoverImages: [
       "/images/projects/gsg/1.png",
       "/images/projects/gsg/2.png",
