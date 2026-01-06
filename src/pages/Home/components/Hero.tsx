@@ -4,7 +4,7 @@ import Scene from "./Scene";
 const Hero = () => {
   return (
     <div className="h-screen w-full relative  flex flex-col items-center justify-center overflow-hidden">
-      {/* 3D Scene */}
+     
       <div className="absolute inset-0 z-0">
         <Scene />
       </div>
