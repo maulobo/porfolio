@@ -11,6 +11,7 @@ import SmoothScroll from "./components/common/smoothScroll/SmoothScroll";
 import Navbar from "./components/common/navbar/Navbar";
 import "./App.css";
 import Home from "./pages/Home/Home";
+import Loader from "./components/common/loader/Loader";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
+      <Loader />
       <SmoothScroll />
       <MaskCursor />
       <Navbar />
