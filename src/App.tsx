@@ -9,6 +9,7 @@ import Work from "./pages/Works/Work";
 import MaskCursor from "./components/common/cursor/MaskCursor";
 import SmoothScroll from "./components/common/smoothScroll/SmoothScroll";
 import Navbar from "./components/common/navbar/Navbar";
+import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Loader from "./components/common/loader/Loader";
@@ -28,6 +29,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Loader />
       <SmoothScroll />
       <MaskCursor />

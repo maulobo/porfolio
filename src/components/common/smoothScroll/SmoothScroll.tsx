@@ -11,6 +11,9 @@ const SmoothScroll = () => {
       smoothWheel: true,
     });
 
+    // Expose lenis instance globally for scroll control
+    (window as any).lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -20,6 +23,7 @@ const SmoothScroll = () => {
 
     return () => {
       lenis.destroy();
+      delete (window as any).lenis;
     };
   }, []);
 
