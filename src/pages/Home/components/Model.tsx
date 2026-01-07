@@ -64,22 +64,7 @@ export default function Model() {
       floatIntensity: 3,
       rotationIntensity: 4,
     },
-    {
-      url: "/3d/meshballs2.glb",
-      position: isSmall ? [2, 3.5, 2] : [7, 2, 2],
-      scale: 1,
-      floatSpeed: 2,
-      floatIntensity: 3,
-      rotationIntensity: 4,
-    },
-    {
-      url: "/3d/meshballs1.glb",
-      position: [-10, -2, 2], 
-      scale: 1,
-      floatSpeed: 2,
-      floatIntensity: 3,
-      rotationIntensity: 4,
-    },
+    
   ];
 
   return (
