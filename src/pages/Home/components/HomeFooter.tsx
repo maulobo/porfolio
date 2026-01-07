@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import FooterCustom, { FooterType } from "../../../components/common/footerCustom/FooterCustom";
 
 export default function HomeFooter() {
   const containerRef = useRef(null);
@@ -47,64 +48,48 @@ export default function HomeFooter() {
           </h2>
         </a>
       </motion.div>
-
-     
+    <FooterCustom typeFooter={FooterType.FOTERHOME}/>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-12 relative z-10">
         <div className="flex flex-col gap-6">
           <h3 className="text-white font-medium mb-2 uppercase text-sm tracking-wider opacity-50">
             Socials
           </h3>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col md:flex-row gap-6">
             <a
-              href="#"
-              className="text-white/80 hover:text-brand-pink flex items-center gap-2 group transition-colors text-lg clickable w-fit"
+              href="https://www.instagram.com/smartcloudar?igsh=MWU2MHQwN3FjajY4dg==" target="_blank"
+              style={{color: '#ffffff'}}
+              className=" hover:text-brand-pink border-white border rounded-full py-2 px-6 flex items-center gap-2 group transition-colors text-lg clickable w-fit"
             >
               Instagram{" "}
               <ArrowUpRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </a>
             <a
               href="https://www.linkedin.com/company/smartcloud-studio/" target="_blank"
-              className="text-white/80 hover:text-brand-pink flex items-center gap-2 group transition-colors text-lg clickable w-fit"
+                 style={{color: '#ffffff'}}
+              className=" hover:text-brand-pink border-white border rounded-full py-2 px-6 flex items-center gap-2 group transition-colors text-lg clickable w-fit"
             >
               LinkedIn{" "}
               <ArrowUpRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </a>
             <a
               href="#"
-              className="text-white/80 hover:text-brand-pink flex items-center gap-2 group transition-colors text-lg clickable w-fit"
+                 style={{color: '#ffffff'}}
+              className=" hover:text-brand-pink border-white border rounded-full py-2 px-6 flex items-center gap-2 group transition-colors text-lg clickable w-fit"
             >
               Behance{" "}
               <ArrowUpRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </a>
           </div>
         </div>
-
-        <div className="flex flex-col gap-6">
-          <h3 className="text-white font-medium mb-2 uppercase text-sm tracking-wider opacity-50">
-            Email
-          </h3>
-          <a
-            href="mailto:scstudio.cloud@gmail.com"
-            className="text-xl md:text-2xl text-white hover:text-brand-pink transition-colors clickable underline decoration-white/20 underline-offset-4 decoration-1"
-          >
-             scstudio.cloud@gmail.com
-          </a>
-        </div>
-
-        <div className="flex flex-col justify-end gap-4 items-start md:items-end">
-          <div className="flex justify-end mb-8 md:mb-0">
-            <a
-              href="mailto:scstudio.cloud@gmail.com"
-              className="w-32 h-32 rounded-full bg-brand-light text-brand-dark font-bold text-sm uppercase tracking-widest hover:scale-110 hover:bg-brand-pink hover:text-white transition-all duration-300 clickable flex items-center justify-center"
-            >
-              Solicitar <br /> Info
-            </a>
-          </div>
-          <p className="text-right text-white/20 text-xs font-mono uppercase tracking-widest mt-auto">
+        
+          
+        
+      </div>
+      <div>
+         <p className="text-right text-white text-xs font-mono uppercase tracking-widest mt-auto">
             © 2026 ScStudio Agency
           </p>
         </div>
-      </div>
     </footer>
   );
 }

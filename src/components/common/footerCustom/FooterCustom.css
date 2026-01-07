@@ -15,17 +15,22 @@
 .footer-custom-container {
   position: relative;
   overflow: hidden;
-  min-height: 600px;
+  min-height: 670px;
   border-radius: 16px;
 }
-
+.mailF {
+  color: var(--color-slate-900);
+  text-decoration: underline;
+  font-weight: 700;
+  text-decoration: none;
+}
 .footer-content {
+  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-
   background: rgb(255 255 255 / 10%);
   border-radius: 10px;
   border: 1px solid rgb(255 255 255 / 15%);
@@ -33,10 +38,42 @@
   -webkit-backdrop-filter: blur(10px);
   padding: 40px 60px;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 95%;
   max-width: 800px;
+}
+
+.footer-content-two{
+  color: white;
+  background: rgb(255 255 255 / 10%);
+  border-radius: 14px;
+  border: 2px solid rgb(255 255 255 / 15%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 30px 60px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.container-footer-home{
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+}
+
+@media (max-width: 1023px) {
+  .section-h{
+    display: none!important;
+  }
+  .footer-content-two{
+  padding: 16px ;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
 }

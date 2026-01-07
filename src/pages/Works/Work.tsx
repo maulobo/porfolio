@@ -15,7 +15,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import clsx from "clsx";
-import FooterCustom from "../../components/common/footerCustom/FooterCustom";
+import FooterCustom, { FooterType } from "../../components/common/footerCustom/FooterCustom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 
 const ProjectCard: React.FC<{
@@ -264,7 +264,7 @@ const Work: React.FC = () => {
               ))}
             </AnimatePresence>
           </motion.div>
-          <FooterCustom />
+          <FooterCustom typeFooter={FooterType.FOOTERWORK} />
         </div>
       </div>
     </TransitionAnimate>
