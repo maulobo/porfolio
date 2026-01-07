@@ -7,7 +7,6 @@ import {
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-
 const MeshBall = ({ url, config }: { url: string; config: any }) => {
   const { nodes } = useGLTF(url);
   const mesh = Object.values(nodes).find(
@@ -26,22 +25,16 @@ const MeshBall = ({ url, config }: { url: string; config: any }) => {
       >
         <Center>
           <mesh geometry={mesh.geometry} scale={config.scale}>
-            {/* 
-               MeshTransmissionMaterial optimizado para rendimiento extremo:
-               - samples={1} (o low): Crucial para FPS.
-               - resolution={256}: Reflejo borroso pero rápido.
-               - backside={false}: Reduce carga a la mitad.
-            */}
             <MeshTransmissionMaterial
-              backside={false} // Desactivado para doblar FPS
-              samples={4} // Mínima calidad necesaria
-              resolution={1024 } // Resolución muy baja para buffer
-              thickness={1} // Fino
+              backside={false}
+              samples={4}
+              resolution={512}
+              thickness={1}
               transmission={1}
-              roughness={0} // Cristal perfecto
+              roughness={0}
               ior={1.5}
-              chromaticAberration={0.05} // Efecto sutil
-              anisotropy={0} // Apagado para rendimiento
+              chromaticAberration={0.05}
+              anisotropy={0}
               color="#ffffff"
             />
           </mesh>
@@ -53,9 +46,17 @@ const MeshBall = ({ url, config }: { url: string; config: any }) => {
 
 export default function Model() {
   const { size } = useThree();
-    const isSmall = size.width <= 400;
-  
+  const isSmall = size.width <= 400;
+
   const balls = [
+    // {
+    //   url: "/3d/bomb-gp.glb",
+    //   position: [-1, 0, 2],
+    //   scale: 1,
+    //   floatSpeed: 2,
+    //   floatIntensity: 3,
+    //   rotationIntensity: 4,
+    // },
     {
       url: "/3d/meshballs3.glb",
       position: [-1, 0, 2], 

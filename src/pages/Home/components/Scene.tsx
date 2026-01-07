@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { Stats, Text } from "@react-three/drei";
 import { easing } from "maath";
 import Model from "./Model";
 
@@ -42,16 +42,17 @@ export default function Scene() {
     <Canvas
       className="h-full w-full"
       camera={{ position: [0, 0, 15], fov: 45 }}
-      dpr={[1, 1.5]} 
+      dpr={[1, 1.5]}
       gl={{
         antialias: true,
-        powerPreference: "high-performance", 
+        powerPreference: "high-performance",
         alpha: false,
       }}
     >
       <color attach="background" args={["#ffffff"]} />
       <Model />
       <AdaptiveText />
+      {/* <Stats /> */}
       <Rig />
     </Canvas>
   );

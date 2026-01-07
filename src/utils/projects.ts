@@ -16,7 +16,7 @@ export const projects: Project[] = [
     category: ["E-commerce Mayorista", "Diseño de Interfaz", "Desarrollo"],
     description:
       "Plataforma de comercio electrónico mayorista con panel de administración personalizado y diseño de interfaz de usuario.",
-    imageUrl: "/images/projects/case-banner.png",
+    imageUrl: "/images/projects/banner-case.jpg",
     hoverImages: [
       "/images/projects/case/1.png",
       "/images/projects/case/2.png",
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     category: ["Bienes Raíces", "Visualización 3D", "Desarrollo Web"],
     description:
       "Plataforma de exhibición inmobiliaria con recorridos inmersivos de apartamentos en 3D.",
-    imageUrl: "/images/projects/vivra-banner.png",
+    imageUrl: "/images/projects/banner-vivra.jpg",
     hoverImages: [
       "/images/projects/vivra/1.png",
       "/images/projects/vivra/2.png",
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     category: ["Desarrollo Frontend", "Diseño de Interfaz", "Branding"],
     description:
       "Transformación digital completa incluyendo frontend, diseño de interfaz y marca.",
-    imageUrl: "/images/projects/BannerSSI.jpg",
+    imageUrl: "/images/projects/banner-ssi.jpg",
     hoverImages: [
       "/images/projects/ssi/1.png",
       "/images/projects/ssi/2.png",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     title: "Minimal",
     category: ["Diseño Web", "Desarrollo Web"],
     description: "Diseño completo y desarrollo de sitio web.",
-    imageUrl: "/images/projects/minimal-banner.png",
+    imageUrl: "/images/projects/minimal-banner.webp",
     hoverImages: [],
     link: "/work/minimal",
     externalUrl: "https://www.minimalstudio.ar/",
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     title: "Helpwin",
     category: ["Diseño Web", "Interfaz Móvil", "Diseño de Apps"],
     description: "Diseño de interfaz integral para aplicaciones web y móviles.",
-    imageUrl: "/images/projects/help-banner.png",
+    imageUrl: "/images/projects/banner-help.jpg",
     hoverImages: [
       "/images/projects/help/1.png",
       "/images/projects/help/2.png",
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     category: ["Desarrollo Web", "Diseño Web", "Backoffice"],
     description:
       "Desarrollo completo de sitio web, diseño y backoffice para gestión de productos.",
-    imageUrl: "/images/projects/gsg-banner.png",
+    imageUrl: "/images/projects/gsg-banner.webp",
     hoverImages: [
       "/images/projects/gsg/1.png",
       "/images/projects/gsg/2.png",
