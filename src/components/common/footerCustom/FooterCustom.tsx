@@ -12,9 +12,9 @@ import { Gradient } from "../../../utils/Gradient";
 import "./FooterCustom.css";
 
 type FormData = {
-  nombreApellido: string;
+  name: string;
   telefono: string;
-  mensaje: string;
+  comments: string;
 };
 
 
@@ -52,9 +52,9 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
 
     try {
       const templateParams = {
-        nombreApellido: data.nombreApellido,
+        name: data.name,
         telefono: data.telefono,
-        mensaje: data.mensaje,
+        comments: data.comments,
       };
 
       await emailjs.send(
@@ -122,7 +122,7 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
               <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mb-2 flex flex-col ">
                 <div className="mb-2">
                   <input
-                    {...register("nombreApellido", { 
+                    {...register("name", { 
                       required: "El nombre y apellido son requeridos",
                       minLength: { value: 3, message: "Debe tener al menos 3 caracteres" }
                     })}
@@ -130,8 +130,8 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
                     placeholder="Nombre y Apellido"
                     className="w-full px-4 py-3 bg-white/20 border border-white/50 rounded-md text-slate-900 placeholder-slate-900/50 focus:outline-none focus:border-slate-900"
                   />
-                  {errors.nombreApellido && (
-                    <span className="text-red-600 text-sm mt-1 block">{errors.nombreApellido.message}</span>
+                  {errors.name && (
+                    <span className="text-red-600 text-sm mt-1 block">{errors.name.message}</span>
                   )}
                 </div>
 
@@ -152,7 +152,7 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
 
                 <div className="mb-2">
                   <textarea
-                    {...register("mensaje", { 
+                    {...register("comments", { 
                       required: "El mensaje es requerido",
                       minLength: { value: 10, message: "El mensaje debe tener al menos 10 caracteres" }
                     })}
@@ -160,8 +160,8 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
                     rows={5}
                     className="w-full px-4 py-3 bg-white/20 border border-white/50  rounded-md text-slate-900 placeholder-slate-900/50 focus:outline-none focus:border-slate-900 resize-none"
                   />
-                  {errors.mensaje && (
-                    <span className="text-red-600 text-sm mt-1 block">{errors.mensaje.message}</span>
+                  {errors.comments && (
+                    <span className="text-red-600 text-sm mt-1 block">{errors.comments.message}</span>
                   )}
                 </div>
 
