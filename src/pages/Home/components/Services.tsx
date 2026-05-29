@@ -49,9 +49,9 @@ const Services = () => {
         <p className="mb-8 font-mono text-xs uppercase tracking-[0.35rem] text-brand-pink">
           Proceso
         </p>
-        <div className="grid gap-4 md:grid-cols-5">
+        <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {processSteps.map((step, index) => (
-            <article
+            <li
               key={step.title}
               className="rounded-md border border-brand-light/10 bg-brand-light/[0.03] p-5"
             >
@@ -64,9 +64,9 @@ const Services = () => {
               <p className="mt-3 text-sm leading-relaxed text-brand-light/55">
                 {step.desc}
               </p>
-            </article>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
