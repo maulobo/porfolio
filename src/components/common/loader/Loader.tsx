@@ -12,6 +12,7 @@ export default function Loader() {
   const location = useLocation();
 
   const isHome = location.pathname === "/";
+  const targetProgress = isHome ? (active ? progress : 100) : imgProgress;
 
   // Image preloading logic for non-home pages
   useEffect(() => {
@@ -44,15 +45,11 @@ export default function Loader() {
 
   // Smooth progress animation
   useEffect(() => {
-    // Determine target progress
-    // If we are on Home, use 3D progress. Otherwise, use image loading progress.
-    const target = isHome ? progress : imgProgress;
-
     // Simple interpolation for the display number
     let timeout: number;
 
-    if (displayProgress < target) {
-      const diff = target - displayProgress;
+    if (displayProgress < targetProgress) {
+      const diff = targetProgress - displayProgress;
       const step = Math.ceil(diff / 5); // Speed up catching up
       timeout = window.setTimeout(() => {
         setDisplayProgress((prev) => Math.min(prev + step, 100));
@@ -60,18 +57,17 @@ export default function Loader() {
     }
 
     return () => window.clearTimeout(timeout);
-  }, [progress, imgProgress, displayProgress, isHome]);
+  }, [targetProgress, displayProgress]);
 
   useEffect(() => {
     // If progress is 100, wait a bit then hide
-    const target = isHome ? progress : imgProgress;
-    if (target === 100) {
+    if (targetProgress === 100) {
       const timer = setTimeout(() => {
         setShow(false);
       }, 800); // 800ms delay to ensure it feels "complete" and smooth
       return () => clearTimeout(timer);
     }
-  }, [progress, imgProgress, isHome]);
+  }, [targetProgress]);
 
   // Force show at least for a moment until we know what's happening
   // Or if we know the app has heavy assets, useProgress is good.
