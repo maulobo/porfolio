@@ -13,7 +13,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
-import { projects } from "../../utils/projects";
 
 const heroImages = [
   "/images/projects/banner-case.jpg",
@@ -28,28 +27,24 @@ const capabilities = [
   {
     icon: Code2,
     title: "Webs y landing pages",
-    eyebrow: "Convertir",
     copy: "Sitios rapidos, memorables y pensados para explicar tu negocio sin vueltas.",
     items: ["Institucionales", "Landing pages", "Ecommerce", "UX/UI"],
   },
   {
     icon: Blocks,
     title: "Software a medida",
-    eyebrow: "Operar",
     copy: "Backoffices, plataformas y automatizaciones para que el negocio funcione mejor.",
     items: ["Dashboards", "Paneles internos", "Integraciones", "MVPs"],
   },
   {
     icon: Search,
     title: "SEO, GEO y contenido",
-    eyebrow: "Aparecer",
     copy: "Estructura, performance y contenido para ser encontrado en Google y en respuestas de IA.",
     items: ["SEO tecnico", "GEO/AEO", "Contenido", "Analitica"],
   },
   {
     icon: Clapperboard,
     title: "Video, motion y piezas",
-    eyebrow: "Mover",
     copy: "Edicion, animacion y assets para lanzamientos, redes, ads y presentaciones.",
     items: ["Video", "Motion", "Animacion", "Social assets"],
   },
@@ -78,24 +73,35 @@ const workflow = [
   },
 ];
 
-const proofProjects = projects.slice(0, 4).map((project, index) => {
-  const outcomes = [
-    "Ecommerce mayorista con experiencia de compra clara.",
-    "Real estate con visualizacion 3D y recorrido digital.",
-    "Marca industrial con web institucional y presencia solida.",
-    "Website premium para estudio creativo.",
-  ];
-
-  return {
-    ...project,
-    outcome: outcomes[index],
-  };
-});
-
-const stats = [
-  ["8+", "proyectos visibles"],
-  ["4", "frentes integrados"],
-  ["1", "equipo para todo"],
+const entryCards = [
+  {
+    icon: Code2,
+    title: "Quiero una web seria",
+    copy: "Landing, sitio institucional o ecommerce con mensaje claro y buena ejecucion visual.",
+    color: "bg-[#d7ff4f]",
+    action: "Entrar por web",
+  },
+  {
+    icon: Blocks,
+    title: "Necesito ordenar mi negocio",
+    copy: "Software, backoffice, automatizaciones o herramientas internas para trabajar mejor.",
+    color: "bg-white",
+    action: "Entrar por software",
+  },
+  {
+    icon: Search,
+    title: "Quiero que me encuentren",
+    copy: "SEO, GEO, contenido y estructura para aparecer en Google, IA y busquedas reales.",
+    color: "bg-[#ff2bf9]",
+    action: "Entrar por growth",
+  },
+  {
+    icon: Clapperboard,
+    title: "Necesito contenido que venda",
+    copy: "Video, motion, animaciones y piezas para explicar mejor lo que haces.",
+    color: "bg-[#f3f0e8]",
+    action: "Entrar por contenido",
+  },
 ];
 
 const Home = () => {
@@ -135,15 +141,11 @@ const Home = () => {
               transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-6xl"
             >
-              <p className="mb-5 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.28rem] text-[#ff2bf9]">
-                <span className="h-2 w-2 bg-[#d7ff4f]" />
-                SC Studio para empresas
-              </p>
-              <h1 className="max-w-6xl text-5xl font-semibold leading-[0.94] tracking-normal md:text-7xl lg:text-[6.8rem]">
-                Web, software y contenido para negocios que necesitan crecer online.
+              <h1 className="max-w-5xl text-5xl font-semibold leading-[0.94] tracking-normal md:text-7xl lg:text-[6.4rem]">
+                Hacemos crecer tu negocio online.
               </h1>
-              <p className="mt-7 max-w-3xl text-lg leading-relaxed text-white/72 md:text-2xl">
-                Construimos presencia digital completa: sitios que convierten, sistemas que ordenan, contenido que explica y SEO/GEO para aparecer donde tus clientes buscan.
+              <p className="mt-7 max-w-3xl text-lg leading-relaxed text-white/74 md:text-2xl">
+                Webs, software, SEO/GEO, video y motion en una presencia digital clara, linda y facil de vender.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -162,18 +164,17 @@ const Home = () => {
               </div>
             </motion.div>
 
-            <div className="grid gap-3 pt-16 md:grid-cols-3">
-              {stats.map(([value, label]) => (
-                <div
-                  key={label}
-                  className="flex items-end justify-between border-t border-white/18 pt-4"
-                >
-                  <span className="text-4xl font-semibold text-white">{value}</span>
-                  <span className="max-w-32 text-right font-mono text-xs uppercase tracking-[0.2rem] text-white/48">
-                    {label}
+            <div className="flex flex-wrap gap-2 pt-16">
+              {["Web", "Software", "SEO/GEO", "Video", "Motion", "Landing pages"].map(
+                (item) => (
+                  <span
+                    key={item}
+                    className="border border-white/24 bg-black/25 px-4 py-2 text-sm text-white/78 backdrop-blur-sm"
+                  >
+                    {item}
                   </span>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </section>
@@ -181,11 +182,8 @@ const Home = () => {
         <section className="bg-[#f3f0e8] px-5 py-24 md:px-12 md:py-32">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div className="max-w-xl">
-              <p className="font-mono text-xs uppercase tracking-[0.28rem] text-[#ff2bf9]">
-                Que hacemos
-              </p>
-              <h2 className="mt-5 text-4xl font-semibold leading-tight md:text-6xl">
-                No vendemos piezas sueltas. Armamos el sistema digital que tu empresa necesita.
+              <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+                Cuatro formas de resolver lo digital.
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-black/62">
                 Si hoy necesitas web, posicionamiento, video, software o todo junto, lo ordenamos en una experiencia coherente para vender mejor y operar con menos friccion.
@@ -199,12 +197,9 @@ const Home = () => {
                 return (
                   <article
                     key={capability.title}
-                    className="group rounded-md border border-black/10 bg-white p-5 transition hover:-translate-y-1 hover:border-black hover:shadow-[12px_12px_0_#111111]"
+                    className="group border-2 border-black bg-white p-5 shadow-[8px_8px_0_#111111] transition hover:-translate-y-1 hover:shadow-[12px_12px_0_#111111]"
                   >
-                    <div className="mb-10 flex items-center justify-between">
-                      <span className="font-mono text-xs uppercase tracking-[0.22rem] text-black/45">
-                        {capability.eyebrow}
-                      </span>
+                    <div className="mb-10 flex items-center justify-end">
                       <Icon className="h-6 w-6 text-[#ff2bf9]" />
                     </div>
                     <h3 className="text-2xl font-semibold">{capability.title}</h3>
@@ -227,13 +222,10 @@ const Home = () => {
         </section>
 
         <section className="bg-[#111111] px-5 py-24 text-white md:px-12 md:py-32">
-          <div className="mb-14 flex flex-col justify-between gap-6 border-b border-white/12 pb-10 md:flex-row md:items-end">
+          <div className="mb-14 flex flex-col justify-between gap-6 border-b-4 border-white pb-10 md:flex-row md:items-end">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.28rem] text-[#d7ff4f]">
-                Metodo
-              </p>
-              <h2 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
-                Una empresa no necesita mas ruido. Necesita una ruta.
+              <h2 className="max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
+                Del quilombo al sistema.
               </h2>
             </div>
             <p className="max-w-md text-lg leading-relaxed text-white/58">
@@ -244,18 +236,24 @@ const Home = () => {
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {workflow.map((step, index) => {
               const Icon = step.icon;
+              const cardColors = [
+                "bg-[#d7ff4f] text-black",
+                "bg-white text-black",
+                "bg-[#ff2bf9] text-black",
+                "bg-[#f3f0e8] text-black",
+              ];
 
               return (
                 <article
                   key={step.title}
-                  className="relative min-h-72 overflow-hidden rounded-md border border-white/12 bg-white/[0.04] p-6"
+                  className={`relative min-h-72 overflow-hidden border-2 border-black p-6 shadow-[10px_10px_0_#ffffff] ${cardColors[index]}`}
                 >
-                  <span className="font-mono text-xs text-[#ff2bf9]">
+                  <span className="absolute right-4 top-3 text-6xl font-black leading-none opacity-15">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <Icon className="mt-12 h-8 w-8 text-[#d7ff4f]" />
+                  <Icon className="mt-8 h-8 w-8" />
                   <h3 className="mt-8 text-2xl font-semibold">{step.title}</h3>
-                  <p className="mt-4 leading-relaxed text-white/58">{step.copy}</p>
+                  <p className="mt-4 leading-relaxed text-black/68">{step.copy}</p>
                 </article>
               );
             })}
@@ -263,77 +261,64 @@ const Home = () => {
         </section>
 
         <section className="bg-white px-5 py-24 md:px-12 md:py-32">
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.28rem] text-[#ff2bf9]">
-                Prueba
-              </p>
-              <h2 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
-                Proyectos que muestran tecnologia, criterio visual y negocio.
-              </h2>
-            </div>
-            <Link
-              to="/work"
-              className="clickable group inline-flex w-fit items-center gap-3 rounded-md bg-black px-5 py-4 font-mono text-xs uppercase tracking-[0.2rem] text-white transition hover:bg-[#ff2bf9]"
-            >
-              Ver portfolio
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+          <div className="mb-12 max-w-5xl">
+            <h2 className="text-5xl font-black leading-[0.9] tracking-normal md:text-7xl">
+              Elegi por donde queres entrar.
+            </h2>
+            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-black/62">
+              No hace falta llegar con el brief perfecto. Entra por el problema que tenes hoy y lo convertimos en plan.
+            </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
-            {proofProjects.map((project) => (
-              <Link
-                key={project.id}
-                to="/work"
-                className="clickable group overflow-hidden rounded-md border border-black/10 bg-[#f3f0e8]"
-                aria-label={`Ver proyectos relacionados con ${project.title}`}
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="grid gap-5 p-5 md:grid-cols-[0.65fr_1fr]">
-                  <div>
-                    <p className="font-mono text-xs text-[#ff2bf9]">{project.id}</p>
-                    <h3 className="mt-3 text-2xl font-semibold">{project.title}</h3>
+            {entryCards.map((card) => {
+              const Icon = card.icon;
+
+              return (
+                <a
+                  key={card.title}
+                  href="mailto:hola@scland.com"
+                  className={`clickable group min-h-80 border-2 border-black p-6 text-black shadow-[10px_10px_0_#111111] transition hover:-translate-y-1 hover:shadow-[14px_14px_0_#111111] ${card.color}`}
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <Icon className="h-9 w-9" />
+                    <ArrowRight className="h-7 w-7 transition-transform group-hover:translate-x-1" />
                   </div>
-                  <div>
-                    <p className="leading-relaxed text-black/62">{project.outcome}</p>
-                    <p className="mt-5 font-mono text-xs uppercase tracking-[0.18rem] text-black/45">
-                      {project.category.join(" / ")}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  <h3 className="mt-16 max-w-xl text-3xl font-black leading-none md:text-5xl">
+                    {card.title}
+                  </h3>
+                  <p className="mt-5 max-w-lg text-lg leading-relaxed text-black/68">
+                    {card.copy}
+                  </p>
+                  <span className="mt-8 inline-block border-2 border-black bg-white px-4 py-2 text-sm font-semibold">
+                    {card.action}
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </section>
 
-        <section className="bg-[#d7ff4f] px-5 py-20 text-black md:px-12 md:py-28">
-          <div className="grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.28rem]">
-                Siguiente paso
-              </p>
-              <h2 className="mt-5 max-w-5xl text-5xl font-semibold leading-[0.95] md:text-7xl">
-                Contanos que queres mejorar y armamos el mapa.
-              </h2>
-            </div>
-            <div>
-              <p className="text-xl leading-relaxed text-black/66">
-                Web nueva, software interno, SEO/GEO, contenido, video o una mezcla. Lo primero es ordenar prioridades.
-              </p>
-              <a
-                href="mailto:hola@scland.com"
-                className="clickable mt-8 inline-flex items-center gap-3 rounded-md bg-black px-6 py-4 font-mono text-xs uppercase tracking-[0.22rem] text-white transition hover:bg-[#ff2bf9]"
-              >
-                Hablemos
-                <Megaphone className="h-4 w-4" />
-              </a>
+        <section className="bg-[#f3f0e8] px-5 py-20 text-black md:px-12 md:py-28">
+          <div className="border-2 border-black bg-white p-6 shadow-[12px_12px_0_#111111] md:p-10">
+            <div className="grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+              <div>
+                <h2 className="max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
+                  Contanos que queres mejorar y armamos el mapa.
+                </h2>
+              </div>
+              <div>
+                <p className="text-xl leading-relaxed text-black/66">
+                  Web nueva, software interno, SEO/GEO, contenido, video o una mezcla. Lo primero es ordenar prioridades.
+                </p>
+                <a
+                  href="mailto:hola@scland.com"
+                  className="clickable mt-8 inline-flex items-center gap-3 border-2 border-black bg-[#d7ff4f] px-6 py-4 font-semibold text-black shadow-[6px_6px_0_#111111] transition hover:-translate-y-1"
+                >
+                  Hablemos
+                  <Megaphone className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
