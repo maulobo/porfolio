@@ -13,6 +13,7 @@ import Navbar from "./components/common/navbar/Navbar";
 import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
 import "./App.css";
 import Home from "./pages/Home/Home";
+import Studio from "./pages/Studio/Studio";
 import Loader from "./components/common/loader/Loader";
 
 function AnimatedRoutes() {
@@ -21,6 +22,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/studio" element={<Studio />} />
         <Route path="/work" element={<Work />} />
       </Routes>
     </AnimatePresence>
