@@ -1,86 +1,77 @@
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import {
+  ArrowRight,
+  Clapperboard,
+  Code2,
+  Layers3,
+  MousePointer2,
+  Sparkles,
+} from "lucide-react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 import Scene from "../Home/components/Scene";
 
-const narrative =
-  "Cada detalle importa: lo que se ve, lo que se siente y lo que funciona.";
+const studioCards = [
+  {
+    icon: Sparkles,
+    title: "Ideas que abren camino",
+    copy: "Pensamos conceptos, mensajes y experiencias antes de empujar pixeles.",
+    color: "bg-[#d7ff4f]",
+  },
+  {
+    icon: Layers3,
+    title: "Imagen con sistema",
+    copy: "Una marca no vive solo en un logo: vive en pantallas, piezas y decisiones.",
+    color: "bg-white",
+  },
+  {
+    icon: MousePointer2,
+    title: "Interaccion con pulso",
+    copy: "Movimiento, microinteracciones y detalles para que la web no se sienta quieta.",
+    color: "bg-[#ff2bf9]",
+  },
+  {
+    icon: Code2,
+    title: "Codigo que sostiene",
+    copy: "La experiencia se tiene que ver bien, cargar bien y aguantar el uso real.",
+    color: "bg-[#f3f0e8]",
+  },
+];
 
-const revealWords = [
-  { text: "IDEAS", sub: "Que inician todo" },
-  { text: "IMAGEN", sub: "Que construye identidad" },
-  { text: "DISEÑO", sub: "Que define el estilo" },
-  { text: "PROYECTOS", sub: "Que quedan" },
+const comicStrips = [
+  "lo que se ve",
+  "lo que se siente",
+  "lo que funciona",
+  "lo que queda",
+];
+
+const scrollPanels = [
+  {
+    kicker: "Panel 01",
+    title: "Ideas",
+    copy: "El primer golpe tiene que ordenar: que decir, como entrar y por que importa.",
+    color: "bg-[#d7ff4f]",
+  },
+  {
+    kicker: "Panel 02",
+    title: "Imagen",
+    copy: "Despues aparece el lenguaje visual: tipografia, ritmo, color, textura y tension.",
+    color: "bg-white",
+  },
+  {
+    kicker: "Panel 03",
+    title: "Movimiento",
+    copy: "La web empieza a respirar con scroll, transiciones, video, motion y microdetalles.",
+    color: "bg-[#ff2bf9]",
+  },
+  {
+    kicker: "Panel 04",
+    title: "Proyecto",
+    copy: "Todo termina en algo publicable: una experiencia que se entiende y queda.",
+    color: "bg-[#f3f0e8]",
+  },
 ] as const;
-
-const NarrativeWord = ({
-  children,
-  progress,
-  range,
-}: {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-}) => {
-  const opacity = useTransform(progress, range, [0.12, 1]);
-
-  return (
-    <span className="relative mr-3 mt-3 inline-block">
-      <span className="absolute text-brand-light opacity-10">{children}</span>
-      <motion.span style={{ opacity }}>{children}</motion.span>
-    </span>
-  );
-};
-
-const ScrollWord = ({
-  word,
-  index,
-  progress,
-  total,
-}: {
-  word: (typeof revealWords)[number];
-  index: number;
-  progress: MotionValue<number>;
-  total: number;
-}) => {
-  const step = 1 / total;
-  const start = index * step;
-  const end = (index + 1) * step;
-
-  const opacity = useTransform(
-    progress,
-    [start, start + 0.1, end - 0.1, end],
-    [0, 1, 1, 0]
-  );
-  const y = useTransform(
-    progress,
-    [start, start + 0.1, end],
-    ["100%", "0%", "-100%"]
-  );
-  const blur = useTransform(
-    progress,
-    [start, start + 0.1, end - 0.1, end],
-    [10, 0, 0, 10]
-  );
-  const filter = useTransform(blur, (value) => `blur(${value}px)`);
-
-  return (
-    <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-      <motion.div
-        style={{ opacity, y, filter }}
-        className="flex flex-col items-center px-5 text-center"
-      >
-        <h2 className="text-stroke-white text-5xl font-bold uppercase leading-none tracking-normal text-white md:text-[12vw]">
-          {word.text}
-        </h2>
-        <p className="mt-4 max-w-3xl text-lg font-normal uppercase tracking-[0.26rem] text-brand-light/60 md:text-4xl md:tracking-[0.34rem]">
-          {word.sub}
-        </p>
-      </motion.div>
-    </div>
-  );
-};
 
 const StudioHero = () => {
   return (
@@ -103,93 +94,193 @@ const StudioHero = () => {
   );
 };
 
-const StudioNarrative = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-  const words = narrative.split(" ");
-
+const StudioManifesto = () => {
   return (
-    <section ref={containerRef} className="relative h-[200vh] bg-brand-dark">
-      <div className="sticky top-0 flex h-screen items-center justify-center px-4 md:px-12">
-        <p className="flex max-w-5xl flex-wrap justify-center text-center text-3xl font-medium leading-[1.1] text-brand-light md:text-5xl lg:text-6xl">
-          {words.map((word, index) => {
-            const start = index / words.length;
-            const end = start + 1 / words.length;
+    <section className="bg-[#f3f0e8] px-5 py-20 text-black md:px-12 md:py-28">
+      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <div className="border-2 border-black bg-white p-6 shadow-[12px_12px_0_#111111] md:p-10">
+          <p className="inline-block border-2 border-black bg-[#d7ff4f] px-3 py-1 text-sm font-black uppercase">
+            Studio Files
+          </p>
+          <h1 className="mt-8 max-w-4xl text-5xl font-black uppercase leading-[0.88] tracking-normal md:text-7xl">
+            Cada detalle cuenta.
+          </h1>
+          <p className="mt-7 max-w-2xl text-xl leading-relaxed text-black/68">
+            Lo visual, lo tecnico y lo que se siente cuando alguien toca la web tienen que hablar el mismo idioma.
+          </p>
+        </div>
 
-            return (
-              <NarrativeWord
-                key={`${word}-${index}`}
-                range={[start, end]}
-                progress={scrollYProgress}
-              >
-                {word}
-              </NarrativeWord>
-            );
-          })}
-        </p>
+        <div className="grid gap-4">
+          {comicStrips.map((strip, index) => (
+            <motion.div
+              key={strip}
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.45 }}
+              transition={{ delay: index * 0.08, duration: 0.45 }}
+              className="border-2 border-black bg-[#111111] px-5 py-5 text-white shadow-[8px_8px_0_#ff2bf9]"
+            >
+              <span className="mr-4 inline-block text-[#d7ff4f]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="text-3xl font-black uppercase md:text-5xl">
+                {strip}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-const StudioReveal = () => {
+const StudioCards = () => {
+  return (
+    <section className="bg-[#111111] px-5 py-20 text-white md:px-12 md:py-28">
+      <div className="mb-12 flex flex-col justify-between gap-5 border-b-4 border-white pb-8 md:flex-row md:items-end">
+        <h2 className="max-w-4xl text-5xl font-black uppercase leading-[0.9] md:text-7xl">
+          La cocina visual.
+        </h2>
+        <p className="max-w-md text-lg leading-relaxed text-white/62">
+          Aca vive lo mas experimental: identidad, motion, interaccion y ese golpe visual que hace que una web no parezca plantilla.
+        </p>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {studioCards.map((card) => {
+          const Icon = card.icon;
+
+          return (
+            <article
+              key={card.title}
+              className={`${card.color} min-h-80 border-2 border-black p-6 text-black shadow-[10px_10px_0_#ffffff]`}
+            >
+              <Icon className="h-9 w-9" />
+              <h3 className="mt-16 text-3xl font-black leading-none">
+                {card.title}
+              </h3>
+              <p className="mt-5 text-lg leading-relaxed text-black/68">
+                {card.copy}
+              </p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+const ScrollPanel = ({
+  panel,
+  index,
+  progress,
+}: {
+  panel: (typeof scrollPanels)[number];
+  index: number;
+  progress: MotionValue<number>;
+}) => {
+  const step = 1 / scrollPanels.length;
+  const start = index * step;
+  const end = (index + 1) * step;
+
+  const opacity = useTransform(
+    progress,
+    [start, start + 0.08, end - 0.08, end],
+    [0, 1, 1, 0]
+  );
+  const y = useTransform(
+    progress,
+    [start, start + 0.08, end],
+    [90, 0, -90]
+  );
+  const rotate = useTransform(
+    progress,
+    [start, start + 0.08, end],
+    [-4, index % 2 === 0 ? -1 : 1, 4]
+  );
+
+  return (
+    <motion.article
+      style={{ opacity, y, rotate }}
+      className={`absolute left-1/2 top-1/2 w-[88vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 border-2 border-black p-6 text-black shadow-[14px_14px_0_#ffffff] md:p-10 ${panel.color}`}
+    >
+      <div className="mb-8 flex items-center justify-between border-b-2 border-black pb-4">
+        <span className="border-2 border-black bg-white px-3 py-1 text-sm font-black uppercase">
+          {panel.kicker}
+        </span>
+        <span className="text-5xl font-black leading-none opacity-20 md:text-8xl">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+      <h2 className="text-6xl font-black uppercase leading-[0.82] md:text-9xl">
+        {panel.title}
+      </h2>
+      <p className="mt-8 max-w-2xl text-xl leading-relaxed text-black/70">
+        {panel.copy}
+      </p>
+    </motion.article>
+  );
+};
+
+const StudioScrollComic = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
-  const wordProgress = useTransform(scrollYProgress, [0, 0.72], [0, 1]);
-  const buttonOpacity = useTransform(scrollYProgress, [0.72, 0.84], [0, 1]);
-  const buttonY = useTransform(scrollYProgress, [0.72, 0.84], [14, 0]);
-  const buttonScale = useTransform(scrollYProgress, [0.72, 0.84], [0.96, 1]);
-  const buttonBlur = useTransform(scrollYProgress, [0.72, 0.84], [10, 0]);
-  const buttonFilter = useTransform(buttonBlur, (value) => `blur(${value}px)`);
-  const pointerEvents = useTransform(scrollYProgress, (value) =>
-    value > 0.76 ? "auto" : "none"
-  );
 
   return (
-    <section ref={containerRef} className="relative h-[520vh] bg-brand-dark">
-      <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden">
-        <div className="relative flex h-full w-full items-center justify-center">
-          {revealWords.map((word, index) => (
-            <ScrollWord
-              key={word.text}
-              word={word}
-              index={index}
-              progress={wordProgress}
-              total={revealWords.length}
-            />
-          ))}
+    <section ref={containerRef} className="relative h-[460vh] bg-[#111111]">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:42px_42px]" />
+        <div className="absolute left-5 top-24 border-2 border-white bg-black px-3 py-2 text-sm font-black uppercase text-white md:left-12">
+          Scroll comic
         </div>
+        {scrollPanels.map((panel, index) => (
+          <ScrollPanel
+            key={panel.title}
+            panel={panel}
+            index={index}
+            progress={scrollYProgress}
+          />
+        ))}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 border-2 border-white px-4 py-2 text-xs font-black uppercase tracking-[0.18rem] text-white">
+          Segui scrolleando
+        </div>
+      </div>
+    </section>
+  );
+};
 
-        <motion.div
-          style={{
-            opacity: buttonOpacity,
-            y: buttonY,
-            scale: buttonScale,
-            filter: buttonFilter,
-            pointerEvents,
-          }}
-          className="absolute inset-0 z-50 flex items-center justify-center"
-        >
-          <Link
-            to="/work"
-            className="clickable group relative m-6 flex items-center gap-4 rounded-md border border-brand-light/30 bg-transparent px-8 py-5 text-brand-light transition-colors hover:border-brand-pink md:m-4 md:px-10"
-          >
-            <span className="absolute inset-0 origin-left scale-x-0 bg-white/5 transition-transform duration-500 ease-out group-hover:scale-x-100" />
-            <span className="relative text-center font-mono text-sm uppercase tracking-[0.28rem] text-white md:text-lg md:tracking-[0.5rem]">
-              Explorar el portfolio
-            </span>
-            <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-brand-pink transition-transform duration-500 ease-out group-hover:scale-x-100" />
-          </Link>
-        </motion.div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs uppercase tracking-[0.24rem] text-white/20">
-          Scroll para revelar
+const StudioPoster = () => {
+  return (
+    <section className="bg-white px-5 py-20 text-black md:px-12 md:py-28">
+      <div className="relative overflow-hidden border-2 border-black bg-[#d7ff4f] p-6 shadow-[14px_14px_0_#111111] md:p-10">
+        <div className="absolute right-4 top-2 hidden text-[12rem] font-black leading-none opacity-10 md:block">
+          SC
+        </div>
+        <div className="relative z-10 grid gap-10 md:grid-cols-[1fr_0.85fr] md:items-end">
+          <div>
+            <p className="inline-flex items-center gap-2 border-2 border-black bg-white px-3 py-1 text-sm font-black uppercase">
+              <Clapperboard className="h-4 w-4" />
+              visual issue
+            </p>
+            <h2 className="mt-7 max-w-4xl text-5xl font-black uppercase leading-[0.88] md:text-7xl">
+              Diseñamos para que se note.
+            </h2>
+          </div>
+          <div>
+            <p className="text-xl leading-relaxed text-black/68">
+              Si la home nueva es la puerta clara de la empresa, Studio es el cuarto donde probamos forma, ritmo y presencia.
+            </p>
+            <Link
+              to="/work"
+              className="clickable mt-8 inline-flex items-center gap-3 border-2 border-black bg-black px-6 py-4 font-semibold text-white shadow-[6px_6px_0_#ff2bf9] transition hover:-translate-y-1"
+            >
+              Explorar portfolio
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -201,8 +292,10 @@ const Studio = () => {
     <TransitionAnimate>
       <main className="min-h-screen bg-brand-dark">
         <StudioHero />
-        <StudioNarrative />
-        <StudioReveal />
+        <StudioManifesto />
+        <StudioScrollComic />
+        <StudioCards />
+        <StudioPoster />
       </main>
     </TransitionAnimate>
   );
