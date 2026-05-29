@@ -1,9 +1,10 @@
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 import Hero from "./components/Hero";
+import HomeFooter from "./components/HomeFooter";
 import Narrative from "./components/Narrative";
 import ProjectReveal from "./components/ProjectReveal";
+import SelectedWorks from "./components/SelectedWorks";
 import Services from "./components/Services";
-import HomeFooter from "./components/HomeFooter";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <Narrative />
         <ProjectReveal />
         <Services />
+        <SelectedWorks />
         <HomeFooter />
       </main>
     </TransitionAnimate>
