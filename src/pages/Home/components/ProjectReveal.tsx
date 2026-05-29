@@ -2,13 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-
-const words = [
-  { text: "IDEAS", sub: "Que inician todo" },
-  { text: "IMAGEN", sub: "Que construye identidad" },
-  { text: "DISEÑO", sub: "Que define el estilo" },
-  { text: "PROYECTOS", sub: "Que quedan" },
-];
+import { revealWords } from "../homeContent";
 
 
 const ScrollWord = ({
@@ -88,13 +82,13 @@ const ProjectReveal = () => {
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
        
         <div className="relative w-full h-full flex items-center justify-center">
-          {words.map((word, i) => (
+          {revealWords.map((word, i) => (
             <ScrollWord
               key={i}
               word={word}
               index={i}
               progress={wordProgress}
-              total={words.length}
+              total={revealWords.length}
             />
           ))}
         </div>

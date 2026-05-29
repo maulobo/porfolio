@@ -1,9 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import clsx from "clsx";
-
-const paragraph =
-  "Cada detalle importa: lo que se ve, lo que se siente y lo que funciona.";
+import { homeNarrative } from "../homeContent";
 
 const Word = ({ children, range, progress }: any) => {
   const opacity = useTransform(progress, range, [0.1, 1]);
@@ -22,7 +19,7 @@ const Narrative = () => {
     offset: ["start start", "end end"],
   });
 
-  const words = paragraph.split(" ");
+  const words = homeNarrative.split(" ");
 
   return (
     <div ref={containerRef} className="h-[200vh] bg-brand-dark relative">
