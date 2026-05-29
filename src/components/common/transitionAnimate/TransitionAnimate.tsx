@@ -6,6 +6,7 @@ import "./stylesCurve.css";
 
 const routes: Record<string, string> = {
   "/": "Home",
+  "/studio": "Studio",
   "/work": "Projectos",
   "/about": "About",
   "/contact": "Contact",
