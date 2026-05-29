@@ -14,7 +14,6 @@ import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
-import Loader from "./components/common/loader/Loader";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -33,7 +32,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Loader />
       <SmoothScroll />
       <MaskCursor />
       <Navbar />
