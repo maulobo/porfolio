@@ -11,7 +11,11 @@ const selectedProjects = projects.slice(0, 4);
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
   return (
     <div className="group relative w-[80vw] md:w-[60vh] h-[50vh] flex-shrink-0 mx-4 md:mx-8">
-      <Link to={project.link} className="block w-full h-full">
+      <Link
+        to="/work"
+        aria-label={`Ver proyectos relacionados con ${project.title}`}
+        className="block w-full h-full"
+      >
         <div className="w-full h-full overflow-hidden rounded-md relative bg-brand-gray">
           <img
             src={project.imageUrl}
