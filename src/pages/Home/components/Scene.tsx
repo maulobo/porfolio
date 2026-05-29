@@ -37,7 +37,7 @@ function AdaptiveText() {
   );
 }
 
-export default function Scene() {
+export default function Scene({ showText = true }: { showText?: boolean }) {
   return (
     <Canvas
       className="h-full w-full"
@@ -51,7 +51,7 @@ export default function Scene() {
     >
       <color attach="background" args={["#ffffff"]} />
       <Model />
-      <AdaptiveText />
+      {showText && <AdaptiveText />}
       {/* <Stats /> */}
       <Rig />
     </Canvas>

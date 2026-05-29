@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <section className="min-h-screen w-full relative flex items-center overflow-hidden bg-white text-brand-dark">
       <div className="absolute inset-0 z-0">
-        <Scene />
+        <Scene showText={false} />
       </div>
 
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-white/10 via-white/35 to-white/70 pointer-events-none" />
