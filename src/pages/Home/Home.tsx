@@ -13,6 +13,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
+import TrustBar from "./components/TrustBar";
+import TechStack from "./components/TechStack";
+import Testimonials from "./components/Testimonials";
 
 const heroImages = [
   "/images/projects/banner-case.jpg",
@@ -179,6 +182,8 @@ const Home = () => {
           </div>
         </section>
 
+        <TrustBar />
+
         <section className="bg-[#f3f0e8] px-5 py-24 md:px-12 md:py-32">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div className="max-w-xl">
@@ -221,6 +226,8 @@ const Home = () => {
           </div>
         </section>
 
+        <TechStack />
+
         <section className="bg-[#111111] px-5 py-24 text-white md:px-12 md:py-32">
           <div className="mb-14 flex flex-col justify-between gap-6 border-b-4 border-white pb-10 md:flex-row md:items-end">
             <div>
@@ -259,6 +266,8 @@ const Home = () => {
             })}
           </div>
         </section>
+
+        <Testimonials />
 
         <section className="bg-white px-5 py-24 md:px-12 md:py-32">
           <div className="mb-12 max-w-5xl">
