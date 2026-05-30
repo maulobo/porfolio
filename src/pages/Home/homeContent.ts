@@ -101,3 +101,62 @@ export const finalCta = {
     "Contanos qué querés mejorar y te ayudamos a ordenar el próximo paso.",
   email: "hola@scland.com",
 };
+
+export const clients = [
+  { name: "SSI", logo: "/images/clients/ssi.png" },
+  { name: "Servicios Confluencia", logo: "/images/clients/confluencia.png" },
+  { name: "TGB", logo: "/images/clients/tgb.png" },
+  { name: "ITM", logo: "/images/clients/itm.png" },
+  { name: "Rolcka", logo: "/images/clients/rolcka.png" },
+  { name: "Juárez Beltrán", logo: "/images/clients/juarez-beltran.png" },
+  { name: "Helpwin", logo: "/images/clients/helpwin.png" },
+  { name: "Aflora", logo: "/images/clients/aflora.png" },
+  { name: "Minimal", logo: "/images/clients/minimal.png" },
+  { name: "Telefé", logo: "/images/clients/telefe.png" },
+  { name: "YPF", logo: "/images/clients/ypf.png" },
+] as const;
+
+export const testimonials = [
+  {
+    quote: "Entregaron en tiempo, el resultado superó lo que esperábamos.",
+    name: "Ana Gómez",
+    company: "SSI",
+    role: "Directora",
+  },
+  {
+    quote: "Por fin alguien que entiende el negocio antes de ponerse a diseñar.",
+    name: "Martín Torres",
+    company: "Aflora",
+    role: "Fundador",
+  },
+  {
+    quote: "La web nueva duplicó las consultas en el primer mes.",
+    name: "Lucía Fernández",
+    company: "Helpwin",
+    role: "Marketing",
+  },
+  {
+    quote: "Trabajar con SmartCloud fue directo, sin burocracia y con resultados.",
+    name: "Carlos Ruiz",
+    company: "TGB",
+    role: "CEO",
+  },
+] as const;
+
+export const techStackRow1 = [
+  { name: "Blender", slug: "blender" },
+  { name: "React", slug: "react" },
+  { name: "Supabase", slug: "supabase" },
+  { name: "n8n", slug: "n8n" },
+  { name: "Adobe", slug: "adobe" },
+  { name: "Figma", slug: "figma" },
+] as const;
+
+export const techStackRow2 = [
+  { name: "Vercel", slug: "vercel" },
+  { name: "Anthropic", slug: "anthropic" },
+  { name: "Trello", slug: "trello" },
+  { name: "Asana", slug: "asana" },
+  { name: "Node.js", slug: "nodedotjs" },
+  { name: "JavaScript", slug: "javascript" },
+] as const;
