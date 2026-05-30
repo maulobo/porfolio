@@ -14,6 +14,7 @@ import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
+import ChatbotWidget from "./components/chatbot/ChatbotWidget";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
       <MaskCursor />
       <Navbar />
       <AnimatedRoutes />
+      <ChatbotWidget />
       <Analytics />
     </Router>
   );
