@@ -78,3 +78,8 @@ button:focus-visible {
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
+
+@keyframes chatPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
