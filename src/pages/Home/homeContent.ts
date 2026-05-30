@@ -148,7 +148,7 @@ export const techStackRow1 = [
   { name: "React", slug: "react" },
   { name: "Supabase", slug: "supabase" },
   { name: "n8n", slug: "n8n" },
-  { name: "Adobe", slug: "adobe" },
+  { name: "DaVinci Resolve", slug: "davinciresolve" },
   { name: "Figma", slug: "figma" },
 ] as const;
 
