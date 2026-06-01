@@ -37,12 +37,20 @@ const ProjectCard: React.FC<{
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["center end", "end start"],
   });
-  const yRange = index % 2 === 0 ? [0, 40] : [0, -40];
+  const yRange = index % 2 === 0 ? [0, 20] : [0, -20];
 
   const smoothProgress = useSpring(scrollYProgress, {
     damping: 15,
@@ -70,7 +78,7 @@ const ProjectCard: React.FC<{
   return (
     <motion.div
       ref={cardRef}
-      style={{ y: !isList ? y : 0 }}
+      style={{ y: !isList && isDesktop ? y : 0 }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}

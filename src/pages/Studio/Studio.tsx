@@ -216,7 +216,7 @@ const ScrollPanel = ({
       style={{ x, y, scale, rotate, zIndex: index }}
       className={`absolute left-1/2 top-1/2 w-[88vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 border-2 border-black p-6 text-black md:p-10 ${panel.color}`}
     >
-      <h2 className="text-6xl font-black uppercase leading-[0.82] md:text-9xl">
+      <h2 className="text-4xl font-black uppercase leading-[0.82] md:text-7xl">
         {panel.title}
       </h2>
       <p className="mt-8 max-w-2xl text-xl leading-relaxed text-black/70">
