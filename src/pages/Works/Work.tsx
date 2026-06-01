@@ -18,6 +18,17 @@ import clsx from "clsx";
 import FooterCustom, { FooterType } from "../../components/common/footerCustom/FooterCustom";
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 
+const cardHoverColors = [
+  "hover:bg-[#d7ff4f]",
+  "hover:bg-white",
+  "hover:bg-[#ff2bf9]",
+  "hover:bg-white",
+  "hover:bg-[#d7ff4f]",
+  "hover:bg-[#ff2bf9]",
+  "hover:bg-white",
+  "hover:bg-[#d7ff4f]",
+];
+
 const ProjectCard: React.FC<{
   project: Project;
   viewMode: "grid" | "list";
@@ -31,7 +42,7 @@ const ProjectCard: React.FC<{
     target: cardRef,
     offset: ["center end", "end start"],
   });
-  const yRange = index % 2 === 0 ? [0, 50] : [0, -50];
+  const yRange = index % 2 === 0 ? [0, 40] : [0, -40];
 
   const smoothProgress = useSpring(scrollYProgress, {
     damping: 15,
@@ -53,28 +64,38 @@ const ProjectCard: React.FC<{
     return () => clearInterval(interval);
   }, [isHovered, project.hoverImages]);
 
+  const isList = viewMode === "list";
+  const accent = cardHoverColors[index % cardHoverColors.length];
+
   return (
     <motion.div
       ref={cardRef}
-      style={{ y: viewMode === "grid" ? y : 0 }}
-      initial={{ opacity: 0, y: 20 }}
+      style={{ y: !isList ? y : 0 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="group rounded-md"
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      className={clsx(
+        "group border-2 border-black bg-white shadow-[8px_8px_0_#111111] transition-all duration-200",
+        isList ? "flex flex-col md:flex-row" : "",
+        accent,
+        "hover:-translate-y-1 hover:shadow-[12px_12px_0_#111111]"
+      )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Image */}
       <div
         className={clsx(
-          "relative overflow-hidden bg-brand-gray mb-6 rounded-md",
-          viewMode === "grid" ? "aspect-4/3" : "aspect-21/9"
+          "relative overflow-hidden border-b-2 border-black bg-[#111111] md:border-b-0",
+          isList ? "md:border-r-2 md:w-[55%]" : "",
+          isList ? "aspect-4/3 md:aspect-auto md:min-h-[320px]" : "aspect-4/3"
         )}
       >
         <img
           src={project.imageUrl}
           alt={project.title}
-          className="absolute inset-0 rounded-md w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
         <AnimatePresence>
@@ -86,53 +107,66 @@ const ProjectCard: React.FC<{
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none rounded-md"
+                className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
               >
-                <div className="w-[55%] h-[55%] bg-brand-dark rounded-md p-4 shadow-2xl relative flex items-center justify-center border border-brand-gray">
+                <div className="relative flex h-[55%] w-[55%] items-center justify-center border-2 border-black bg-white p-4 shadow-[6px_6px_0_#111111]">
                   <img
                     src={project.hoverImages[currentImageIndex]}
                     alt=""
-                    className="max-w-full max-h-full object-contain "
+                    className="max-h-full max-w-full object-contain"
                   />
                 </div>
               </motion.div>
             )}
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/40 transition-colors duration-300 pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30" />
       </div>
 
-      <div className="flex flex-col-reverse md:flex-row justify-between items-start">
+      {/* Content */}
+      <div
+        className={clsx(
+          "flex flex-col justify-between p-5 md:p-7",
+          isList ? "md:w-[45%]" : ""
+        )}
+      >
         <div>
-          <h3 className="text-2xl font-medium mb-2 group-hover:text-brand-pink transition-colors duration-300">
-            {project.title}
-          </h3>
-          <p className="text-brand-light/60 text-lg">{project.description}</p>
-          {project.externalUrl && (
-            <a
-              href={project.externalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-brand-light hover:text-brand-pink transition-colors duration-300 clickable"
-            >
-              Visitar sitio <ArrowUpRight size={16} />
-            </a>
-          )}
-        </div>
-        <div className="flex flex-col items-end gap-2 w-full">
-          <span className="text-xs font-mono text-brand-violet">
-            0{project.id}
-          </span>
-          <div className="flex mb-4 flex-row md:flex-col justify-start md:justify-end gap-2 w-full md:max-w-50">
-            {project.category.map((cat, idx) => (
+          <div className="mb-4 flex flex-wrap gap-2">
+            {project.category.map((cat) => (
               <span
-                key={idx}
-                className="text-xs border border-brand-gray px-2 py-1 rounded-md text-brand-light/50"
+                key={cat}
+                className="border-2 border-black px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16rem] text-black/70"
               >
                 {cat}
               </span>
             ))}
           </div>
+          <h3 className="text-2xl font-semibold leading-tight tracking-tight text-black transition-colors duration-200 group-hover:text-black md:text-3xl">
+            {project.title}
+          </h3>
+          <p className="mt-3 max-w-lg text-base leading-relaxed text-black/60">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="mt-6 flex items-center gap-4">
+          {project.externalUrl && (
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="clickable inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 font-mono text-xs uppercase tracking-[0.18rem] text-black shadow-[3px_3px_0_#111111] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#d7ff4f] hover:shadow-[5px_5px_0_#111111]"
+            >
+              Visitar sitio
+              <ArrowUpRight size={14} />
+            </a>
+          )}
+          <a
+            href={project.link}
+            className="clickable inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18rem] text-black/50 underline decoration-black/20 underline-offset-4 transition-colors duration-200 hover:text-black"
+          >
+            Ver proyecto
+          </a>
         </div>
       </div>
     </motion.div>
@@ -151,16 +185,33 @@ const Work: React.FC = () => {
 
   return (
     <TransitionAnimate>
-      <div className="min-h-screen bg-brand-dark text-brand-light font-sans pt-8 px-4 md:px-12 pb-20">
-        <div className="max-w-400 mx-auto">
-          <div className="flex flex-col justify-between items-end mb-16 border-b border-brand-gray pb-8">
-            <div className="hidden md:flex flex-row items-end gap-12">
-              <div className="relative z-10">
+      <div className="min-h-screen bg-[#f3f0e8] px-5 pb-20 pt-8 font-sans text-black md:px-12">
+        <div className="mx-auto max-w-[1400px]">
+          {/* Header */}
+          <div className="mb-12 flex flex-col gap-8 border-b-2 border-black pb-8 md:mb-16 md:flex-row md:items-end md:justify-between">
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: 120, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.3,
+                }}
+                className="text-6xl font-semibold leading-[0.92] tracking-tight md:text-8xl lg:text-[7rem]"
+              >
+                Proyectos
+              </motion.h1>
+            </div>
+
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:gap-6">
+              {/* Filter */}
+              <div className="relative z-20">
                 <button
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-gray/10 border border-brand-gray/20 text-brand-light hover:border-brand-pink/50 hover:bg-brand-gray/20 transition-all duration-300"
+                  className="clickable flex items-center gap-3 border-2 border-black bg-white px-5 py-3 font-mono text-xs uppercase tracking-[0.22rem] text-black shadow-[4px_4px_0_#111111] transition-all hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#111111]"
                 >
-                  <span className="text-sm font-medium">{activeCategory}</span>
+                  <span>{activeCategory}</span>
                   <ChevronDown
                     size={16}
                     className={clsx(
@@ -173,13 +224,13 @@ const Work: React.FC = () => {
                 <AnimatePresence>
                   {isFilterOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      initial={{ opacity: 0, y: 10, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.96 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-full mt-2 w-64 bg-brand-dark border border-brand-gray/20 rounded-xl shadow-2xl overflow-hidden backdrop-blur-xl"
+                      className="absolute right-0 top-full mt-2 w-72 overflow-hidden border-2 border-black bg-[#f3f0e8] shadow-[8px_8px_0_#111111]"
                     >
-                      <div className="max-h-[60vh] overflow-y-auto py-2 custom-scrollbar">
+                      <div className="max-h-[60vh] overflow-y-auto py-1">
                         {categories.map((cat) => (
                           <button
                             key={cat}
@@ -188,15 +239,15 @@ const Work: React.FC = () => {
                               setIsFilterOpen(false);
                             }}
                             className={clsx(
-                              "w-full text-left px-4 py-3 text-sm transition-colors flex items-center justify-between group",
+                              "flex w-full items-center justify-between px-4 py-3 text-left font-mono text-xs uppercase tracking-[0.16rem] transition-colors",
                               activeCategory === cat
-                                ? "bg-brand-pink/10 text-brand-pink"
-                                : "text-brand-light/70 hover:bg-brand-gray/10 hover:text-brand-light"
+                                ? "bg-[#d7ff4f] text-black"
+                                : "text-black/70 hover:bg-white hover:text-black"
                             )}
                           >
                             <span>{cat}</span>
                             {activeCategory === cat && (
-                              <Check size={14} className="text-brand-pink" />
+                              <Check size={14} className="text-black" />
                             )}
                           </button>
                         ))}
@@ -205,51 +256,43 @@ const Work: React.FC = () => {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="flex items-center gap-2  ">
+
+              {/* View toggle */}
+              <div className="flex items-center gap-1 border-2 border-black bg-white shadow-[4px_4px_0_#111111]">
                 <button
                   onClick={() => setViewMode("grid")}
                   className={clsx(
-                    "p-2 rounded-md transition-all",
+                    "p-3 transition-colors",
                     viewMode === "grid"
-                      ? "bg-brand-dark shadow-sm text-brand-pink"
-                      : "text-brand-light/40 hover:text-brand-light"
+                      ? "bg-[#d7ff4f] text-black"
+                      : "text-black/40 hover:text-black"
                   )}
+                  aria-label="Vista de grilla"
                 >
-                  <LayoutGrid size={20} />
+                  <LayoutGrid size={18} />
                 </button>
+                <div className="h-6 w-px bg-black/15" />
                 <button
                   onClick={() => setViewMode("list")}
                   className={clsx(
-                    "p-2 rounded-md transition-all",
+                    "p-3 transition-colors",
                     viewMode === "list"
-                      ? "bg-brand-dark shadow-sm text-brand-pink"
-                      : "text-brand-light/40 hover:text-brand-light"
+                      ? "bg-[#d7ff4f] text-black"
+                      : "text-black/40 hover:text-black"
                   )}
+                  aria-label="Vista de lista"
                 >
-                  <List size={20} />
+                  <List size={18} />
                 </button>
               </div>
             </div>
-            <div className="self-start overflow-hidden mt-10">
-              <motion.h1
-                initial={{ y: 200 }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0.8,
-                }}
-                className=" text-6xl md:text-9xl font-light tracking-tighter mb-8 md:mb-0 text-white"
-              >
-                Proyectos
-              </motion.h1>
-            </div>
           </div>
 
+          {/* Grid */}
           <motion.div
             layout
             className={clsx(
-              "grid gap-x-8 gap-y-16",
+              "grid gap-6 md:gap-8",
               viewMode === "grid" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
             )}
           >
@@ -264,6 +307,7 @@ const Work: React.FC = () => {
               ))}
             </AnimatePresence>
           </motion.div>
+
           <FooterCustom typeFooter={FooterType.FOOTERWORK} />
         </div>
       </div>

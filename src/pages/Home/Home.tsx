@@ -152,7 +152,7 @@ const Home = () => {
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="mailto:hola@scland.com"
+                  href="mailto:contacto@smartcloudstudio.com"
                   className="clickable group inline-flex w-fit items-center gap-3 rounded-md bg-[#d7ff4f] px-6 py-4 font-mono text-xs uppercase tracking-[0.22rem] text-black transition hover:bg-white"
                 >
                   Empezar proyecto
@@ -255,9 +255,6 @@ const Home = () => {
                   key={step.title}
                   className={`relative min-h-72 overflow-hidden border-2 border-black p-6 shadow-[10px_10px_0_#ffffff] ${cardColors[index]}`}
                 >
-                  <span className="absolute right-4 top-3 text-6xl font-black leading-none opacity-15">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                   <Icon className="mt-8 h-8 w-8" />
                   <h3 className="mt-8 text-2xl font-semibold">{step.title}</h3>
                   <p className="mt-4 leading-relaxed text-black/68">{step.copy}</p>
@@ -286,7 +283,7 @@ const Home = () => {
               return (
                 <a
                   key={card.title}
-                  href="mailto:hola@scland.com"
+                  href="mailto:contacto@smartcloudstudio.com"
                   className={`clickable group min-h-80 border-2 border-black p-6 text-black shadow-[10px_10px_0_#111111] transition hover:-translate-y-1 hover:shadow-[14px_14px_0_#111111] ${card.color}`}
                 >
                   <div className="flex items-start justify-between gap-6">
@@ -321,7 +318,7 @@ const Home = () => {
                   Web nueva, software interno, SEO/GEO, contenido, video o una mezcla. Lo primero es ordenar prioridades.
                 </p>
                 <a
-                  href="mailto:hola@scland.com"
+                  href="mailto:contacto@smartcloudstudio.com"
                   className="clickable mt-8 inline-flex items-center gap-3 border-2 border-black bg-[#d7ff4f] px-6 py-4 font-semibold text-black shadow-[6px_6px_0_#111111] transition hover:-translate-y-1"
                 >
                   Hablemos

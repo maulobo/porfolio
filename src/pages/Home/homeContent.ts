@@ -99,22 +99,24 @@ export const finalCta = {
   headline: "Hablemos de tu presencia digital.",
   description:
     "Contanos qué querés mejorar y te ayudamos a ordenar el próximo paso.",
-  email: "hola@scland.com",
+  email: "contacto@smartcloudstudio.com",
 };
 
 export const clients = [
-  { name: "SSI", logo: "/images/clients/ssi.png" },
-  { name: "Servicios Confluencia", logo: "/images/clients/confluencia.png" },
-  { name: "TGB", logo: "/images/clients/tgb.png" },
-  { name: "ITM", logo: "/images/clients/itm.png" },
-  { name: "Rolcka", logo: "/images/clients/rolcka.png" },
-  { name: "Juárez Beltrán", logo: "/images/clients/juarez-beltran.png" },
-  { name: "Helpwin", logo: "/images/clients/helpwin.png" },
-  { name: "Aflora", logo: "/images/clients/aflora.png" },
-  { name: "Minimal", logo: "/images/clients/minimal.png" },
-  { name: "Telefé", logo: "/images/clients/telefe.png" },
-  { name: "YPF", logo: "/images/clients/ypf.png" },
-] as const;
+  { name: "SSI", logo: "/assets/clients/ssi.png" },
+  { name: "Telefé", logo: "/assets/clients/telefe.png" },
+  { name: "YPF", logo: "/assets/clients/ypf.png" },
+  { name: "GSG Design", logo: "/assets/clients/gsg.png" },
+  { name: "Aflora", logo: "/assets/clients/afflora.png" },
+  { name: "Petroplastic", logo: "/assets/clients/pet.png" },
+  { name: "Portal Patagonia", logo: "/assets/clients/pp.png" },
+  { name: "Ultra Tech", logo: "/assets/clients/ultratech.png" },
+  { name: "Vitatech", logo: "/assets/clients/vitatech.png" },
+  { name: "HelpWin", logo: "/assets/clients/helpwin.png" },
+  { name: "Minimal", logo: "/assets/clients/minimal.png" },
+  { name: "PubliMark", logo: "/assets/clients/publimark.png" },
+  { name: "Vivra Güemes", logo: "/assets/clients/vivra.png" },
+];
 
 export const testimonials = [
   {

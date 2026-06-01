@@ -32,7 +32,7 @@ const Hero = () => {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
-              href="mailto:hola@scland.com"
+              href="mailto:contacto@smartcloudstudio.com"
               className="clickable group inline-flex w-fit items-center gap-3 rounded-md bg-brand-dark px-6 py-4 font-mono text-xs uppercase tracking-[0.22rem] text-white transition-colors hover:bg-brand-pink"
             >
               {homeHero.primaryCta}

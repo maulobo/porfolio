@@ -48,25 +48,21 @@ const comicStrips = [
 
 const scrollPanels = [
   {
-    kicker: "Panel 01",
     title: "Ideas",
     copy: "El primer golpe tiene que ordenar: que decir, como entrar y por que importa.",
     color: "bg-[#d7ff4f]",
   },
   {
-    kicker: "Panel 02",
     title: "Imagen",
     copy: "Despues aparece el lenguaje visual: tipografia, ritmo, color, textura y tension.",
     color: "bg-white",
   },
   {
-    kicker: "Panel 03",
     title: "Movimiento",
     copy: "La web empieza a respirar con scroll, transiciones, video, motion y microdetalles.",
     color: "bg-[#ff2bf9]",
   },
   {
-    kicker: "Panel 04",
     title: "Proyecto",
     copy: "Todo termina en algo publicable: una experiencia que se entiende y queda.",
     color: "bg-[#f3f0e8]",
@@ -170,6 +166,14 @@ const StudioCards = () => {
   );
 };
 
+// Final resting offsets — lower cards peek from behind upper ones
+const cardRest = [
+  { x: -20, y: 14, r: -3 },
+  { x: 16, y: -10, r: 2 },
+  { x: -10, y: 7, r: -1.5 },
+  { x: 0, y: 0, r: 0 },
+] as const;
+
 const ScrollPanel = ({
   panel,
   index,
@@ -179,39 +183,39 @@ const ScrollPanel = ({
   index: number;
   progress: MotionValue<number>;
 }) => {
-  const step = 1 / scrollPanels.length;
-  const start = index * step;
-  const end = (index + 1) * step;
+  const n = scrollPanels.length;
+  const isFirst = index === 0;
+  const off = cardRest[index];
 
-  const opacity = useTransform(
-    progress,
-    [start, start + 0.08, end - 0.08, end],
-    [0, 1, 1, 0]
-  );
+  const rangeStart = isFirst ? 0 : (index - 1) / (n - 1);
+  const rangeEnd = isFirst ? 0.5 : index / (n - 1);
+
   const y = useTransform(
     progress,
-    [start, start + 0.08, end],
-    [90, 0, -90]
+    [rangeStart, rangeEnd],
+    isFirst ? [off.y, off.y] : [920, off.y]
+  );
+  const x = useTransform(
+    progress,
+    [rangeStart, rangeEnd],
+    isFirst ? [off.x, off.x] : [0, off.x]
   );
   const rotate = useTransform(
     progress,
-    [start, start + 0.08, end],
-    [-4, index % 2 === 0 ? -1 : 1, 4]
+    [rangeStart, rangeEnd],
+    isFirst ? [off.r, off.r] : [index % 2 === 0 ? 6 : -6, off.r]
+  );
+  const scale = useTransform(
+    progress,
+    [rangeStart, rangeEnd],
+    isFirst ? [1, 1] : [0.88, 1]
   );
 
   return (
     <motion.article
-      style={{ opacity, y, rotate }}
-      className={`absolute left-1/2 top-1/2 w-[88vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 border-2 border-black p-6 text-black shadow-[14px_14px_0_#ffffff] md:p-10 ${panel.color}`}
+      style={{ x, y, scale, rotate, zIndex: index }}
+      className={`absolute left-1/2 top-1/2 w-[88vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 border-2 border-black p-6 text-black md:p-10 ${panel.color}`}
     >
-      <div className="mb-8 flex items-center justify-between border-b-2 border-black pb-4">
-        <span className="border-2 border-black bg-white px-3 py-1 text-sm font-black uppercase">
-          {panel.kicker}
-        </span>
-        <span className="text-5xl font-black leading-none opacity-20 md:text-8xl">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
       <h2 className="text-6xl font-black uppercase leading-[0.82] md:text-9xl">
         {panel.title}
       </h2>

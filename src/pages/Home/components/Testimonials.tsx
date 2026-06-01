@@ -29,13 +29,6 @@ const Testimonials = () => {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className={`relative overflow-hidden border-b-2 ${style.border} ${style.bg} ${style.text} px-5 py-12 md:px-12 md:py-16`}
           >
-            <span
-              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-[18vw] font-black leading-none opacity-[0.06]"
-              aria-hidden="true"
-            >
-              {String(index + 1).padStart(2, "0")}
-            </span>
-
             <div className="relative grid gap-8 md:grid-cols-[2fr_1fr] md:items-end">
               <blockquote>
                 <p className="text-3xl font-black leading-tight md:text-5xl lg:text-[3.2rem]">
