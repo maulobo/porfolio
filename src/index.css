@@ -42,29 +42,24 @@ body {
   min-height: 100vh;
 }
 
-button {
-  border-radius: 8px;
-  border: 2px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border 0.25s;
-}
-button:hover {
-  border: 2px solid #ffffff;
-}
-button:focus,
-button:active,
-button:focus-visible {
-  border: 2px solid #ff2bf9;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes chatPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }

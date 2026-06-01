@@ -13,7 +13,8 @@ import Navbar from "./components/common/navbar/Navbar";
 import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
 import "./App.css";
 import Home from "./pages/Home/Home";
-import Loader from "./components/common/loader/Loader";
+import Studio from "./pages/Studio/Studio";
+import ChatbotWidget from "./components/chatbot/ChatbotWidget";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/studio" element={<Studio />} />
         <Route path="/work" element={<Work />} />
       </Routes>
     </AnimatePresence>
@@ -31,11 +33,11 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Loader />
       <SmoothScroll />
       <MaskCursor />
       <Navbar />
       <AnimatedRoutes />
+      <ChatbotWidget />
       <Analytics />
     </Router>
   );
