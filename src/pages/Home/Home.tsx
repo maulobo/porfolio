@@ -152,7 +152,9 @@ const Home = () => {
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="mailto:contacto@smartcloudstudio.com"
+                  href="https://wa.me/5492995831639"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="clickable group inline-flex w-fit items-center gap-3 rounded-md bg-[#d7ff4f] px-6 py-4 font-mono text-xs uppercase tracking-[0.22rem] text-black transition hover:bg-white"
                 >
                   Empezar proyecto

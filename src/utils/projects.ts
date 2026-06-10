@@ -61,8 +61,7 @@ export const projects: Project[] = [
       "/images/projects/ssi/6.png",
     ],
     link: "/work/ssi",
-    externalUrl:
-      "https://ssi-dev-git-preview-changes-maulobos-projects.vercel.app/",
+    externalUrl: "https://sotosisrl.com/",
   },
   {
     id: "04",
