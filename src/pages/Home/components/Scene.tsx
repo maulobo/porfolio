@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Stats, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 import { easing } from "maath";
 import Model from "./Model";
 
@@ -52,7 +52,6 @@ export default function Scene({ showText = true }: { showText?: boolean }) {
       <color attach="background" args={["#ffffff"]} />
       <Model />
       {showText && <AdaptiveText />}
-      {/* <Stats /> */}
       <Rig />
     </Canvas>
   );

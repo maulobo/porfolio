@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# El panel de demostración usa datos ficticios (empresas, personas, facturas).
+# Se bloquea su indexación para que esos registros inventados no aparezcan en
+# buscadores como si fueran información real del estudio o de un cliente.
+# El panel sigue siendo accesible por enlace directo.
+Disallow: /software/panel-crm
+
 Sitemap: https://www.scstudio.com/sitemap.xml

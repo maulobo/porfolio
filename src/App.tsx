@@ -1,9 +1,10 @@
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
-} from "react-router-dom";
+} from "react-router";
 import { AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import Work from "./pages/Works/Work";
@@ -15,6 +16,12 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
 import ChatbotWidget from "./components/chatbot/ChatbotWidget";
+
+/**
+ * El panel CRM de muestra se carga aparte: arrastra recharts y dnd-kit, que no
+ * hacen falta para navegar el sitio.
+ */
+const PanelCrm = lazy(() => import("./pages/Software/PanelCrm/PanelCrm"));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -29,15 +36,35 @@ function AnimatedRoutes() {
   );
 }
 
-function App() {
+/** Sitio público: navbar, cursor custom y smooth scroll. */
+function SiteLayout() {
   return (
-    <Router>
-      <ScrollToTop />
+    <>
       <SmoothScroll />
       <MaskCursor />
       <Navbar />
       <AnimatedRoutes />
       <ChatbotWidget />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        {/* El panel corre fuera del chrome del sitio: tiene su propio layout. */}
+        <Route
+          path="/software/panel-crm/*"
+          element={
+            <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0f1116" }} />}>
+              <PanelCrm />
+            </Suspense>
+          }
+        />
+        <Route path="*" element={<SiteLayout />} />
+      </Routes>
       <Analytics />
     </Router>
   );

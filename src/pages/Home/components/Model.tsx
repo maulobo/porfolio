@@ -4,7 +4,6 @@ import {
   Center,
   MeshTransmissionMaterial,
 } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const MeshBall = ({ url, config }: { url: string; config: any }) => {
@@ -45,9 +44,6 @@ const MeshBall = ({ url, config }: { url: string; config: any }) => {
 };
 
 export default function Model() {
-  const { size } = useThree();
-  const isSmall = size.width <= 400;
-
   const balls = [
     // {
     //   url: "/3d/bomb-gp.glb",

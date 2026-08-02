@@ -1,7 +1,7 @@
 import { useProgress } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { projects } from "../../../utils/projects";
 
 export default function Loader() {

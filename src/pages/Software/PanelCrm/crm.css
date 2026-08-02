@@ -1,0 +1,153 @@
+/**
+ * Tokens del panel CRM de muestra.
+ *
+ * Todo vive bajo `.crm` para que el panel tenga identidad propia y no herede
+ * el dark neón del portfolio (index.css pisa `a`, `color-scheme` y el fondo).
+ */
+
+.crm {
+  --crm-radius: 16px;
+  --crm-radius-sm: 10px;
+  --crm-gap: 14px;
+
+  /* Dark (por defecto) */
+  --crm-bg: #0f1116;
+  --crm-surface: #161920;
+  --crm-surface-2: #1d212a;
+  --crm-surface-3: #242935;
+  --crm-border: #272d38;
+  --crm-border-strong: #39414f;
+  --crm-text: #e8ecf3;
+  --crm-text-dim: #96a0b0;
+  --crm-text-faint: #6b7585;
+  --crm-accent: #4c8df6;
+  --crm-accent-text: #ffffff;
+  --crm-success: #3dd68c;
+  --crm-warning: #f2b33d;
+  --crm-danger: #f26d6d;
+  --crm-info: #5ba8f5;
+  --crm-neutral: #8d97a6;
+
+  color-scheme: dark;
+  background: var(--crm-bg);
+  color: var(--crm-text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.crm[data-crm-theme="light"] {
+  --crm-bg: #f4f6fa;
+  --crm-surface: #ffffff;
+  --crm-surface-2: #f7f9fc;
+  --crm-surface-3: #eef2f7;
+  --crm-border: #e2e8f0;
+  --crm-border-strong: #cbd5e1;
+  --crm-text: #0f1b2d;
+  --crm-text-dim: #55657c;
+  --crm-text-faint: #7c8aa0;
+  --crm-accent: #1f6feb;
+  --crm-accent-text: #ffffff;
+  --crm-success: #15a05c;
+  --crm-warning: #c77a0a;
+  --crm-danger: #d4443e;
+  --crm-info: #1f6feb;
+  --crm-neutral: #64748b;
+
+  color-scheme: light;
+}
+
+/* El portfolio define `a { color:#646cff }` global: lo neutralizamos acá dentro. */
+.crm a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+/**
+ * MaskCursor.css aplica `body { cursor: none }` y `a, button { cursor: none }`
+ * a todo el documento, y ese CSS entra al bundle aunque el cursor custom no se
+ * monte en esta ruta. Sin esto, el panel se navega sin puntero.
+ */
+.crm,
+.crm * {
+  cursor: auto;
+}
+
+.crm a,
+.crm button,
+.crm select,
+.crm summary,
+.crm [role="button"] {
+  cursor: pointer;
+}
+
+.crm input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.crm textarea {
+  cursor: text;
+}
+
+.crm :disabled {
+  cursor: not-allowed;
+}
+
+/* Las tarjetas del kanban declaran su propio cursor de arrastre. */
+.crm .cursor-grab {
+  cursor: grab;
+}
+.crm .cursor-grab:active,
+.crm .active\:cursor-grabbing:active {
+  cursor: grabbing;
+}
+
+.crm *,
+.crm *::before,
+.crm *::after {
+  box-sizing: border-box;
+}
+
+/* Los controles nativos no heredan la tipografía por sí solos. */
+.crm input,
+.crm select,
+.crm button,
+.crm textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.crm ::placeholder {
+  color: var(--crm-text-faint);
+}
+
+/* Scrollbars discretas, incluida la horizontal del kanban. */
+.crm-scroll::-webkit-scrollbar {
+  height: 9px;
+  width: 9px;
+}
+.crm-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.crm-scroll::-webkit-scrollbar-thumb {
+  background: var(--crm-border-strong);
+  border-radius: 99px;
+}
+.crm-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--crm-text-faint);
+}
+.crm-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--crm-border-strong) transparent;
+}
+
+/* Recharts inyecta un outline al enfocar la superficie del gráfico. */
+.crm .recharts-surface:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm *,
+  .crm *::before,
+  .crm *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

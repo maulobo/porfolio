@@ -144,21 +144,3 @@ export const testimonials = [
     role: "CEO",
   },
 ] as const;
-
-export const techStackRow1 = [
-  { name: "Blender", slug: "blender" },
-  { name: "React", slug: "react" },
-  { name: "Supabase", slug: "supabase" },
-  { name: "n8n", slug: "n8n" },
-  { name: "DaVinci Resolve", slug: "davinciresolve" },
-  { name: "Figma", slug: "figma" },
-] as const;
-
-export const techStackRow2 = [
-  { name: "Vercel", slug: "vercel" },
-  { name: "Anthropic", slug: "anthropic" },
-  { name: "Trello", slug: "trello" },
-  { name: "Asana", slug: "asana" },
-  { name: "Node.js", slug: "nodedotjs" },
-  { name: "JavaScript", slug: "javascript" },
-] as const;

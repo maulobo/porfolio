@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { clients } from "../homeContent";
+import { clients } from "../../homeContent";
 
 type Client = { name: string; logo: string };
 
@@ -49,7 +49,7 @@ const TrustBar = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl font-black leading-none text-white md:text-7xl"
           >
-            Aliados
+            Clientes
           </motion.h2>
         </div>
         <motion.div
@@ -58,10 +58,11 @@ const TrustBar = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.28rem] text-white/40">
-            Empresas que confían en nosotros
+           Equipos que confían en nuestro trabajo
           </p>
-          <p className="mt-3 max-w-sm text-lg leading-relaxed text-white/50">
-            Desde startups hasta corporaciones. Cada proyecto suma una relación a largo plazo.
+          <p className="mt-3 max-w-lg text-lg leading-relaxed text-white/50">
+           Trabajamos con startups, pymes y organizaciones que buscan una ejecución cuidada, una mirada
+           propia y relaciones de trabajo responsables.
           </p>
         </motion.div>
       </div>
