@@ -12,7 +12,7 @@ Object.defineProperty(window, "scrollTo", {
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query: string) => ({
-    matches: query.includes("prefers-reduced-motion"),
+    matches: false,
     media: query,
     onchange: null,
     addListener: vi.fn(),

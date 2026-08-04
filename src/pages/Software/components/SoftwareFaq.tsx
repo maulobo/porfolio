@@ -6,9 +6,11 @@ const SoftwareFaq = () => {
 
   return (
     <section className="software-faq">
-      <p>Preguntas frecuentes</p>
-      <h2>Preguntas frecuentes</h2>
-      <div>
+      <div className="software-faq__intro">
+        <p className="software-label">Preguntas frecuentes</p>
+        <h2>Preguntas frecuentes</h2>
+      </div>
+      <div className="software-faq__items">
         {softwareContent.faq.map(({ question, answer }, index) => {
           const isOpen = openIndex === index;
           const triggerId = `software-faq-trigger-${index}`;
@@ -23,6 +25,7 @@ const SoftwareFaq = () => {
                   aria-controls={panelId}
                   id={triggerId}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="software-faq__trigger"
                 >
                   {question}
                 </button>
@@ -32,6 +35,7 @@ const SoftwareFaq = () => {
                 role="region"
                 aria-labelledby={triggerId}
                 hidden={!isOpen}
+                className="software-faq__panel"
               >
                 <p>{answer}</p>
               </div>

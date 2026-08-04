@@ -7,10 +7,12 @@ type SoftwareProcessProps = {
 
 const SoftwareProcess = ({ eyebrow, title, body, steps }: SoftwareProcessProps) => (
   <section className="software-process">
-    <p>{eyebrow}</p>
-    <h2>{title}</h2>
-    <p>{body}</p>
-    <ol>
+    <div className="software-process__intro">
+      <p className="software-label">{eyebrow}</p>
+      <h2>{title}</h2>
+      <p className="software-section-copy">{body}</p>
+    </div>
+    <ol className="software-process__steps grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
       {steps.map(({ name, detail }) => (
         <li key={name}>
           <h3>{name}</h3>

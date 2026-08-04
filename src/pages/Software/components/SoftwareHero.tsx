@@ -20,7 +20,7 @@ const SoftwareHero = () => {
 
   return (
     <motion.section
-      className="software-hero"
+      className="software-hero min-h-screen"
       initial="hidden"
       animate="visible"
       variants={variants}
@@ -30,7 +30,7 @@ const SoftwareHero = () => {
         <motion.p className="software-hero__eyebrow" variants={variants} transition={transition}>
           {softwarePageCopy.hero.eyebrow}
         </motion.p>
-        <motion.h1 variants={variants} transition={transition}>
+        <motion.h1 className="software-hero__title" variants={variants} transition={transition}>
           {softwarePageCopy.hero.title}
         </motion.h1>
         <motion.p className="software-hero__body" variants={variants} transition={transition}>
@@ -38,13 +38,19 @@ const SoftwareHero = () => {
         </motion.p>
         <motion.div className="software-hero__actions" variants={variants} transition={transition}>
           <a
+            className="software-button software-button--primary"
             href="https://wa.me/5492995831639"
             target="_blank"
             rel="noopener noreferrer"
           >
             Iniciar un proyecto
           </a>
-          <a href="/software/panel-crm" target="_blank" rel="noopener noreferrer">
+          <a
+            className="software-button software-button--secondary"
+            href="/software/panel-crm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Ver demostración
           </a>
         </motion.div>

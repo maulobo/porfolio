@@ -12,6 +12,7 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isSoftwareRoute = location.pathname === "/servicios/software";
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -32,10 +33,12 @@ const Navbar = () => {
       animate={hidden && !menuOpen ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className={clsx(
-        "fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-6 py-4 transition-colors duration-300",
-        scrolled
-          ? "bg-brand-dark/80 backdrop-blur-md border-b border-brand-gray/20"
-          : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-[100] flex items-center justify-center px-6 py-4 transition-colors duration-300",
+        isSoftwareRoute && "software-navbar",
+        menuOpen && "navbar-menu-open",
+        scrolled || isSoftwareRoute
+          ? "border-b border-brand-gray/20 bg-brand-dark/95 backdrop-blur-md"
+          : "bg-transparent",
       )}
     >
       <nav className="hidden items-center gap-8 md:flex" aria-label="Navegación principal">

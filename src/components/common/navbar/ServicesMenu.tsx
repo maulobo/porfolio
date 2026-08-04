@@ -61,7 +61,7 @@ export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuPro
         aria-controls="services-menu"
         aria-current={pathname.startsWith("/servicios/") ? "page" : undefined}
         className={clsx(
-          "relative py-2 text-sm uppercase tracking-widest font-medium transition-colors duration-300",
+          "relative min-h-11 py-2 text-sm uppercase tracking-widest font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-pink",
           pathname.startsWith("/servicios/")
             ? "text-brand-pink"
             : "text-brand-light/70 hover:text-brand-light",
@@ -75,7 +75,7 @@ export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuPro
           id="services-menu"
           role="region"
           aria-label="Servicios"
-          className="absolute left-1/2 top-full mt-3 w-[24rem] -translate-x-1/2 border border-brand-gray/30 bg-brand-dark p-3 shadow-2xl"
+          className="software-services-menu absolute left-1/2 top-full z-[110] mt-3 w-[24rem] -translate-x-1/2 border-2 border-brand-light/30 bg-brand-dark p-3 shadow-[8px_8px_0_#ff2bf9]"
         >
           {serviceLinks.map((service) => (
             <Link
@@ -83,7 +83,7 @@ export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuPro
               to={service.path}
               aria-current={pathname === service.path ? "page" : undefined}
               onClick={() => close()}
-              className="block px-4 py-3 transition-colors hover:bg-brand-light/10"
+              className="block min-h-11 px-4 py-3 transition-colors hover:bg-brand-light/10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-pink"
             >
               <span className="block text-sm font-medium text-brand-light">{service.name}</span>
               <span className="mt-1 block text-xs leading-relaxed text-brand-light/60">

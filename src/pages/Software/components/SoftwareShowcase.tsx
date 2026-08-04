@@ -22,17 +22,20 @@ const screenshots = [
 const SoftwareShowcase = () => (
   <section className="software-showcase">
     <div className="software-showcase__intro">
-      <p>Ejemplo de software</p>
+      <p className="software-label">Ejemplo de software</p>
       <h2>Una interfaz para ver, decidir y actuar.</h2>
-      <p>
+      <p className="software-section-copy">
         Mostramos una plataforma operativa de demostración. Las pantallas permiten recorrer
         información comercial, equipos y estados de trabajo.
       </p>
     </div>
 
-    <div className="software-showcase__gallery">
-      {screenshots.map((screenshot) => (
-        <figure key={screenshot.src} className="software-showcase__figure">
+    <div className="software-showcase__gallery grid grid-cols-1 lg:grid-cols-3">
+      {screenshots.map((screenshot, index) => (
+        <figure
+          key={screenshot.src}
+          className={`software-showcase__figure software-showcase__figure--${index + 1}`}
+        >
           <img
             src={screenshot.src}
             alt={screenshot.alt}

@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import Navbar from "./Navbar";
 
 const renderNavbar = (path = "/") =>
@@ -50,16 +50,28 @@ describe("Navbar services menu", () => {
 
   it("opens the mobile navigation, expands Services, and restores body scroll", async () => {
     const user = userEvent.setup();
+    const lenis = {
+      isStopped: false,
+      stop: vi.fn(),
+      start: vi.fn(),
+    };
+    Object.defineProperty(window, "lenis", {
+      configurable: true,
+      value: lenis,
+    });
     renderNavbar();
     const menuButton = screen.getByRole("button", { name: /abrir menú/i });
 
     await user.click(menuButton);
     expect(document.body).toHaveStyle({ overflow: "hidden" });
+    expect(lenis.stop).toHaveBeenCalledOnce();
     await user.click(screen.getByRole("button", { name: /^servicios$/i }));
     expect(screen.getByRole("link", { name: /software a medida/i })).toBeVisible();
 
     await user.click(screen.getByRole("button", { name: /cerrar menú/i }));
     expect(document.body.style.overflow).toBe("");
+    expect(lenis.start).toHaveBeenCalledOnce();
+    Reflect.deleteProperty(window, "lenis");
   });
 
   it("closes the mobile navigation with Escape and restores trigger focus", async () => {
