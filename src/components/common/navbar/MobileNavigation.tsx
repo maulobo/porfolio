@@ -56,9 +56,12 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
 
       if (event.key !== "Tab") return;
 
-      const focusableElements = Array.from(
+      const panelFocusableElements = Array.from(
         panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? [],
       );
+      const focusableElements = triggerRef.current
+        ? [triggerRef.current, ...panelFocusableElements]
+        : panelFocusableElements;
       const first = focusableElements[0];
       const last = focusableElements.at(-1);
       if (!first || !last) return;

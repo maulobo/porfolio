@@ -1,8 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Navbar from "./Navbar";
+
+afterEach(() => {
+  Reflect.deleteProperty(window, "lenis");
+});
 
 const renderNavbar = (path = "/") =>
   render(
@@ -71,7 +75,6 @@ describe("Navbar services menu", () => {
     await user.click(screen.getByRole("button", { name: /cerrar menú/i }));
     expect(document.body.style.overflow).toBe("");
     expect(lenis.start).toHaveBeenCalledOnce();
-    Reflect.deleteProperty(window, "lenis");
   });
 
   it("closes the mobile navigation with Escape and restores trigger focus", async () => {
@@ -86,18 +89,26 @@ describe("Navbar services menu", () => {
     expect(document.body.style.overflow).toBe("");
   });
 
-  it("cycles focus between the first and last mobile navigation controls", async () => {
+  it("keeps the visible close trigger in the mobile focus loop", async () => {
     const user = userEvent.setup();
     renderNavbar();
 
-    await user.click(screen.getByRole("button", { name: /abrir menú/i }));
+    const openButton = screen.getByRole("button", { name: /abrir menú/i });
+    await user.click(openButton);
+    const closeButton = screen.getByRole("button", { name: /cerrar menú/i });
     const mobileNavigation = screen.getByRole("navigation", { name: /navegación móvil/i });
     const firstControl = within(mobileNavigation).getByRole("link", { name: "Inicio" });
     const lastControl = within(mobileNavigation).getByRole("link", { name: "Studio" });
 
     firstControl.focus();
     await user.keyboard("{Shift>}{Tab}{/Shift}");
+    expect(closeButton).toHaveFocus();
+
+    await user.keyboard("{Shift>}{Tab}{/Shift}");
     expect(lastControl).toHaveFocus();
+
+    await user.keyboard("{Tab}");
+    expect(closeButton).toHaveFocus();
 
     await user.keyboard("{Tab}");
     expect(firstControl).toHaveFocus();

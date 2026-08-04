@@ -49,7 +49,7 @@ const Navbar = () => {
             <Link
               key={link.path}
               to={link.path}
-              className="relative group py-2"
+              className="group relative inline-flex min-h-11 items-center py-2"
             >
               <span
                 className={clsx(
@@ -85,7 +85,7 @@ const Navbar = () => {
             <Link
               key={link.path}
               to={link.path}
-              className="relative group py-2"
+              className="group relative inline-flex min-h-11 items-center py-2"
             >
               <span
                 className={clsx(
