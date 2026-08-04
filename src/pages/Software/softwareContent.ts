@@ -75,6 +75,6 @@ export const softwarePageCopy = {
   },
   metadata: {
     title: "Software a medida | SmartCloud Studio",
-    description: "Desarrollamos plataformas, paneles, automatizaciones e integraciones alrededor de procesos reales.",
+    description: "Desarrollamos plataformas, paneles, automatizaciones e integraciones definidas alrededor de procesos reales, con experiencia, lógica y ejecución responsable.",
   },
 } as const;
