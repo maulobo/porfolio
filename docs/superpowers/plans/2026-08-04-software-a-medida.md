@@ -866,25 +866,7 @@ git commit -m "feat: route software service page"
 - Consumes: the final semantic components from Tasks 2–5.
 - Produces: the approved neobrutalist layout, signature screen stack, connector, focus states, and responsive behavior.
 
-- [ ] **Step 1: Add a regression assertion for motion fallback**
-
-Append to `Software.test.tsx`:
-
-```tsx
-it("keeps all hero evidence visible when reduced motion is requested", () => {
-  renderPage();
-  expect(screen.getByRole("heading", { level: 1 })).toBeVisible();
-  expect(screen.getByRole("img", { name: "Dashboard operativo" })).toBeVisible();
-  expect(screen.getByRole("link", { name: "Ver demostración" })).toBeVisible();
-});
-```
-
-- [ ] **Step 2: Run the focused test and confirm the current baseline**
-
-Run: `npm test -- --run src/pages/Software/Software.test.tsx`
-Expected: PASS before styling; this is a regression guard for the upcoming visual change rather than a new behavioral RED case.
-
-- [ ] **Step 3: Implement the visual tokens and signature element**
+- [ ] **Step 1: Implement the visual tokens and signature element**
 
 In `software.css`, define page-scoped custom properties and classes:
 
@@ -938,13 +920,13 @@ Add media queries that:
 - keep touch targets at least 44 px high;
 - show the desktop menu only from `md` upward and mobile navigation below `md`.
 
-- [ ] **Step 4: Apply the approved Tailwind layout**
+- [ ] **Step 2: Apply the approved Tailwind layout**
 
 Use the approved palette, 2 px black borders, displaced shadows, concise mono labels, and large Inter headlines. Preserve one bold composition in the hero; keep later blocks restrained. Use `min-h-screen` only on the hero, not every section.
 
 The desktop information sections use `lg:grid-cols-[0.34fr_0.66fr]`; the showcase uses `lg:grid-cols-3`; the process uses `md:grid-cols-2 xl:grid-cols-3`. Mobile is a single column.
 
-- [ ] **Step 5: Run automated verification**
+- [ ] **Step 3: Run automated verification**
 
 Run:
 
@@ -960,7 +942,7 @@ Expected:
 - production build exits 0;
 - lint introduces no new errors. If existing unrelated lint errors remain, record their exact files and confirm none are in files changed by this plan.
 
-- [ ] **Step 6: Run the site and inspect desktop**
+- [ ] **Step 4: Run the site and inspect desktop**
 
 Run: `npm run dev -- --host 127.0.0.1`
 Open `/servicios/software` at 1440 × 900 and verify:
@@ -972,7 +954,7 @@ Open `/servicios/software` at 1440 × 900 and verify:
 - no section repeats the same visual emphasis;
 - the demo opens at `/software/panel-crm` without public navbar, cursor, chatbot, or footer.
 
-- [ ] **Step 7: Inspect mobile and keyboard behavior**
+- [ ] **Step 5: Inspect mobile and keyboard behavior**
 
 At 390 × 844 and 320 × 568, verify:
 
@@ -986,7 +968,7 @@ At 390 × 844 and 320 × 568, verify:
 
 Enable reduced motion and confirm the hero appears fully composed without entrance movement.
 
-- [ ] **Step 8: Re-run final checks after visual fixes**
+- [ ] **Step 6: Re-run final checks after visual fixes**
 
 Run:
 
@@ -1000,7 +982,7 @@ git status --short
 
 Expected: tests and build PASS, no whitespace errors, and only intended source files plus the user-provided source documents/images remain untracked or modified.
 
-- [ ] **Step 9: Commit final visuals**
+- [ ] **Step 7: Commit final visuals**
 
 ```bash
 git add src/pages/Software src/components/common/navbar
