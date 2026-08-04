@@ -45,4 +45,30 @@ describe("Software page", () => {
       expect.stringContaining("plataformas, paneles, automatizaciones e integraciones"),
     );
   });
+
+  it("restores pre-existing page metadata when it unmounts", () => {
+    document.title = "Original title";
+    const description = document.createElement("meta");
+    description.name = "description";
+    description.content = "Original description";
+    document.head.appendChild(description);
+
+    const { unmount } = renderPage();
+
+    unmount();
+
+    expect(document.title).toBe("Original title");
+    expect(description).toHaveAttribute("content", "Original description");
+    description.remove();
+  });
+
+  it("removes a temporary description when it unmounts", () => {
+    expect(document.querySelector('meta[name="description"]')).toBeNull();
+
+    const { unmount } = renderPage();
+
+    unmount();
+
+    expect(document.querySelector('meta[name="description"]')).toBeNull();
+  });
 });
