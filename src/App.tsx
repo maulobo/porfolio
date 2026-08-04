@@ -16,6 +16,7 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
 import ChatbotWidget from "./components/chatbot/ChatbotWidget";
+import Software from "./pages/Software/Software";
 
 /**
  * El panel CRM de muestra se carga aparte: arrastra recharts y dnd-kit, que no
@@ -23,7 +24,7 @@ import ChatbotWidget from "./components/chatbot/ChatbotWidget";
  */
 const PanelCrm = lazy(() => import("./pages/Software/PanelCrm/PanelCrm"));
 
-function AnimatedRoutes() {
+export function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
@@ -31,6 +32,7 @@ function AnimatedRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/studio" element={<Studio />} />
         <Route path="/work" element={<Work />} />
+        <Route path="/servicios/software" element={<Software />} />
       </Routes>
     </AnimatePresence>
   );

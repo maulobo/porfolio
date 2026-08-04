@@ -8,6 +8,7 @@ const entryCards = [
     copy: "Landing, sitio institucional o e-commerce con una identidad propia, una estructura clara y una ejecución visual cuidada.",
     color: "bg-[#d7ff4f]",
     action: "Explorar soluciones web",
+    path: "/#servicios-web",
   },
   {
      white: false,
@@ -16,6 +17,7 @@ const entryCards = [
     copy: "Software, backoffices, automatizaciones e integraciones para ordenar procesos y conectar información.",
     color: "bg-white",
     action: "Explorar software a medida",
+    path: "/servicios/software",
   },
   {
      white: false,
@@ -24,6 +26,7 @@ const entryCards = [
     copy: "SEO técnico, arquitectura de contenidos y optimización para buscadores y respuestas generadas por IA.",
     color: "bg-[#f3f0e8]",
     action: "Explorar visibilidad",
+    path: "/#servicios-visibilidad",
   },
   {
      white: true,
@@ -32,6 +35,7 @@ const entryCards = [
     copy: "Video, motion, animación y piezas digitales para presentar productos, servicios e ideas con claridad.",
     color: "bg-[#ff2bf9]",
     action: "Explorar contenido audiovisual",
+    path: "/#servicios-audiovisual",
   },
 ];
 
@@ -56,7 +60,7 @@ const EntryPointsSection = () => {
           return (
             <a
               key={card.title}
-              href="mailto:contacto@smartcloudstudio.com"
+              href={card.path}
               className={`clickable group min-h-80 border-2 border-black p-6 shadow-[10px_10px_0_#111111] transition hover:-translate-y-1 hover:shadow-[14px_14px_0_#111111] ${card.color} ${
                 card.white ? "text-white" : "text-black"
               }`}

@@ -2,9 +2,42 @@ import { useEffect } from "react";
 import { useLocation } from "react-router";
 
 export default function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    if (hash) {
+      const scrollToHash = () => {
+        const target = document.getElementById(hash.slice(1));
+        if (!target) return false;
+
+        target.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        });
+        return true;
+      };
+
+      if (scrollToHash()) return;
+
+      const observer = new MutationObserver(() => {
+        if (!scrollToHash()) return;
+
+        observer.disconnect();
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      timeoutId = setTimeout(() => observer.disconnect(), 2_000);
+
+      return () => {
+        observer.disconnect();
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
+      };
+    }
+
     // Force scroll to top immediately
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
@@ -20,10 +53,12 @@ export default function ScrollToTop() {
     
     // Try immediately and also after a short delay
     scrollToTop();
-    const timeoutId = setTimeout(scrollToTop, 100);
+    timeoutId = setTimeout(scrollToTop, 100);
     
-    return () => clearTimeout(timeoutId);
-  }, [pathname]);
+    return () => {
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    };
+  }, [pathname, hash]);
 
   return null;
 }

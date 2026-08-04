@@ -3,24 +3,28 @@ import { Blocks, Clapperboard, Code2, Search } from "lucide-react";
 const capabilities = [
   {
     icon: Code2,
+    id: "servicios-web",
     title: "Sitios web y landings",
     copy: "Diseñamos y desarrollamos sitios a medida, con una identidad propia, una estructura clara y el nivel técnico que cada proyecto requiere.",
     items: ["Institucionales", "Landing pages", "E-commerce", "UX/UI", "Desarrollo interactivo"],
   },
   {
     icon: Blocks,
+    id: "servicios-software",
     title: "Software a medida",
     copy: "Creamos plataformas, backoffices y automatizaciones que ordenan procesos, conectan información y facilitan el trabajo cotidiano.",
     items: ["Dashboards", "Paneles internos", "Integraciones", "MVP y productos digitales", "Automatizaciones"],
   },
   {
     icon: Search,
+    id: "servicios-visibilidad",
     title: "Visibilidad en buscadores e IA",
     copy: "Trabajamos la estructura, el rendimiento y los contenidos para mejorar la presencia de una marca en buscadores tradicionales y respuestas generadas por inteligencia artificial.",
     items: ["SEO tecnico", "GEO/AEO", "Contenido", "Analitica", "Arquitectura de contenidos","Visibilidad en respuestas de IA"],
   },
   {
     icon: Clapperboard,
+    id: "servicios-audiovisual",
     title: "Video, motion y piezas digitales",
     copy: "Producimos contenido audiovisual para presentar productos, explicar ideas y construir una comunicación visual coherente en distintos canales.",
     items: ["Video", "Motion graphics", "Animacion", "Social assets","Piezas para redes y campañas", "Contenido para lanzamientos y presentaciones"],
@@ -48,6 +52,7 @@ const CapabilitiesSection = () => {
           return (
             <article
               key={capability.title}
+              id={capability.id}
               className="group flex flex-col border-2 border-black bg-white p-6 shadow-[8px_8px_0_#111111] transition hover:-translate-y-1 hover:shadow-[12px_12px_0_#111111] md:p-8"
             >
               <div className="flex items-center gap-4">
