@@ -41,16 +41,6 @@
   overflow-y: auto;
 }
 
-.software-label {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
 .software-section-copy {
   max-width: 45rem;
   margin: 1.5rem 0 0;
@@ -86,39 +76,24 @@
 }
 
 .software-hero {
-  position: relative;
   display: grid;
-  width: 100%;
   min-height: 100svh;
-  grid-template-columns: minmax(22rem, 0.82fr) minmax(0, 1.18fr);
-  align-items: center;
-  gap: clamp(2rem, 4vw, 5rem);
-  padding: clamp(7rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem) clamp(3.5rem, 5vw, 5rem);
+  align-content: center;
+  gap: clamp(3rem, 6vw, 5.5rem);
+  padding: clamp(8rem, 10vw, 10rem) clamp(1.25rem, 5vw, 5rem) clamp(4rem, 7vw, 7rem);
   border-bottom: 2px solid var(--software-ink);
-  background:
-    linear-gradient(90deg, transparent 0 49.9%, rgba(17, 17, 17, 0.07) 49.9% 50.1%, transparent 50.1%),
-    var(--software-paper);
+  background: var(--software-paper);
+}
+
+.software-hero__content,
+.software-product-stage {
+  width: min(100%, 90rem);
+  margin-inline: auto;
 }
 
 .software-hero__content {
-  position: relative;
-  z-index: 5;
-  max-width: 41rem;
-}
-
-.software-hero__eyebrow {
-  display: inline-flex;
-  margin: 0 0 1.5rem;
-  border: 2px solid var(--software-ink);
-  background: var(--software-lime);
-  padding: 0.5rem 0.7rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(0.66rem, 0.9vw, 0.76rem);
-  font-weight: 750;
-  line-height: 1.3;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  box-shadow: 4px 4px 0 var(--software-ink);
+  max-width: 72rem;
+  margin-left: max(0px, calc((100% - 90rem) / 2));
 }
 
 .software-hero__title {
@@ -154,56 +129,17 @@
   background: var(--software-white);
 }
 
-.software-screen-stack {
+.software-product-stage {
   position: relative;
-  isolation: isolate;
-  min-height: clamp(15rem, 37vw, 34rem);
-}
-
-.software-screen-stack__image {
-  position: absolute;
-  display: block;
-  width: min(76vw, 62rem);
-  max-width: none;
-  height: auto;
   border: 2px solid var(--software-ink);
   background: #e7ebf0;
-  box-shadow: 10px 10px 0 var(--software-pink);
+  box-shadow: 12px 12px 0 var(--software-pink), 22px 22px 0 var(--software-lime);
 }
 
-.software-screen-stack__image--primary {
-  top: clamp(4.5rem, 8vw, 7rem);
-  left: 0;
-  z-index: 2;
-}
-
-.software-screen-stack__image--secondary {
-  top: 0;
-  left: clamp(2.75rem, 5vw, 5.5rem);
-  z-index: 1;
-  box-shadow: 10px 10px 0 var(--software-lime);
-}
-
-.software-system-trace {
-  position: absolute;
-  bottom: -4.5rem;
-  left: 50%;
-  z-index: 3;
-  width: 2px;
-  height: 6rem;
-  background: var(--software-pink);
-}
-
-.software-system-trace::after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0.7rem;
-  height: 0.7rem;
-  border: 2px solid var(--software-ink);
-  background: var(--software-pink);
-  content: "";
-  transform: translate(-50%, 50%);
+.software-product-stage__image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .software-info-section,
@@ -224,7 +160,7 @@
 
 .software-info-section__grid,
 .software-showcase__intro,
-.software-showcase__gallery,
+.software-showcase__stories,
 .software-showcase__demo-link,
 .software-process__intro,
 .software-process__steps,
@@ -237,7 +173,7 @@
 
 .software-info-section__grid,
 .software-showcase__intro,
-.software-showcase__gallery,
+.software-showcase__stories,
 .software-process__intro,
 .software-process__steps,
 .software-faq,
@@ -267,31 +203,24 @@
 .software-chip-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  column-gap: clamp(2rem, 5vw, 6rem);
   margin: clamp(2rem, 4vw, 3rem) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .software-chip-list li {
-  position: relative;
-  min-height: 3.25rem;
-  border: 1px solid currentColor;
-  padding: 0.9rem 1rem 0.9rem 2.25rem;
-  font-size: 0.95rem;
+  min-height: 0;
+  border: 0;
+  border-top: 1px solid currentColor;
+  padding: 1rem 0;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
   font-weight: 600;
   line-height: 1.35;
 }
 
 .software-chip-list li::before {
-  position: absolute;
-  top: 1.18rem;
-  left: 1rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  border: 1px solid var(--software-ink);
-  background: var(--software-pink);
-  content: "";
+  content: none;
 }
 
 .software-info-section--dark {
@@ -299,11 +228,6 @@
   border-bottom: 2px solid var(--software-ink);
   background: var(--software-ink);
   color: var(--software-white);
-}
-
-.software-info-section--dark .software-chip-list li::before {
-  border-color: var(--software-white);
-  background: var(--software-lime);
 }
 
 .software-showcase {
@@ -322,47 +246,60 @@
   grid-column: 2;
 }
 
-.software-showcase__gallery {
-  gap: clamp(1rem, 2vw, 1.5rem);
-  margin-top: clamp(3rem, 6vw, 5rem);
+.software-showcase__stories {
+  display: grid;
+  gap: clamp(4.5rem, 9vw, 9rem);
+  margin-top: clamp(4rem, 7vw, 7rem);
 }
 
-.software-showcase__figure {
+.software-product-story {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.35fr) minmax(0, 0.65fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+}
+
+.software-product-story--reverse .software-product-story__copy {
+  grid-column: 2;
+}
+
+.software-product-story--reverse .software-product-story__media {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.software-product-story__copy h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.2vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.software-product-story__copy p {
+  margin: 1.25rem 0 0;
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.7;
+  color: rgba(17, 17, 17, 0.68);
+}
+
+.software-product-story__media {
   overflow: hidden;
   margin: 0;
   border: 2px solid var(--software-ink);
   background: #e7ebf0;
-  box-shadow: 5px 5px 0 var(--software-ink);
+  box-shadow: 10px 10px 0 var(--software-lime);
 }
 
-.software-showcase__figure img {
+.software-product-story--reverse .software-product-story__media {
+  box-shadow: -10px 10px 0 var(--software-pink);
+}
+
+.software-product-story__media img {
   display: block;
   width: 100%;
-  max-width: 100%;
-  height: clamp(14rem, 23vw, 20rem);
-  border-bottom: 2px solid var(--software-ink);
-  background: #e7ebf0;
-  object-fit: cover;
-  object-position: 15% top;
-}
-
-.software-showcase__figure--2 img {
-  object-position: 28% top;
-}
-
-.software-showcase__figure--3 img {
-  object-position: 40% top;
-}
-
-.software-showcase__figure figcaption {
-  min-height: 3.25rem;
-  padding: 1rem;
-  background: var(--software-white);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
-  font-weight: 750;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  height: auto;
 }
 
 .software-showcase__demo-link {
@@ -388,8 +325,10 @@
 }
 
 .software-process__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   counter-reset: software-step;
-  gap: 1rem;
+  gap: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 3vw, 3rem);
   margin-top: clamp(3rem, 6vw, 5rem);
   margin-bottom: 0;
   padding: 0;
@@ -397,18 +336,19 @@
 }
 
 .software-process__steps li {
-  position: relative;
-  min-height: 12rem;
-  border: 2px solid var(--software-ink);
-  padding: 4rem 1.5rem 1.5rem;
-  background: var(--software-paper);
+  display: grid;
+  min-height: 0;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-content: start;
+  border: 0;
+  border-top: 2px solid var(--software-ink);
+  padding: 1.25rem 0 0;
+  background: transparent;
   counter-increment: software-step;
 }
 
 .software-process__steps li::before {
-  position: absolute;
-  top: 1.15rem;
-  left: 1.5rem;
+  grid-row: 1 / span 2;
   color: var(--software-pink);
   content: "0" counter(software-step);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -426,7 +366,8 @@
 }
 
 .software-process__steps p {
-  margin: 1rem 0 0;
+  grid-column: 2;
+  margin: 0.8rem 0 0;
   font-size: 0.96rem;
   line-height: 1.6;
   color: rgba(17, 17, 17, 0.64);
@@ -543,26 +484,20 @@
 }
 
 @media (max-width: 959px) {
-  .software-hero {
+  .software-product-story {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
-    background: var(--software-paper);
   }
 
-  .software-hero__content {
-    max-width: 46rem;
+  .software-product-story__copy,
+  .software-product-story__media,
+  .software-product-story--reverse .software-product-story__copy,
+  .software-product-story--reverse .software-product-story__media {
+    grid-column: auto;
+    grid-row: auto;
   }
 
-  .software-hero__title {
-    max-width: 13ch;
-  }
-
-  .software-screen-stack {
-    min-height: clamp(18rem, 56vw, 32rem);
-  }
-
-  .software-screen-stack__image {
-    width: min(82vw, 48rem);
+  .software-process__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .software-faq {
@@ -584,10 +519,6 @@
     min-height: 100svh;
     gap: 1.75rem;
     padding: 6.5rem 1rem 3rem;
-  }
-
-  .software-hero__eyebrow {
-    margin-bottom: 1.25rem;
   }
 
   .software-hero__title {
@@ -613,32 +544,8 @@
     min-height: 3.25rem;
   }
 
-  .software-screen-stack {
-    min-height: clamp(12.5rem, 65vw, 16rem);
-  }
-
-  .software-screen-stack__image {
-    width: calc(100vw - 2rem);
-    max-width: calc(100vw - 2rem);
-    box-shadow: 5px 5px 0 var(--software-pink);
-  }
-
-  .software-screen-stack__image--primary {
-    top: clamp(2.35rem, 10vw, 3.25rem);
-    left: 0;
-  }
-
-  .software-screen-stack__image--secondary {
-    top: 0;
-    left: 0.45rem;
-    width: calc(100vw - 2.9rem);
-    max-width: calc(100vw - 2.9rem);
-    box-shadow: 5px 5px 0 var(--software-lime);
-  }
-
-  .software-system-trace {
-    bottom: -3rem;
-    height: 4.5rem;
+  .software-product-stage {
+    box-shadow: 6px 6px 0 var(--software-pink), 10px 10px 0 var(--software-lime);
   }
 
   .software-info-section,
@@ -670,20 +577,25 @@
     margin-top: 1rem;
   }
 
-  .software-showcase__gallery {
+  .software-showcase__stories {
     margin-top: 2.5rem;
   }
 
-  .software-showcase__figure img {
-    height: clamp(13rem, 70vw, 16.5rem);
+  .software-product-story__media {
+    box-shadow: 6px 6px 0 var(--software-lime);
+  }
+
+  .software-product-story--reverse .software-product-story__media {
+    box-shadow: -6px 6px 0 var(--software-pink);
   }
 
   .software-process__steps {
+    grid-template-columns: minmax(0, 1fr);
     margin-top: 2.5rem;
   }
 
-  .software-process__steps li {
-    min-height: 10.5rem;
+  .software-chip-list {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .software-faq__trigger {
@@ -708,10 +620,6 @@
 @media (max-width: 359px) {
   .software-hero__title {
     font-size: 2.7rem;
-  }
-
-  .software-chip-list {
-    grid-template-columns: 1fr;
   }
 }
 
