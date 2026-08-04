@@ -3,8 +3,11 @@ import FooterCustom, { FooterType } from "../../components/common/footerCustom/F
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 import {
   SoftwareClosing,
+  SoftwareFaq,
+  SoftwareHero,
   SoftwareInfoSection,
   SoftwareProcess,
+  SoftwareShowcase,
 } from "./components";
 import { softwareContent, softwarePageCopy } from "./softwareContent";
 import "./software.css";
@@ -39,20 +42,18 @@ const Software = () => {
 
   return (
     <TransitionAnimate>
-      <main>
-        <section className="software-hero">
-          <p>{softwarePageCopy.hero.eyebrow}</p>
-          <h1>{softwarePageCopy.hero.title}</h1>
-          <p>{softwarePageCopy.hero.body}</p>
-        </section>
+      <main className="software-page">
+        <SoftwareHero />
         <SoftwareInfoSection {...softwarePageCopy.useCases} items={softwareContent.useCases} />
         <SoftwareInfoSection
           {...softwarePageCopy.capabilities}
           items={softwareContent.capabilities}
           dark
         />
+        <SoftwareShowcase />
         <SoftwareProcess {...softwarePageCopy.process} steps={softwareContent.process} />
         <SoftwareInfoSection {...softwarePageCopy.layers} items={softwareContent.layers} dark />
+        <SoftwareFaq />
         <SoftwareClosing />
         <FooterCustom typeFooter={FooterType.FOOTERWORK} />
       </main>
