@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
@@ -60,5 +60,34 @@ describe("Navbar services menu", () => {
 
     await user.click(screen.getByRole("button", { name: /cerrar menú/i }));
     expect(document.body.style.overflow).toBe("");
+  });
+
+  it("closes the mobile navigation with Escape and restores trigger focus", async () => {
+    const user = userEvent.setup();
+    renderNavbar();
+    const menuButton = screen.getByRole("button", { name: /abrir menú/i });
+
+    await user.click(menuButton);
+    await user.keyboard("{Escape}");
+
+    expect(screen.getByRole("button", { name: /abrir menú/i })).toHaveFocus();
+    expect(document.body.style.overflow).toBe("");
+  });
+
+  it("cycles focus between the first and last mobile navigation controls", async () => {
+    const user = userEvent.setup();
+    renderNavbar();
+
+    await user.click(screen.getByRole("button", { name: /abrir menú/i }));
+    const mobileNavigation = screen.getByRole("navigation", { name: /navegación móvil/i });
+    const firstControl = within(mobileNavigation).getByRole("link", { name: "Inicio" });
+    const lastControl = within(mobileNavigation).getByRole("link", { name: "Studio" });
+
+    firstControl.focus();
+    await user.keyboard("{Shift>}{Tab}{/Shift}");
+    expect(lastControl).toHaveFocus();
+
+    await user.keyboard("{Tab}");
+    expect(firstControl).toHaveFocus();
   });
 });

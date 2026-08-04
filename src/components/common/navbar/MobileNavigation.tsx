@@ -88,7 +88,7 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
         <div
           ref={panelRef}
           id="mobile-navigation"
-          className="fixed inset-x-0 top-full border-t border-brand-light/20 bg-brand-dark px-6 py-8 shadow-2xl"
+          className="fixed inset-x-0 top-[4.5rem] bottom-0 overflow-y-auto border-t border-brand-light/20 bg-brand-dark px-6 py-8 shadow-2xl"
         >
           <nav aria-label="Navegación móvil" className="flex flex-col gap-1">
             {primaryLinks.slice(0, 1).map((link) => (
