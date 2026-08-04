@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Link } from "react-router";
 import clsx from "clsx";
 import { serviceLinks } from "./navigation";
@@ -25,6 +25,17 @@ export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuPro
     const next = !open;
     setOpen(next);
     onOpenChange(next);
+  };
+
+  const handleTriggerKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key !== "ArrowDown") return;
+
+    event.preventDefault();
+    setOpen(true);
+    onOpenChange(true);
+    window.requestAnimationFrame(() => {
+      menuRef.current?.querySelector<HTMLAnchorElement>('a[href]')?.focus();
+    });
   };
 
   useEffect(() => {
@@ -56,6 +67,7 @@ export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuPro
         ref={triggerRef}
         type="button"
         onClick={toggle}
+        onKeyDown={handleTriggerKeyDown}
         aria-label="Servicios (menú)"
         aria-expanded={open}
         aria-controls="services-menu"

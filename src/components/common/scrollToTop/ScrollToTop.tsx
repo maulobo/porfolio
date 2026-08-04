@@ -5,22 +5,36 @@ export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    let frameId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     if (hash) {
-      frameId = window.requestAnimationFrame(() => {
+      const scrollToHash = () => {
         const target = document.getElementById(hash.slice(1));
-        target?.scrollIntoView({
+        if (!target) return false;
+
+        target.scrollIntoView({
           behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
             ? "auto"
             : "smooth",
           block: "start",
         });
+        return true;
+      };
+
+      if (scrollToHash()) return;
+
+      const observer = new MutationObserver(() => {
+        if (!scrollToHash()) return;
+
+        observer.disconnect();
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
       });
+      observer.observe(document.body, { childList: true, subtree: true });
+      timeoutId = setTimeout(() => observer.disconnect(), 2_000);
 
       return () => {
-        if (frameId !== undefined) window.cancelAnimationFrame(frameId);
+        observer.disconnect();
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
       };
     }
 
@@ -42,7 +56,6 @@ export default function ScrollToTop() {
     timeoutId = setTimeout(scrollToTop, 100);
     
     return () => {
-      if (frameId !== undefined) window.cancelAnimationFrame(frameId);
       if (timeoutId !== undefined) clearTimeout(timeoutId);
     };
   }, [pathname, hash]);

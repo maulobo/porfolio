@@ -45,11 +45,21 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
     const previousOverflow = document.body.style.overflow;
     const smoothScroll = (window as Window & { lenis?: SmoothScrollController }).lenis;
     const smoothScrollWasStopped = smoothScroll?.isStopped ?? false;
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
     document.body.style.overflow = "hidden";
     if (!smoothScrollWasStopped) smoothScroll?.stop();
 
+    const handleDesktopChange = () => {
+      if (desktopQuery.matches) close();
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (panelRef.current?.querySelector("#mobile-services-menu")) {
+          setServicesOpen(false);
+          return;
+        }
+
         close(true);
         return;
       }
@@ -76,10 +86,12 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
     };
 
     document.addEventListener("keydown", handleKeyDown);
+    desktopQuery.addEventListener("change", handleDesktopChange);
     return () => {
       document.body.style.overflow = previousOverflow;
       if (!smoothScrollWasStopped) smoothScroll?.start();
       document.removeEventListener("keydown", handleKeyDown);
+      desktopQuery.removeEventListener("change", handleDesktopChange);
     };
   }, [open]);
 
