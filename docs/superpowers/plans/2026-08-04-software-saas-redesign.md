@@ -34,7 +34,7 @@
 
 ---
 
-### Task 1: Lock the product-led semantic contract
+### Task 1: Lock and implement the product-led semantic contract
 
 **Files:**
 - Modify: `src/pages/Software/Software.test.tsx`
@@ -140,16 +140,11 @@ Run: `npm test -- src/pages/Software/Software.test.tsx --run`
 
 Expected: FAIL because the hero still has two images, labels still render, and the product-story headings do not exist.
 
-- [ ] **Step 6: Commit the failing contract**
+- [ ] **Step 6: Keep the verified red state and continue directly to implementation**
 
-```bash
-git add src/pages/Software/Software.test.tsx
-git commit -m "test: define product-led software layout"
-```
+Do not commit while the focused test is red. Continue with the component work below so the task completes a full RED → GREEN cycle.
 
----
-
-### Task 2: Recompose the React content and components
+#### React recomposition
 
 **Files:**
 - Modify: `src/pages/Software/softwareContent.ts`
@@ -289,13 +284,13 @@ Expected: all Software page tests PASS, including screenshot order, no-eyebrow c
 - [ ] **Step 8: Commit the semantic recomposition**
 
 ```bash
-git add src/pages/Software/Software.tsx src/pages/Software/softwareContent.ts src/pages/Software/components/SoftwareHero.tsx src/pages/Software/components/SoftwareInfoSection.tsx src/pages/Software/components/SoftwareShowcase.tsx src/pages/Software/components/SoftwareProcess.tsx src/pages/Software/components/SoftwareFaq.tsx
+git add src/pages/Software/Software.test.tsx src/pages/Software/Software.tsx src/pages/Software/softwareContent.ts src/pages/Software/components/SoftwareHero.tsx src/pages/Software/components/SoftwareInfoSection.tsx src/pages/Software/components/SoftwareShowcase.tsx src/pages/Software/components/SoftwareProcess.tsx src/pages/Software/components/SoftwareFaq.tsx
 git commit -m "feat: recompose software page around product screens"
 ```
 
 ---
 
-### Task 3: Build the SaaS layout in SmartCloud’s visual language
+### Task 2: Build the SaaS layout in SmartCloud’s visual language
 
 **Files:**
 - Modify: `src/pages/Software/software.css`
@@ -456,7 +451,7 @@ git commit -m "style: present software screens without cropping"
 
 ---
 
-### Task 4: Browser QA and final verification
+### Task 3: Browser QA and final verification
 
 **Files:**
 - Modify if required by observed defects: `src/pages/Software/software.css`
@@ -464,7 +459,7 @@ git commit -m "style: present software screens without cropping"
 - Test if required by a regression: `src/pages/Software/Software.test.tsx`
 
 **Interfaces:**
-- Consumes: the completed product-led page from Tasks 1–3.
+- Consumes: the completed product-led page from Tasks 1–2.
 - Produces: verified desktop/mobile layouts and a clean repository test/build result.
 
 - [ ] **Step 1: Start the worktree development server**
