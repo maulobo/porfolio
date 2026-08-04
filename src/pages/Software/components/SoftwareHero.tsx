@@ -27,9 +27,6 @@ const SoftwareHero = () => {
       transition={transition}
     >
       <div className="software-hero__content">
-        <motion.p className="software-hero__eyebrow" variants={variants} transition={transition}>
-          {softwarePageCopy.hero.eyebrow}
-        </motion.p>
         <motion.h1 className="software-hero__title" variants={variants} transition={transition}>
           {softwarePageCopy.hero.title}
         </motion.h1>
@@ -56,28 +53,16 @@ const SoftwareHero = () => {
         </motion.div>
       </div>
 
-      <motion.div className="software-screen-stack" variants={variants} transition={transition}>
+      <motion.div className="software-product-stage" variants={variants} transition={transition}>
         <img
-          className="software-screen-stack__image software-screen-stack__image--primary"
+          className="software-product-stage__image"
           src="/software/1.png"
-          alt=""
-          aria-hidden="true"
+          alt="Panel operativo con indicadores, actividad reciente y accesos de gestión"
           width={2996}
           height={1540}
           fetchPriority="high"
         />
-        <img
-          className="software-screen-stack__image software-screen-stack__image--secondary"
-          src="/software/2.png"
-          alt=""
-          aria-hidden="true"
-          width={2998}
-          height={1548}
-          fetchPriority="high"
-        />
       </motion.div>
-
-      <div className="software-system-trace" aria-hidden="true" />
     </motion.section>
   );
 };

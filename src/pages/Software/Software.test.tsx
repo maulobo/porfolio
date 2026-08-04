@@ -41,7 +41,7 @@ describe("Software page", () => {
     ).toBeInTheDocument();
   });
 
-  it("labels all screenshots as a software example and opens the demo separately", () => {
+  it("presents three complete product screens as one hero and two stories", () => {
     renderPage();
 
     const hero = screen
@@ -49,16 +49,12 @@ describe("Software page", () => {
       .closest("section");
 
     expect(hero).not.toBeNull();
-    const heroScreens = (hero as HTMLElement).querySelectorAll("img");
-    expect(heroScreens).toHaveLength(2);
+    const heroScreens = within(hero as HTMLElement).getAllByRole("img");
+    expect(heroScreens).toHaveLength(1);
     expect(heroScreens[0]).toHaveAttribute("src", "/software/1.png");
     expect(heroScreens[0]).toHaveAttribute("width", "2996");
     expect(heroScreens[0]).toHaveAttribute("height", "1540");
     expect(heroScreens[0]).toHaveAttribute("fetchpriority", "high");
-    expect(heroScreens[1]).toHaveAttribute("src", "/software/2.png");
-    expect(heroScreens[1]).toHaveAttribute("width", "2998");
-    expect(heroScreens[1]).toHaveAttribute("height", "1548");
-    expect(heroScreens[1]).toHaveAttribute("fetchpriority", "high");
     const contactAction = within(hero as HTMLElement).getByRole("link", {
       name: "Iniciar un proyecto",
     });
@@ -72,23 +68,56 @@ describe("Software page", () => {
     expect(demoAction).toHaveAttribute("target", "_blank");
     expect(demoAction).toHaveAttribute("rel", "noopener noreferrer");
 
-    expect(screen.getByRole("img", { name: "Resumen operativo" })).toHaveAttribute(
-      "src",
-      "/software/1.png",
+    const productScreens = screen.getAllByRole("img").filter((image) =>
+      image.getAttribute("src")?.startsWith("/software/"),
     );
-    expect(screen.getByRole("img", { name: "Seguimiento comercial" })).toHaveAttribute(
+    expect(productScreens.map((image) => image.getAttribute("src"))).toEqual([
+      "/software/1.png",
+      "/software/2.png",
+      "/software/3.png",
+    ]);
+    expect(productScreens.every((image) => image.getAttribute("alt")?.trim())).toBe(true);
+  });
+
+  it("uses titles and spacing instead of eyebrows", () => {
+    const { container } = renderPage();
+
+    expect(container.querySelector(".software-label")).toBeNull();
+    expect(container.querySelector(".software-hero__eyebrow")).toBeNull();
+    expect(screen.queryByText("Software a medida · Diseño con identidad")).toBeNull();
+    expect(screen.queryByText("Cuándo puede ser útil")).toBeNull();
+    expect(screen.queryByText("Qué construimos")).toBeNull();
+    expect(screen.queryByText("Cómo trabajamos")).toBeNull();
+    expect(screen.queryByText("Lo visible y lo técnico")).toBeNull();
+    expect(screen.getAllByText("Preguntas frecuentes")).toHaveLength(1);
+  });
+
+  it("connects each secondary screen to a concrete product capability", () => {
+    renderPage();
+
+    const commercialStory = screen
+      .getByRole("heading", { name: "Seguimiento que reúne la información importante." })
+      .closest("article");
+    const operationsStory = screen
+      .getByRole("heading", { name: "La operación visible en un mismo lugar." })
+      .closest("article");
+
+    expect(commercialStory).not.toBeNull();
+    expect(within(commercialStory as HTMLElement).getByRole("img")).toHaveAttribute(
       "src",
       "/software/2.png",
     );
-    expect(screen.getByRole("img", { name: "Gestión de equipos" })).toHaveAttribute(
+    expect(operationsStory).not.toBeNull();
+    expect(within(operationsStory as HTMLElement).getByRole("img")).toHaveAttribute(
       "src",
       "/software/3.png",
     );
-    expect(screen.getByText("Ejemplo de software")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Abrir demostración" })).toMatchObject({
-      target: "_blank",
-      rel: expect.stringContaining("noopener"),
-    });
+
+    const demoLinks = screen.getAllByRole("link", { name: /demostración/i });
+    expect(demoLinks).toHaveLength(2);
+    expect(demoLinks.every((link) => link.getAttribute("href") === "/software/panel-crm")).toBe(
+      true,
+    );
   });
 
   it("opens one FAQ answer and reports its expanded state", async () => {
@@ -147,6 +176,8 @@ describe("Software page", () => {
       { level: "H2", text: "Cuando las herramientas existentes ya no acompañan el trabajo." },
       { level: "H2", text: "Un sistema definido alrededor del problema." },
       { level: "H2", text: "Una interfaz para ver, decidir y actuar." },
+      { level: "H3", text: "Seguimiento que reúne la información importante." },
+      { level: "H3", text: "La operación visible en un mismo lugar." },
       { level: "H2", text: "Decisiones claras en cada etapa." },
       { level: "H3", text: "Diagnóstico" },
       { level: "H3", text: "Definición" },

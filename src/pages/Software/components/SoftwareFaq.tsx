@@ -7,7 +7,6 @@ const SoftwareFaq = () => {
   return (
     <section className="software-faq">
       <div className="software-faq__intro">
-        <p className="software-label">Preguntas frecuentes</p>
         <h2>Preguntas frecuentes</h2>
       </div>
       <div className="software-faq__items">

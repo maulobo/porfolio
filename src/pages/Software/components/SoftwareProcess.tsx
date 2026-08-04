@@ -1,14 +1,12 @@
 type SoftwareProcessProps = {
-  eyebrow: string;
   title: string;
   body: string;
   steps: readonly { name: string; detail: string }[];
 };
 
-const SoftwareProcess = ({ eyebrow, title, body, steps }: SoftwareProcessProps) => (
+const SoftwareProcess = ({ title, body, steps }: SoftwareProcessProps) => (
   <section className="software-process">
     <div className="software-process__intro">
-      <p className="software-label">{eyebrow}</p>
       <h2>{title}</h2>
       <p className="software-section-copy">{body}</p>
     </div>

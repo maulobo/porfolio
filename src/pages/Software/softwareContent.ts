@@ -22,6 +22,28 @@ export const softwareContent = {
     { name: "Publicación", detail: "Puesta en marcha y acompañamiento." },
     { name: "Evolución", detail: "Documentación y mejoras siguientes." },
   ],
+  productStories: [
+    {
+      title: "Seguimiento que reúne la información importante.",
+      body: "Una vista comercial puede ordenar oportunidades, responsables y próximos pasos sin repartir el contexto entre distintas herramientas.",
+      image: {
+        src: "/software/2.png",
+        alt: "Vista de seguimiento comercial con oportunidades, responsables y estados",
+        width: 2998,
+        height: 1548,
+      },
+    },
+    {
+      title: "La operación visible en un mismo lugar.",
+      body: "Equipos, disponibilidad y estados de trabajo pueden convivir en una interfaz diseñada alrededor de la forma real de operar.",
+      image: {
+        src: "/software/3.png",
+        alt: "Vista de gestión operativa con equipos, disponibilidad y estados de trabajo",
+        width: 3006,
+        height: 1390,
+      },
+    },
+  ],
   faq: [
     {
       question: "¿Qué tipo de software desarrollan?",
@@ -44,27 +66,22 @@ export const softwareContent = {
 
 export const softwarePageCopy = {
   hero: {
-    eyebrow: "Software a medida · Diseño con identidad",
     title: "La operación necesita su propio sistema.",
     body: "Desarrollamos plataformas, paneles e integraciones alrededor de procesos reales. La experiencia visible y la lógica que la sostiene forman parte del mismo proyecto.",
   },
   useCases: {
-    eyebrow: "Cuándo puede ser útil",
     title: "Cuando las herramientas existentes ya no acompañan el trabajo.",
     body: "La necesidad puede aparecer como información dispersa, tareas manuales, falta de seguimiento o sistemas que no reflejan la forma real de operar.",
   },
   capabilities: {
-    eyebrow: "Qué construimos",
     title: "Un sistema definido alrededor del problema.",
     body: "El alcance se decide según el contexto: desde una herramienta puntual hasta una plataforma que conecta distintas áreas de la operación.",
   },
   process: {
-    eyebrow: "Cómo trabajamos",
     title: "Decisiones claras en cada etapa.",
     body: "El proceso se adapta al alcance, pero mantiene responsables, entregables e instancias de revisión.",
   },
   layers: {
-    eyebrow: "Lo visible y lo técnico",
     title: "La interfaz es solo una parte del sistema.",
     body: "Trabajamos la experiencia, la lógica, los datos y las integraciones como una misma solución. La tecnología aparece como respaldo, no como argumento vacío.",
   },
