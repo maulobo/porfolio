@@ -2,9 +2,28 @@ import { useEffect } from "react";
 import { useLocation } from "react-router";
 
 export default function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    let frameId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    if (hash) {
+      frameId = window.requestAnimationFrame(() => {
+        const target = document.getElementById(hash.slice(1));
+        target?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        });
+      });
+
+      return () => {
+        if (frameId !== undefined) window.cancelAnimationFrame(frameId);
+      };
+    }
+
     // Force scroll to top immediately
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
@@ -20,10 +39,13 @@ export default function ScrollToTop() {
     
     // Try immediately and also after a short delay
     scrollToTop();
-    const timeoutId = setTimeout(scrollToTop, 100);
+    timeoutId = setTimeout(scrollToTop, 100);
     
-    return () => clearTimeout(timeoutId);
-  }, [pathname]);
+    return () => {
+      if (frameId !== undefined) window.cancelAnimationFrame(frameId);
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    };
+  }, [pathname, hash]);
 
   return null;
 }

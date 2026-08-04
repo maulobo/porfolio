@@ -1,0 +1,98 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import clsx from "clsx";
+import { serviceLinks } from "./navigation";
+
+type ServicesMenuProps = {
+  pathname: string;
+  onOpenChange: (open: boolean) => void;
+};
+
+export default function ServicesMenu({ pathname, onOpenChange }: ServicesMenuProps) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const close = (restoreFocus = false) => {
+    setOpen(false);
+    onOpenChange(false);
+    if (restoreFocus) {
+      triggerRef.current?.focus();
+    }
+  };
+
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    onOpenChange(next);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        close();
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        close(true);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={toggle}
+        aria-label="Servicios (menú)"
+        aria-expanded={open}
+        aria-controls="services-menu"
+        aria-current={pathname.startsWith("/servicios/") ? "page" : undefined}
+        className={clsx(
+          "relative py-2 text-sm uppercase tracking-widest font-medium transition-colors duration-300",
+          pathname.startsWith("/servicios/")
+            ? "text-brand-pink"
+            : "text-brand-light/70 hover:text-brand-light",
+        )}
+      >
+        Servicios
+      </button>
+
+      {open && (
+        <div
+          id="services-menu"
+          role="region"
+          aria-label="Servicios"
+          className="absolute left-1/2 top-full mt-3 w-[24rem] -translate-x-1/2 border border-brand-gray/30 bg-brand-dark p-3 shadow-2xl"
+        >
+          {serviceLinks.map((service) => (
+            <Link
+              key={service.path}
+              to={service.path}
+              aria-current={pathname === service.path ? "page" : undefined}
+              onClick={() => close()}
+              className="block px-4 py-3 transition-colors hover:bg-brand-light/10"
+            >
+              <span className="block text-sm font-medium text-brand-light">{service.name}</span>
+              <span className="mt-1 block text-xs leading-relaxed text-brand-light/60">
+                {service.description}
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
