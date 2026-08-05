@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const team = [
   {
-    name: "Anabel",
+    name: "Valeria",
     role: "Frontend Development, UX/UI y QA",
     photo: "/team/ana.jpg",
     copy: "Trabaja sobre la experiencia, la interfaz y la calidad de cada producto. Convierte conceptos y recorridos en sitios claros, consistentes y preparados para funcionar correctamente en distintos dispositivos.",
@@ -18,7 +18,7 @@ const team = [
   {
     name: "Martín",
     role: "Producción audiovisual y diseño 3D",
-    photo: "/team/martin.jpeg",
+    photo: "/team/martiin.jpeg",
     copy: "Construye la dimensión visual y narrativa de los proyectos. Desarrolla video, motion y piezas 3D desde la idea inicial hasta la postproducción, cuidando la coherencia y el detalle de cada entrega.",
     accent: "bg-[#f3f0e8]",
   },

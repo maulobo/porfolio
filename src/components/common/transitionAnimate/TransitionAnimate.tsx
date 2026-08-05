@@ -9,6 +9,9 @@ const routes: Record<string, string> = {
   "/studio": "Studio",
   "/work": "Projectos",
   "/servicios/software": "Software",
+  "/servicios/web": "Sitios web",
+  "/servicios/visibilidad": "Visibilidad",
+  "/servicios/audiovisual": "Audiovisual",
   "/about": "About",
   "/contact": "Contact",
 };

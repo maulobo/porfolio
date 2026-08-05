@@ -27,4 +27,25 @@ describe("public routes", () => {
       }),
     ).toBeInTheDocument();
   });
+
+  it.each([
+    ["/servicios/web", "Sitios web y landings"],
+    ["/servicios/visibilidad", "Visibilidad en buscadores e IA"],
+    ["/servicios/audiovisual", "Contenido audiovisual"],
+  ])("renders the coming soon screen at %s", (path: string, name: string) => {
+    render(
+      <MemoryRouter initialEntries={[path]}>
+        <AnimatedRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: "Próximamente vas a poder ver esta sección.",
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(name)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /jugar mientras tanto/i })).toBeInTheDocument();
+  });
 });

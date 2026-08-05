@@ -59,7 +59,7 @@ const ProjectCard: React.FC<{
   const y = useTransform(smoothProgress, [0, 1], yRange);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isHovered && project.hoverImages && project.hoverImages.length > 0) {
       interval = setInterval(() => {
         setCurrentImageIndex(

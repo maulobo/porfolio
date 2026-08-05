@@ -1,6 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import clsx from "clsx";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import MenuRow from "./MenuRow";
+import {
+  overlayVariants,
+  panelVariants,
+  rowVariants,
+  shadowVariants,
+  wrapperVariants,
+} from "./menuMotion";
 import { primaryLinks, serviceLinks } from "./navigation";
 
 type MobileNavigationProps = {
@@ -19,24 +26,26 @@ const focusableSelector =
 
 export default function MobileNavigation({ pathname, onOpenChange }: MobileNavigationProps) {
   const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
-  const close = (restoreFocus = false) => {
-    setOpen(false);
-    setServicesOpen(false);
-    onOpenChange(false);
-    if (restoreFocus) {
-      triggerRef.current?.focus();
-    }
-  };
+  // Memoizado: el effect lo usa y sin esto quedaría capturado en una closure vieja.
+  const close = useCallback(
+    (restoreFocus = false) => {
+      setOpen(false);
+      onOpenChange(false);
+      if (restoreFocus) {
+        triggerRef.current?.focus();
+      }
+    },
+    [onOpenChange],
+  );
 
   const toggle = () => {
     const next = !open;
     setOpen(next);
     onOpenChange(next);
-    if (!next) setServicesOpen(false);
   };
 
   useEffect(() => {
@@ -55,11 +64,6 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        if (panelRef.current?.querySelector("#mobile-services-menu")) {
-          setServicesOpen(false);
-          return;
-        }
-
         close(true);
         return;
       }
@@ -93,7 +97,7 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
       document.removeEventListener("keydown", handleKeyDown);
       desktopQuery.removeEventListener("change", handleDesktopChange);
     };
-  }, [open]);
+  }, [open, close]);
 
   return (
     <div className="md:hidden">
@@ -104,78 +108,129 @@ export default function MobileNavigation({ pathname, onOpenChange }: MobileNavig
         aria-expanded={open}
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
         onClick={toggle}
-        className="min-h-11 border-2 border-brand-light/35 px-3 py-2 text-xs font-medium uppercase tracking-widest text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-pink"
+        className="relative z-[115] min-h-11 border-2 border-brand-pink bg-brand-dark px-3 py-2 text-xs font-medium uppercase tracking-widest text-brand-light transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-pink"
       >
         {open ? "Cerrar menú" : "Abrir menú"}
       </button>
 
-      {open && (
-        <div
-          ref={panelRef}
-          id="mobile-navigation"
-          className="software-mobile-navigation fixed inset-x-0 top-[4.5rem] bottom-0 z-[110] overflow-y-auto border-t-2 border-brand-light/20 bg-brand-dark px-6 py-8 shadow-2xl"
-        >
-          <nav aria-label="Navegación móvil" className="flex flex-col gap-1">
-            {primaryLinks.slice(0, 1).map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => close()}
-                aria-current={pathname === link.path ? "page" : undefined}
-                className="min-h-11 border-b border-brand-light/15 py-4 text-xl font-medium text-brand-light focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-pink"
-              >
-                {link.name}
-              </Link>
-            ))}
+      <AnimatePresence>
+        {open && (
+          /* Separa el menú del fondo del sitio; tocarlo también cierra. */
+          <motion.div
+            key="overlay"
+            aria-hidden="true"
+            onClick={() => close()}
+            variants={reduceMotion ? undefined : overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-[105] bg-[#0a0c12]/80 backdrop-blur-md"
+          />
+        )}
 
-            <div className="border-b border-brand-light/15 py-4">
-              <button
-                type="button"
-                aria-expanded={servicesOpen}
-                aria-controls="mobile-services-menu"
-                onClick={() => setServicesOpen((current) => !current)}
-                className={clsx(
-                  "min-h-11 w-full text-left text-xl font-medium text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-pink",
-                  pathname.startsWith("/servicios/") && "text-brand-pink",
-                )}
-              >
-                Servicios
-              </button>
+        {open && (
+          <motion.div
+            key="panel"
+            ref={panelRef}
+            id="mobile-navigation"
+            variants={wrapperVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-x-0 bottom-0 top-[4.5rem] z-[110] overflow-y-auto overscroll-contain px-4 pb-12 pt-3"
+          >
+            <div className="relative">
+              {/* Sombra sólida como capa propia: así puede animarse por separado. */}
+              <motion.span
+                aria-hidden="true"
+                variants={reduceMotion ? undefined : shadowVariants}
+                className="pointer-events-none absolute inset-0 bg-[#ff2bf9]"
+              />
 
-              {servicesOpen && (
-                <div id="mobile-services-menu" className="mt-3 flex flex-col border-l border-brand-pink pl-4">
-                  {serviceLinks.map((service) => (
-                    <Link
-                      key={service.path}
-                      to={service.path}
-                      onClick={() => close()}
-                      aria-current={pathname === service.path ? "page" : undefined}
-                      className="min-h-11 py-3 text-sm text-brand-light/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-pink"
-                    >
-                      <span className="block font-medium text-brand-light">{service.name}</span>
-                      <span className="mt-1 block text-xs leading-relaxed text-brand-light/55">
-                        {service.description}
-                      </span>
-                    </Link>
+              <motion.nav
+                aria-label="Navegación móvil"
+                variants={reduceMotion ? undefined : panelVariants}
+                style={{ originY: 0 }}
+                className="relative border-[3px] border-[#111111] bg-[#f3f0e8] text-[#111111]"
+              >
+                {/* Cabecera tipo "ficha": el detalle que hace distinto a este menú. */}
+                <motion.div
+                  variants={reduceMotion ? undefined : rowVariants}
+                  className="flex items-center justify-between gap-4 border-b-[3px] border-[#111111] bg-[#111111] px-4 py-2.5"
+                >
+                  <span className="font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#f3f0e8]">
+                    Menú
+                  </span>
+                  <span className="font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#d7ff4f]">
+                    Scland
+                  </span>
+                </motion.div>
+
+                <div className="flex flex-col">
+                  {primaryLinks.slice(0, 1).map((link) => (
+                    <MenuRow
+                      key={link.path}
+                      to={link.path}
+                      name={link.name}
+                      active={pathname === link.path}
+                      animate={!reduceMotion}
+                      onSelect={() => close()}
+                    />
                   ))}
                 </div>
-              )}
-            </div>
 
-            {primaryLinks.slice(1).map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => close()}
-                aria-current={pathname === link.path ? "page" : undefined}
-                className="min-h-11 border-b border-brand-light/15 py-4 text-xl font-medium text-brand-light focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-pink"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+                {/* Mismo bloque de servicios que el desplegable de escritorio. */}
+                <motion.div
+                  variants={reduceMotion ? undefined : rowVariants}
+                  className="flex items-center justify-between gap-4 border-y-[3px] border-[#111111] bg-[#111111] px-4 py-2"
+                >
+                  <span className="font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#f3f0e8]">
+                    Servicios
+                  </span>
+                  <span className="font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#d7ff4f]">
+                    {String(serviceLinks.length).padStart(2, "0")} áreas
+                  </span>
+                </motion.div>
+
+                {/* Sólo el nombre: en mobile el alto es el recurso escaso y el
+                    menú tiene que entrar entero en pantalla. */}
+                <div className="flex flex-col">
+                  {serviceLinks.map((service) => (
+                    <MenuRow
+                      key={service.path}
+                      to={service.path}
+                      name={service.name}
+                      active={pathname === service.path}
+                      animate={!reduceMotion}
+                      onSelect={() => close()}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex flex-col border-t-[3px] border-[#111111]">
+                  {primaryLinks.slice(1).map((link) => (
+                    <MenuRow
+                      key={link.path}
+                      to={link.path}
+                      name={link.name}
+                      active={pathname === link.path}
+                      animate={!reduceMotion}
+                      onSelect={() => close()}
+                    />
+                  ))}
+                </div>
+
+                <motion.p
+                  variants={reduceMotion ? undefined : rowVariants}
+                  className="border-t-[3px] border-[#111111] bg-[#f3f0e8] px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18rem] text-black/55"
+                >
+                  Se combinan según el proyecto
+                </motion.p>
+              </motion.nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

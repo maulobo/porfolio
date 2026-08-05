@@ -1,29 +1,31 @@
 export type ServiceLink = {
   name: string;
   path: string;
-  description: string;
+  
+  /** `live` = la sección ya existe. `soon` = pantalla "en construcción". */
+  status: "live" | "soon";
 };
 
 export const serviceLinks: readonly ServiceLink[] = [
   {
-    name: "Sitios web y landings",
-    path: "/#servicios-web",
-    description: "Sitios con identidad, estructura y ejecución cuidada.",
-  },
-  {
     name: "Software a medida",
     path: "/servicios/software",
-    description: "Plataformas, paneles, integraciones y automatizaciones.",
+    status: "live",
+  },
+  {
+    name: "Sitios web y landings",
+    path: "/servicios/web",
+    status: "soon",
   },
   {
     name: "Visibilidad en buscadores e IA",
-    path: "/#servicios-visibilidad",
-    description: "SEO técnico, contenidos y respuestas generativas.",
+    path: "/servicios/visibilidad",
+    status: "soon",
   },
   {
-    name: "Video y motion",
-    path: "/#servicios-audiovisual",
-    description: "Piezas para explicar productos, servicios e ideas.",
+    name: "Contenido audiovisual",
+    path: "/servicios/audiovisual",
+    status: "soon",
   },
 ] as const;
 

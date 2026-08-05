@@ -1,4 +1,5 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import SoftwareFigure from "./SoftwareFigure";
 import { softwarePageCopy } from "../softwareContent";
 
 const heroVariants: Variants = {
@@ -11,6 +12,8 @@ const staticVariants: Variants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const { hero } = softwarePageCopy;
+
 const SoftwareHero = () => {
   const shouldReduceMotion = useReducedMotion();
   const variants = shouldReduceMotion ? staticVariants : heroVariants;
@@ -20,48 +23,39 @@ const SoftwareHero = () => {
 
   return (
     <motion.section
-      className="software-hero min-h-screen"
+      className="software-hero"
       initial="hidden"
       animate="visible"
       variants={variants}
       transition={transition}
     >
       <div className="software-hero__content">
+        <motion.p className="software-eyebrow" variants={variants} transition={transition}>
+          {hero.eyebrow}
+        </motion.p>
         <motion.h1 className="software-hero__title" variants={variants} transition={transition}>
-          {softwarePageCopy.hero.title}
+          {hero.title}
         </motion.h1>
         <motion.p className="software-hero__body" variants={variants} transition={transition}>
-          {softwarePageCopy.hero.body}
+          {hero.body}
         </motion.p>
         <motion.div className="software-hero__actions" variants={variants} transition={transition}>
-          <a
-            className="software-button software-button--primary"
-            href="https://wa.me/5492995831639"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Iniciar un proyecto
-          </a>
-          <a
-            className="software-button software-button--secondary"
-            href="/software/panel-crm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver demostración
-          </a>
+          {hero.actions.map((action) => (
+            <a
+              key={action.label}
+              className={`software-button software-button--${action.variant}`}
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {action.label}
+            </a>
+          ))}
         </motion.div>
       </div>
 
-      <motion.div className="software-product-stage" variants={variants} transition={transition}>
-        <img
-          className="software-product-stage__image"
-          src="/software/1.png"
-          alt="Panel operativo con indicadores, actividad reciente y accesos de gestión"
-          width={2996}
-          height={1540}
-          fetchPriority="high"
-        />
+      <motion.div className="software-hero__figure" variants={variants} transition={transition}>
+        <SoftwareFigure {...hero.image} priority />
       </motion.div>
     </motion.section>
   );

@@ -3,14 +3,17 @@ import FooterCustom, { FooterType } from "../../components/common/footerCustom/F
 import TransitionAnimate from "../../components/common/transitionAnimate/TransitionAnimate";
 import {
   SoftwareClosing,
+  SoftwareContact,
   SoftwareFaq,
   SoftwareHero,
-  SoftwareInfoSection,
   SoftwareProcess,
   SoftwareShowcase,
+  SoftwareTopics,
 } from "./components";
-import { softwareContent, softwarePageCopy } from "./softwareContent";
+import { softwarePageCopy } from "./softwareContent";
 import "./software.css";
+
+const { problem, solution, layers } = softwarePageCopy;
 
 const Software = () => {
   useEffect(() => {
@@ -32,7 +35,7 @@ const Software = () => {
 
       if (!existingDescription) {
         description.remove();
-      } else if (previousDescription === null) {
+      } else if (previousDescription == null) {
         existingDescription.removeAttribute("content");
       } else {
         existingDescription.content = previousDescription;
@@ -44,17 +47,14 @@ const Software = () => {
     <TransitionAnimate>
       <main className="software-page">
         <SoftwareHero />
-        <SoftwareInfoSection {...softwarePageCopy.useCases} items={softwareContent.useCases} />
-        <SoftwareInfoSection
-          {...softwarePageCopy.capabilities}
-          items={softwareContent.capabilities}
-          dark
-        />
+        <SoftwareTopics {...problem} shape="one" columns={4} white />
+        <SoftwareTopics {...solution} shape="two" columns={3} />
         <SoftwareShowcase />
-        <SoftwareProcess {...softwarePageCopy.process} steps={softwareContent.process} />
-        <SoftwareInfoSection {...softwarePageCopy.layers} items={softwareContent.layers} dark />
+        <SoftwareProcess />
+        <SoftwareTopics {...layers} shape="two" columns={3} />
         <SoftwareFaq />
         <SoftwareClosing />
+        <SoftwareContact />
         <FooterCustom typeFooter={FooterType.FOOTERWORK} />
       </main>
     </TransitionAnimate>

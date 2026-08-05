@@ -1,0 +1,55 @@
+.coming-soon {
+  --cs-ink: #111111;
+  --cs-paper: #f3f0e8;
+  --cs-yellow: #ffe500;
+  --cs-pink: #ff2bf9;
+  --cs-lime: #d7ff4f;
+}
+
+/* Cinta de obra: el track se duplica y se desplaza -50% para un loop sin costura. */
+.coming-soon__tape {
+  position: absolute;
+  left: 50%;
+  width: 150vw;
+  overflow: hidden;
+  border-block: 4px solid var(--cs-ink);
+  background: var(--cs-yellow);
+  box-shadow: 0 10px 0 rgba(17, 17, 17, 0.35);
+}
+
+.coming-soon__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  will-change: transform;
+  animation: cs-marquee 24s linear infinite;
+}
+
+.coming-soon__track--reverse {
+  animation: cs-marquee-reverse 30s linear infinite;
+}
+
+@keyframes cs-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes cs-marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon__track,
+  .coming-soon__track--reverse {
+    animation: none;
+  }
+}

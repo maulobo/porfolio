@@ -39,7 +39,7 @@ describe("Navbar services menu", () => {
       expect.arrayContaining([
         expect.objectContaining({ textContent: expect.stringMatching(/sitios web/i) }),
         expect.objectContaining({ textContent: expect.stringMatching(/visibilidad/i) }),
-        expect.objectContaining({ textContent: expect.stringMatching(/video y motion/i) }),
+        expect.objectContaining({ textContent: expect.stringMatching(/contenido audiovisual/i) }),
       ]),
     );
 
@@ -72,7 +72,7 @@ describe("Navbar services menu", () => {
     );
   });
 
-  it("opens the mobile navigation, expands Services, and restores body scroll", async () => {
+  it("opens the mobile navigation with the services listed, and restores body scroll", async () => {
     const user = userEvent.setup();
     const lenis = {
       isStopped: false,
@@ -89,7 +89,8 @@ describe("Navbar services menu", () => {
     await user.click(menuButton);
     expect(document.body).toHaveStyle({ overflow: "hidden" });
     expect(lenis.stop).toHaveBeenCalledOnce();
-    await user.click(screen.getByRole("button", { name: /^servicios$/i }));
+    // El panel móvil muestra la misma card que el desplegable de escritorio:
+    // los servicios están a la vista, sin acordeón.
     expect(screen.getByRole("link", { name: /software a medida/i })).toBeVisible();
 
     await user.click(screen.getByRole("button", { name: /cerrar menú/i }));
@@ -153,27 +154,6 @@ describe("Navbar services menu", () => {
 
     expect(screen.getByRole("button", { name: /abrir menú/i })).toHaveFocus();
     expect(document.body.style.overflow).toBe("");
-  });
-
-  it("closes the mobile Services accordion before closing the panel with Escape", async () => {
-    const user = userEvent.setup();
-    renderNavbar();
-
-    await user.click(screen.getByRole("button", { name: /abrir menú/i }));
-    const servicesButton = screen.getByRole("button", { name: /^servicios$/i });
-    await user.click(servicesButton);
-    expect(servicesButton).toHaveAttribute("aria-expanded", "true");
-
-    await user.keyboard("{Escape}");
-
-    expect(screen.getByRole("button", { name: /cerrar menú/i })).toBeInTheDocument();
-    expect(servicesButton).toHaveAttribute("aria-expanded", "false");
-    expect(screen.queryByRole("link", { name: /software a medida/i })).not.toBeInTheDocument();
-
-    await user.keyboard("{Escape}");
-
-    expect(screen.getByRole("button", { name: /abrir menú/i })).toHaveFocus();
-    expect(screen.queryByRole("navigation", { name: /navegación móvil/i })).not.toBeInTheDocument();
   });
 
   it("keeps the visible close trigger in the mobile focus loop", async () => {

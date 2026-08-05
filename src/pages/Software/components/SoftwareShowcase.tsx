@@ -1,40 +1,40 @@
-import { softwareContent } from "../softwareContent";
+import SoftwareFigure from "./SoftwareFigure";
+import SoftwareSectionHead from "./SoftwareSectionHead";
+import { softwarePageCopy } from "../softwareContent";
+
+const { showcase } = softwarePageCopy;
 
 const SoftwareShowcase = () => (
-  <section className="software-showcase">
-    <div className="software-showcase__intro">
-      <h2>Una interfaz para ver, decidir y actuar.</h2>
-      <p className="software-section-copy">
-        Mostramos una plataforma operativa de demostración. Cada pantalla responde a una tarea y
-        mantiene la información necesaria dentro del mismo sistema.
-      </p>
-    </div>
+  <section className="software-section">
+    <div className="software-section__inner">
+      <SoftwareSectionHead title={showcase.title} body={showcase.body} shape="three" />
 
-    <div className="software-showcase__stories">
-      {softwareContent.productStories.map((story, index) => (
-        <article
-          className={`software-product-story${index % 2 ? " software-product-story--reverse" : ""}`}
-          key={story.image.src}
+      <div className="software-stories">
+        {showcase.stories.map((story, index) => (
+          <article
+            key={story.image.src}
+            className={`software-story${index % 2 ? " software-story--reverse" : ""}`}
+          >
+            <div className="software-story__copy">
+              <h3>{story.title}</h3>
+              <p>{story.body}</p>
+            </div>
+            <SoftwareFigure {...story.image} />
+          </article>
+        ))}
+      </div>
+
+      <div className="software-showcase__cta">
+        <a
+          className="software-button software-button--demo"
+          href={showcase.cta.href}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <div className="software-product-story__copy">
-            <h3>{story.title}</h3>
-            <p>{story.body}</p>
-          </div>
-          <figure className="software-product-story__media">
-            <img {...story.image} loading="lazy" />
-          </figure>
-        </article>
-      ))}
+          {showcase.cta.label}
+        </a>
+      </div>
     </div>
-
-    <a
-      className="software-showcase__demo-link"
-      href="/software/panel-crm"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Abrir demostración
-    </a>
   </section>
 );
 

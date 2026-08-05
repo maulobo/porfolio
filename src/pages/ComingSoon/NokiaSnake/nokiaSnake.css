@@ -1,0 +1,291 @@
+/* Nokia 1100 dibujado en CSS a partir de public/nokia1100Model.png.
+   Todo se escala desde --nokia-w para que el aparato sea un bloque rígido. */
+
+.nokia-overlay {
+  /* Proporción fija del aparato (ancho / alto). Nunca se toca. */
+  --nokia-ratio: 0.48;
+  /* Techo de altura disponible. El ancho manda y el alto se deriva de él,
+     así ningún tope puede achicar una sola dimensión y deformar el equipo. */
+  --nokia-max-h: min(94vh, 50.6rem);
+  --nokia-w: min(94vw, calc(var(--nokia-max-h) * var(--nokia-ratio)));
+  --nokia-h: calc(var(--nokia-w) / var(--nokia-ratio));
+  --nokia-silver: linear-gradient(160deg, #eef1f5, #c4ccd8 46%, #9aa4b4);
+  --nokia-ink: #111111;
+  --nokia-lcd: #9ec87c;
+  --nokia-lcd-ink: #1b2a12;
+
+  position: fixed;
+  z-index: 200;
+  display: grid;
+  overflow: auto;
+  padding: 0.5rem;
+  background: rgba(10, 12, 18, 0.86);
+  inset: 0;
+  place-items: center;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  overscroll-behavior: contain;
+}
+
+.nokia {
+  position: relative;
+  display: flex;
+  width: var(--nokia-w);
+  height: var(--nokia-h);
+  flex-direction: column;
+  border: 3px solid var(--nokia-ink);
+  border-radius: calc(var(--nokia-w) * 0.13) calc(var(--nokia-w) * 0.13)
+    calc(var(--nokia-w) * 0.1) calc(var(--nokia-w) * 0.1);
+  padding: calc(var(--nokia-w) * 0.045);
+  background: linear-gradient(158deg, #3d4761 0%, #262e42 52%, #171d2b 100%);
+  box-shadow:
+    8px 8px 0 #ff2bf9,
+    inset 0 0 0 2px rgba(255, 255, 255, 0.07);
+  gap: calc(var(--nokia-w) * 0.028);
+}
+
+/* Auricular */
+.nokia__speaker {
+  width: 26%;
+  height: calc(var(--nokia-w) * 0.018);
+  border-radius: 999px;
+  margin-inline: auto;
+  background: #0d111b;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.nokia__brand {
+  display: grid;
+  border: 2px solid var(--nokia-ink);
+  padding: calc(var(--nokia-w) * 0.012) calc(var(--nokia-w) * 0.05);
+  margin-inline: auto;
+  background: #0d111b;
+  color: #f3f0e8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: calc(var(--nokia-w) * 0.078);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  place-items: center;
+}
+
+/* Marco plateado alrededor del LCD */
+.nokia__screen-frame {
+  border: 2px solid var(--nokia-ink);
+  border-radius: calc(var(--nokia-w) * 0.05);
+  padding: calc(var(--nokia-w) * 0.03);
+  background: var(--nokia-silver);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.nokia__screen {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  flex-direction: column;
+  border: 2px solid var(--nokia-ink);
+  background: var(--nokia-lcd);
+  box-shadow: inset 0 0 calc(var(--nokia-w) * 0.06) rgba(27, 42, 18, 0.35);
+  color: var(--nokia-lcd-ink);
+  touch-action: none;
+}
+
+.nokia__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--nokia-lcd-ink);
+  padding: calc(var(--nokia-w) * 0.018) calc(var(--nokia-w) * 0.028);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: calc(var(--nokia-w) * 0.042);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.nokia__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  /* El canvas es chiquito y se escala: así el pixelado se ve intencional. */
+  image-rendering: pixelated;
+}
+
+.nokia__message {
+  position: absolute;
+  display: grid;
+  padding: calc(var(--nokia-w) * 0.05);
+  background: rgba(158, 200, 124, 0.92);
+  inset: 0;
+  place-content: center;
+  text-align: center;
+}
+
+.nokia__message h2 {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: calc(var(--nokia-w) * 0.085);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.nokia__message p {
+  margin: calc(var(--nokia-w) * 0.03) 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: calc(var(--nokia-w) * 0.044);
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* Banda plateada con el pad y la tecla C */
+.nokia__nav {
+  position: relative;
+  display: grid;
+  border: 2px solid var(--nokia-ink);
+  border-radius: calc(var(--nokia-w) * 0.06) calc(var(--nokia-w) * 0.06)
+    calc(var(--nokia-w) * 0.3) calc(var(--nokia-w) * 0.3);
+  padding: calc(var(--nokia-w) * 0.03);
+  background: var(--nokia-silver);
+  gap: calc(var(--nokia-w) * 0.025);
+  grid-template-columns: 1fr auto 1fr;
+  place-items: center;
+}
+
+.nokia__dpad {
+  display: grid;
+  width: calc(var(--nokia-w) * 0.34);
+  height: calc(var(--nokia-w) * 0.34);
+  border: 2px solid var(--nokia-ink);
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 32%, #6f8cc9, #2f4a86);
+  gap: 1px;
+  grid-template-areas:
+    ". up ."
+    "left center right"
+    ". down .";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.nokia__dpad-key {
+  display: grid;
+  border: 0;
+  background: transparent;
+  color: #eaf0ff;
+  cursor: pointer;
+  font-size: calc(var(--nokia-w) * 0.05);
+  line-height: 1;
+  padding: 0;
+  place-items: center;
+}
+
+.nokia__dpad-key:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* En pantallas chicas se juega con el teclado numérico: el pad queda inerte. */
+.nokia__dpad--locked {
+  background: radial-gradient(circle at 50% 32%, #55617d, #2b3348);
+}
+
+.nokia__dpad-key:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.nokia__soft {
+  min-height: calc(var(--nokia-w) * 0.16);
+  border: 2px solid var(--nokia-ink);
+  border-radius: 999px;
+  padding-inline: calc(var(--nokia-w) * 0.05);
+  background: linear-gradient(#f2f5f9, #b6bfcb);
+  color: #10141f;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: calc(var(--nokia-w) * 0.05);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nokia__soft:active {
+  background: linear-gradient(#b6bfcb, #f2f5f9);
+}
+
+.nokia__keypad {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  gap: calc(var(--nokia-w) * 0.022);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.nokia__key {
+  display: flex;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--nokia-ink);
+  border-radius: 999px;
+  background: linear-gradient(#f4f7fb, #aeb8c6);
+  color: #10141f;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 900;
+  gap: 0.2em;
+  line-height: 1;
+}
+
+.nokia__key:active {
+  background: linear-gradient(#9aa5b5, #e2e8f0);
+}
+
+.nokia__key-number {
+  font-size: calc(var(--nokia-w) * 0.075);
+}
+
+.nokia__key-letters {
+  font-size: calc(var(--nokia-w) * 0.038);
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.nokia__key--active {
+  background: linear-gradient(#d7ff4f, #a8cc2f);
+}
+
+/* Sin delay de doble tap ni selección de texto al apretar rápido en mobile. */
+.nokia :where(button) {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nokia :where(button):focus-visible,
+.nokia-overlay :where(button):focus-visible {
+  outline: 3px solid #ff2bf9;
+  outline-offset: 3px;
+}
+
+/* Pantallas bajas pero anchas: ahí el pad alcanza y el teclado puede ocultarse.
+   Por debajo de 500px el teclado es el único control, así que nunca se oculta. */
+@media (max-height: 660px) and (min-width: 500px) {
+  .nokia__keypad {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nokia-overlay {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

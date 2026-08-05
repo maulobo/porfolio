@@ -1,23 +1,22 @@
-type SoftwareProcessProps = {
-  title: string;
-  body: string;
-  steps: readonly { name: string; detail: string }[];
-};
+import SoftwareSectionHead from "./SoftwareSectionHead";
+import { softwarePageCopy } from "../softwareContent";
 
-const SoftwareProcess = ({ title, body, steps }: SoftwareProcessProps) => (
-  <section className="software-process">
-    <div className="software-process__intro">
-      <h2>{title}</h2>
-      <p className="software-section-copy">{body}</p>
+const { process } = softwarePageCopy;
+
+const SoftwareProcess = () => (
+  <section className="software-section software-section--white">
+    <div className="software-section__inner">
+      <SoftwareSectionHead title={process.title} body={process.body} shape="one" />
+
+      <ol className="software-steps">
+        {process.steps.map((step) => (
+          <li key={step.name}>
+            <h3>{step.name}</h3>
+            <p>{step.detail}</p>
+          </li>
+        ))}
+      </ol>
     </div>
-    <ol className="software-process__steps grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      {steps.map(({ name, detail }) => (
-        <li key={name}>
-          <h3>{name}</h3>
-          <p>{detail}</p>
-        </li>
-      ))}
-    </ol>
   </section>
 );
 

@@ -1,6 +1,9 @@
 export { default as SoftwareClosing } from "./SoftwareClosing";
+export { default as SoftwareContact } from "./SoftwareContact";
 export { default as SoftwareFaq } from "./SoftwareFaq";
+export { default as SoftwareFigure } from "./SoftwareFigure";
 export { default as SoftwareHero } from "./SoftwareHero";
-export { default as SoftwareInfoSection } from "./SoftwareInfoSection";
 export { default as SoftwareProcess } from "./SoftwareProcess";
+export { default as SoftwareSectionHead } from "./SoftwareSectionHead";
 export { default as SoftwareShowcase } from "./SoftwareShowcase";
+export { default as SoftwareTopics } from "./SoftwareTopics";

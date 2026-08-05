@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 const team = [
   {
-    name: "Anabel",
+    name: "Valeria",
     role: "Frontend, UX/UI y QA",
     photo: "/team/ana.jpg",
     accent: "bg-[#d7ff4f]",
@@ -18,7 +18,7 @@ const team = [
   {
     name: "Martín",
     role: "Producción audiovisual y 3D",
-    photo: "/team/martin.jpeg",
+    photo: "/team/martiin.jpeg",
     accent: "bg-[#f3f0e8]",
   },
 ];

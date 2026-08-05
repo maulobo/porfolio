@@ -17,6 +17,9 @@ import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
 import ChatbotWidget from "./components/chatbot/ChatbotWidget";
 import Software from "./pages/Software/Software";
+import ServiciosWeb from "./pages/ComingSoon/ServiciosWeb";
+import ServiciosVisibilidad from "./pages/ComingSoon/ServiciosVisibilidad";
+import ServiciosAudiovisual from "./pages/ComingSoon/ServiciosAudiovisual";
 
 /**
  * El panel CRM de muestra se carga aparte: arrastra recharts y dnd-kit, que no
@@ -33,6 +36,9 @@ export function AnimatedRoutes() {
         <Route path="/studio" element={<Studio />} />
         <Route path="/work" element={<Work />} />
         <Route path="/servicios/software" element={<Software />} />
+        <Route path="/servicios/web" element={<ServiciosWeb />} />
+        <Route path="/servicios/visibilidad" element={<ServiciosVisibilidad />} />
+        <Route path="/servicios/audiovisual" element={<ServiciosAudiovisual />} />
       </Routes>
     </AnimatePresence>
   );

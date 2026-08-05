@@ -1,19 +1,23 @@
 import { softwarePageCopy } from "../softwareContent";
 
+const { closing } = softwarePageCopy;
+
 const SoftwareClosing = () => (
-  <section className="software-closing">
-    <div className="software-closing__copy">
-      <h2>{softwarePageCopy.closing.title}</h2>
-      <p>{softwarePageCopy.closing.body}</p>
+  <section className="software-section software-section--white">
+    <div className="software-section__inner software-closing">
+      <div>
+        <h2>{closing.title}</h2>
+        <p>{closing.body}</p>
+      </div>
+      <a
+        className="software-button software-button--primary"
+        href={closing.cta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {closing.cta.label}
+      </a>
     </div>
-    <a
-      className="software-button software-button--closing"
-      href="https://wa.me/5492995831639"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {softwarePageCopy.closing.cta}
-    </a>
   </section>
 );
 
