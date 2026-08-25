@@ -11,6 +11,57 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "11",
+    title: "Terraza Norte",
+    category: ["Bienes Raíces", "Diseño Web", "Desarrollo Web"],
+    description:
+      "Sitio del polo gastronómico y parking subterráneo de Neuquén: recorrido por la arquitectura, la propuesta gastronómica y el tour virtual.",
+    imageUrl: "/images/projects/banner-terraza.jpg",
+    hoverImages: [
+      "/images/projects/terraza/1.jpg",
+      "/images/projects/terraza/2.jpg",
+      "/images/projects/terraza/3.jpg",
+      "/images/projects/terraza/4.jpg",
+      "/images/projects/terraza/5.jpg",
+    ],
+    link: "/work/terraza-norte",
+    externalUrl: "https://www.terrazanorte.com/",
+  },
+  {
+    id: "10",
+    title: "Triestudio",
+    category: ["Diseño Web", "Desarrollo Web", "Branding"],
+    description:
+      "Sitio institucional para un estudio creativo: home animada, grilla de servicios y portfolio de campañas, branding y audiovisual.",
+    imageUrl: "/images/projects/banner-trie.jpg",
+    hoverImages: [
+      "/images/projects/trie/1.jpg",
+      "/images/projects/trie/2.jpg",
+      "/images/projects/trie/3.jpg",
+      "/images/projects/trie/4.jpg",
+      "/images/projects/trie/5.jpg",
+    ],
+    link: "/work/triestudio",
+    externalUrl: "https://www.triestudio.com.ar/",
+  },
+  {
+    id: "09",
+    title: "Afflora Sentidos",
+    category: ["Diseño Web", "Desarrollo Web", "Branding"],
+    description:
+      "Sitio inmersivo para una marca de aromas y bienestar, con narrativa sensorial, animaciones de scroll y navegación bilingüe.",
+    imageUrl: "/images/projects/banner-afflora.jpg",
+    hoverImages: [
+      "/images/projects/afflora/1.jpg",
+      "/images/projects/afflora/2.jpg",
+      "/images/projects/afflora/3.jpg",
+      "/images/projects/afflora/4.jpg",
+      "/images/projects/afflora/5.jpg",
+    ],
+    link: "/work/afflora",
+    externalUrl: "https://www.afflora.com.ar/",
+  },
+  {
     id: "01",
     title: "CASE Company",
     category: ["E-commerce Mayorista", "Diseño de Interfaz", "Desarrollo"],
