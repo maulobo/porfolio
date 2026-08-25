@@ -157,8 +157,8 @@ const ProjectCard: React.FC<{
           </p>
         </div>
 
-        <div className="mt-6 flex items-center gap-4">
-          {project.externalUrl && (
+        {project.externalUrl && (
+          <div className="mt-6 flex items-center gap-4">
             <a
               href={project.externalUrl}
               target="_blank"
@@ -168,14 +168,8 @@ const ProjectCard: React.FC<{
               Visitar sitio
               <ArrowUpRight size={14} />
             </a>
-          )}
-          <a
-            href={project.link}
-            className="clickable inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18rem] text-black/50 underline decoration-black/20 underline-offset-4 transition-colors duration-200 hover:text-black"
-          >
-            Ver proyecto
-          </a>
-        </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
