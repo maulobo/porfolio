@@ -11,6 +11,57 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "11",
+    title: "Terraza Norte",
+    category: ["Bienes Raíces", "Diseño Web", "Desarrollo Web"],
+    description:
+      "Sitio del polo gastronómico y parking subterráneo de Neuquén: recorrido por la arquitectura, la propuesta gastronómica y el tour virtual.",
+    imageUrl: "/images/projects/banner-terraza.webp",
+    hoverImages: [
+      "/images/projects/terraza/1.webp",
+      "/images/projects/terraza/2.webp",
+      "/images/projects/terraza/3.webp",
+      "/images/projects/terraza/4.webp",
+      "/images/projects/terraza/5.webp",
+    ],
+    link: "/work/terraza-norte",
+    externalUrl: "https://www.terrazanorte.com/",
+  },
+  {
+    id: "10",
+    title: "Triestudio",
+    category: ["Diseño Web", "Desarrollo Web", "Branding"],
+    description:
+      "Sitio institucional para un estudio creativo: home animada, grilla de servicios y portfolio de campañas, branding y audiovisual.",
+    imageUrl: "/images/projects/banner-trie.webp",
+    hoverImages: [
+      "/images/projects/trie/1.webp",
+      "/images/projects/trie/2.webp",
+      "/images/projects/trie/3.webp",
+      "/images/projects/trie/4.webp",
+      "/images/projects/trie/5.webp",
+    ],
+    link: "/work/triestudio",
+    externalUrl: "https://www.triestudio.com.ar/",
+  },
+  {
+    id: "09",
+    title: "Afflora Sentidos",
+    category: ["Diseño Web", "Desarrollo Web", "Branding"],
+    description:
+      "Sitio inmersivo para una marca de aromas y bienestar, con narrativa sensorial, animaciones de scroll y navegación bilingüe.",
+    imageUrl: "/images/projects/banner-afflora.webp",
+    hoverImages: [
+      "/images/projects/afflora/1.webp",
+      "/images/projects/afflora/2.webp",
+      "/images/projects/afflora/3.webp",
+      "/images/projects/afflora/4.webp",
+      "/images/projects/afflora/5.webp",
+    ],
+    link: "/work/afflora",
+    externalUrl: "https://www.afflora.com.ar/",
+  },
+  {
     id: "01",
     title: "CASE Company",
     category: ["E-commerce Mayorista", "Diseño de Interfaz", "Desarrollo"],
