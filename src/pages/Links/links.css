@@ -45,13 +45,14 @@
 .links__tape {
   position: absolute;
   left: 50%;
-  width: 160vw;
+  width: 120vw;
   overflow: hidden;
   border-block: 3px solid var(--lk-ink);
 }
 
 .links__track {
   display: flex;
+  backface-visibility: hidden;
   width: max-content;
   align-items: center;
   will-change: transform;
@@ -62,19 +63,46 @@
   animation: lk-marquee-reverse 34s linear infinite;
 }
 
+/* Halos: gradientes radiales, mucho más baratos que un filter: blur gigante. */
+.links__glow {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 43, 249, 0.28), transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(215, 255, 79, 0.16), transparent 45%);
+}
+
+/* Entrada: sólo opacity y transform, que corren en el compositor. */
+.links__enter {
+  animation: lk-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.links__enter--sticker {
+  animation-name: lk-pop;
+  animation-duration: 0.6s;
+}
+
 /* Sello circular que gira detrás del CTA. */
 .links__seal {
   animation: lk-spin 18s linear infinite;
 }
 
 @keyframes lk-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes lk-marquee-reverse {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes lk-enter {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes lk-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes lk-spin {
@@ -84,7 +112,8 @@
 @media (prefers-reduced-motion: reduce) {
   .links__track,
   .links__track--reverse,
-  .links__seal {
+  .links__seal,
+  .links__enter {
     animation: none;
   }
 }

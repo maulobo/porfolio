@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkle } from "lucide-react";
 import "./links.css";
 
 const WHATSAPP_URL =
   "https://wa.me/5492995831639?text=Hola%20SmartCloud%2C%20necesito%20un%20desarrollo.";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
 const services = ["Software a medida", "Web y e-commerce", "Visibilidad en IA", "Video y motion"];
 
-/** Repeticiones por mitad del track: cada mitad tiene que cubrir los 160vw de la cinta. */
-const TAPE_UNITS = 4;
+/** Repeticiones por mitad del track: cada mitad tiene que cubrir el ancho de la cinta. */
+const TAPE_UNITS = 3;
 
 const Tape = ({ items, className }: { items: string[]; className: string }) => (
   <>
@@ -59,9 +56,8 @@ const Links = () => {
 
   return (
     <main className="links relative h-dvh w-full overflow-hidden bg-[#111111] text-white">
-      {/* Halos de color: rosa arriba, lima abajo. */}
-      <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-[#ff2bf9]/30 blur-[110px]" />
-      <div className="pointer-events-none absolute -bottom-32 -right-20 h-80 w-80 rounded-full bg-[#d7ff4f]/20 blur-[110px]" />
+      {/* Halos de color con gradientes: un blur de este tamaño traba la GPU del celular. */}
+      <div className="links__glow pointer-events-none absolute inset-0" aria-hidden="true" />
 
       <div className="links__tape top-[3%] -translate-x-1/2 -rotate-3 bg-[#ff2bf9]" aria-hidden="true">
         <div className="links__track">
@@ -76,42 +72,34 @@ const Links = () => {
       </div>
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-md flex-col justify-center px-5 py-24">
-        <motion.span
-          initial={{ opacity: 0, rotate: -12, scale: 0.8 }}
-          animate={{ opacity: 1, rotate: -4, scale: 1 }}
-          transition={{ delay: 0.1, duration: 0.6, ease }}
-          className="w-fit border-2 border-[#111111] bg-[#ffe500] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#111111] shadow-[4px_4px_0_#ff2bf9]"
+        <span
+          style={{ animationDelay: "0.1s" }}
+          className="links__enter links__enter--sticker w-fit -rotate-4 border-2 border-[#111111] bg-[#ffe500] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#111111] shadow-[4px_4px_0_#ff2bf9]"
         >
           SmartCloud Studio
-        </motion.span>
+        </span>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8, ease }}
-          className="mt-5 text-[2.6rem] font-semibold leading-[0.92] tracking-tight sm:text-5xl"
+        <h1
+          style={{ animationDelay: "0.2s" }}
+          className="links__enter mt-5 text-[2.6rem] font-semibold leading-[0.92] tracking-tight sm:text-5xl"
         >
           Tu idea,{" "}
           <span className="relative inline-block">
             <span className="absolute inset-x-[-0.12em] inset-y-[0.08em] -rotate-2 bg-[#ff2bf9]" aria-hidden="true" />
             <span className="relative text-[#111111]">funcionando.</span>
           </span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8, ease }}
-          className="mt-4 max-w-sm text-sm leading-relaxed text-white/65 sm:text-base"
+        <p
+          style={{ animationDelay: "0.3s" }}
+          className="links__enter mt-4 max-w-sm text-sm leading-relaxed text-white/65 sm:text-base"
         >
           Software a medida, webs y contenido con dirección propia.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease }}
-          className="mt-8 flex flex-col gap-4"
+        <div
+          style={{ animationDelay: "0.4s" }}
+          className="links__enter mt-8 flex flex-col gap-4"
         >
           <div className="relative">
             <a
@@ -148,7 +136,7 @@ const Links = () => {
             Ver web completa
             <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </main>
   );

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
-import { AnimatedRoutes } from "./App";
+import { AnimatedRoutes } from "./SiteLayout";
 
 vi.mock("./components/common/transitionAnimate/TransitionAnimate", () => ({
   default: ({ children }: { children: ReactNode }) => <>{children}</>,
