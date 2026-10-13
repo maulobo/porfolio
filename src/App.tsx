@@ -1,62 +1,20 @@
 import { lazy, Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router";
-import { AnimatePresence } from "framer-motion";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { Analytics } from "@vercel/analytics/react";
-import Work from "./pages/Works/Work";
-import MaskCursor from "./components/common/cursor/MaskCursor";
-import SmoothScroll from "./components/common/smoothScroll/SmoothScroll";
-import Navbar from "./components/common/navbar/Navbar";
 import ScrollToTop from "./components/common/scrollToTop/ScrollToTop";
-import "./App.css";
-import Home from "./pages/Home/Home";
-import Studio from "./pages/Studio/Studio";
-import ChatbotWidget from "./components/chatbot/ChatbotWidget";
-import Software from "./pages/Software/Software";
-import ServiciosWeb from "./pages/ComingSoon/ServiciosWeb";
-import ServiciosVisibilidad from "./pages/ComingSoon/ServiciosVisibilidad";
-import ServiciosAudiovisual from "./pages/ComingSoon/ServiciosAudiovisual";
 import Links from "./pages/Links/Links";
+
+/**
+ * El sitio completo (three.js, modelos, todas las páginas) se carga aparte para
+ * que /links, que llega desde redes y casi siempre en celular, no lo descargue.
+ */
+const SiteLayout = lazy(() => import("./SiteLayout"));
 
 /**
  * El panel CRM de muestra se carga aparte: arrastra recharts y dnd-kit, que no
  * hacen falta para navegar el sitio.
  */
 const PanelCrm = lazy(() => import("./pages/Software/PanelCrm/PanelCrm"));
-
-export function AnimatedRoutes() {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/studio" element={<Studio />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/servicios/software" element={<Software />} />
-        <Route path="/servicios/web" element={<ServiciosWeb />} />
-        <Route path="/servicios/visibilidad" element={<ServiciosVisibilidad />} />
-        <Route path="/servicios/audiovisual" element={<ServiciosAudiovisual />} />
-      </Routes>
-    </AnimatePresence>
-  );
-}
-
-/** Sitio público: navbar, cursor custom y smooth scroll. */
-function SiteLayout() {
-  return (
-    <>
-      <SmoothScroll />
-      <MaskCursor />
-      <Navbar />
-      <AnimatedRoutes />
-      <ChatbotWidget />
-    </>
-  );
-}
 
 function App() {
   return (
@@ -74,7 +32,14 @@ function App() {
         />
         {/* Landing de links para redes: pantalla única, sin chrome del sitio. */}
         <Route path="/links" element={<Links />} />
-        <Route path="*" element={<SiteLayout />} />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<div style={{ minHeight: "100vh", background: "#111111" }} />}>
+              <SiteLayout />
+            </Suspense>
+          }
+        />
       </Routes>
       <Analytics />
     </Router>
