@@ -20,6 +20,7 @@ import Software from "./pages/Software/Software";
 import ServiciosWeb from "./pages/ComingSoon/ServiciosWeb";
 import ServiciosVisibilidad from "./pages/ComingSoon/ServiciosVisibilidad";
 import ServiciosAudiovisual from "./pages/ComingSoon/ServiciosAudiovisual";
+import Links from "./pages/Links/Links";
 
 /**
  * El panel CRM de muestra se carga aparte: arrastra recharts y dnd-kit, que no
@@ -71,6 +72,8 @@ function App() {
             </Suspense>
           }
         />
+        {/* Landing de links para redes: pantalla única, sin chrome del sitio. */}
+        <Route path="/links" element={<Links />} />
         <Route path="*" element={<SiteLayout />} />
       </Routes>
       <Analytics />
