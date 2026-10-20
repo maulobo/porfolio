@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { useForm } from "react-hook-form";
 import emailjs from '@emailjs/browser';
+import { track } from '../../../lib/analytics';
 import clsx from "clsx";
 // @ts-ignore
 import { Gradient } from "../../../utils/Gradient";
@@ -65,6 +66,7 @@ const FooterCustom = ({typeFooter}: FooterCustomProps) => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
+      track('Contact Form Submitted', { form: 'footer' });
       setSubmitMessage({ type: 'success', text: '¡Gracias por contactarnos! Te responderemos pronto.' });
       reset();
     } catch (error) {

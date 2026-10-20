@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { MessageSquare, X } from "lucide-react";
 import ChatbotPanel from "./ChatbotPanel";
+import { track } from "../../lib/analytics";
 
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ const ChatbotWidget = () => {
       hasOpenedRef.current = true;
     }
     setIsOpen(true);
+    track("Chatbot Opened");
   };
 
   const handleClose = () => setIsOpen(false);
