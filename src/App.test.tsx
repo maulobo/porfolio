@@ -11,6 +11,8 @@ vi.mock("./components/common/transitionAnimate/TransitionAnimate", () => ({
 vi.mock("./pages/Home/Home", () => ({ default: () => <main>Inicio</main> }));
 vi.mock("./pages/Studio/Studio", () => ({ default: () => <main>Studio</main> }));
 vi.mock("./pages/Works/Work", () => ({ default: () => <main>Proyectos</main> }));
+// jsdom no tiene WebGL.
+vi.mock("./components/common/gridScan/GridScan", () => ({ default: () => null }));
 
 describe("public routes", () => {
   it("renders the software service page at its public route", () => {
@@ -28,8 +30,20 @@ describe("public routes", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders the web service page at its public route", () => {
+    render(
+      <MemoryRouter initialEntries={["/servicios/web"]}>
+        <AnimatedRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Tu web empieza mucho antes del diseño." }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Ver nuestro trabajo" })).toHaveAttribute("href", "/work");
+  });
+
   it.each([
-    ["/servicios/web", "Sitios web y landings"],
     ["/servicios/visibilidad", "Visibilidad en buscadores e IA"],
     ["/servicios/audiovisual", "Contenido audiovisual"],
   ])("renders the coming soon screen at %s", (path: string, name: string) => {
