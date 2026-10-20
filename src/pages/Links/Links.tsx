@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { ArrowRight, ArrowUpRight, Sparkle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, LayoutGrid, Sparkle } from "lucide-react";
+import { track } from "../../lib/analytics";
 import "./links.css";
 
 const WHATSAPP_URL =
   "https://wa.me/5492995831639?text=Hola%20SmartCloud%2C%20necesito%20un%20desarrollo.";
 
 const services = ["Software a medida", "Web y e-commerce", "Visibilidad en IA", "Video y motion"];
+
+/** Cada botón se mide por separado en Mixpanel ("Links Button Clicked"). */
+const trackButton = (button: string, position: number, destination: string) => () =>
+  track("Links Button Clicked", { button, position, destination });
 
 /** Repeticiones por mitad del track: cada mitad tiene que cubrir el ancho de la cinta. */
 const TAPE_UNITS = 3;
@@ -71,7 +76,7 @@ const Links = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-md flex-col justify-center px-5 py-24">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-md flex-col justify-center px-5 py-[4.5rem]">
         <span
           style={{ animationDelay: "0.1s" }}
           className="links__enter links__enter--sticker w-fit -rotate-4 border-2 border-[#111111] bg-[#ffe500] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-[0.22rem] text-[#111111] shadow-[4px_4px_0_#ff2bf9]"
@@ -99,13 +104,14 @@ const Links = () => {
 
         <div
           style={{ animationDelay: "0.4s" }}
-          className="links__enter mt-8 flex flex-col gap-4"
+          className="links__enter mt-7 flex flex-col gap-4"
         >
           <div className="relative">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackButton("WhatsApp", 1, "whatsapp")}
               className="group relative flex min-h-[4.5rem] items-center justify-between gap-3 border-[3px] border-[#111111] bg-[#d7ff4f] py-4 pl-5 pr-14 text-[#111111] shadow-[6px_6px_0_#ff2bf9] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[9px_9px_0_#ff2bf9] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff2bf9]"
             >
               <span className="flex flex-col">
@@ -122,7 +128,20 @@ const Links = () => {
           </div>
 
           <Link
+            to="/servicios"
+            onClick={trackButton("Ver servicios", 2, "/servicios")}
+            className="group flex min-h-14 items-center justify-between gap-3 border-[3px] border-[#111111] bg-[#ff2bf9] px-5 py-3 font-mono text-xs font-black uppercase tracking-[0.16rem] text-[#111111] shadow-[6px_6px_0_#d7ff4f] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#d7ff4f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d7ff4f]"
+          >
+            <span className="flex items-center gap-2.5">
+              <LayoutGrid className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+              Ver nuestros servicios
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+          </Link>
+
+          <Link
             to="/work"
+            onClick={trackButton("Ver trabajos", 3, "/work")}
             className="group flex min-h-14 items-center justify-between gap-3 border-[3px] border-[#111111] bg-[#f3f0e8] px-5 py-3 font-mono text-xs font-black uppercase tracking-[0.16rem] text-[#111111] shadow-[6px_6px_0_rgba(255,255,255,0.18)] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ffe500] hover:shadow-[8px_8px_0_rgba(255,255,255,0.25)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff2bf9]"
           >
             Ver trabajos
@@ -131,6 +150,7 @@ const Links = () => {
 
           <Link
             to="/"
+            onClick={trackButton("Ver web completa", 4, "/")}
             className="links__ghost group flex min-h-14 items-center justify-between gap-3 border-2 border-white/30 px-5 py-3 font-mono text-xs font-black uppercase tracking-[0.16rem] text-white transition duration-200 hover:border-[#ff2bf9] hover:text-[#ff2bf9] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff2bf9]"
           >
             Ver web completa

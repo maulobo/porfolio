@@ -52,7 +52,7 @@ const Software = () => {
         <SoftwareShowcase />
         <SoftwareProcess />
         <SoftwareTopics {...layers} shape="two" columns={3} />
-        <SoftwareFaq />
+    <SoftwareFaq />
         <SoftwareClosing />
         <SoftwareContact />
         <FooterCustom typeFooter={FooterType.FOOTERWORK} />
