@@ -1,0 +1,128 @@
+/* Sitios web a medida.
+   Reutiliza la estructura de software.css (cabeceras, retícula, botones,
+   contacto) en versión oscura: las secciones son transparentes para que el
+   GridScan fijo se vea continuo de punta a punta. */
+
+.web-page {
+  --web-line: rgba(243, 240, 232, 0.2);
+  --software-muted: rgba(243, 240, 232, 0.72);
+
+  position: relative;
+  /* El overflow: clip de .software-page no afecta al fondo fijo. */
+  isolation: isolate;
+  background: var(--software-ink);
+  color: var(--software-paper);
+}
+
+.web-page__background {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: 100lvh;
+  pointer-events: none;
+}
+
+/* Todo el contenido (y el footer) va por encima del canvas. */
+.web-page > :not(.web-page__background) {
+  position: relative;
+  z-index: 1;
+}
+
+.web-page .software-hero,
+.web-page .software-section,
+.web-page .software-contact {
+  background: transparent;
+}
+
+.web-page .software-section,
+.web-page .software-contact {
+  border-top-color: var(--web-line);
+}
+
+.web-hero {
+  min-height: 100svh;
+}
+
+.web-page .software-eyebrow {
+  color: var(--software-ink);
+}
+
+/* ------------------------------------------------------------------ Botones */
+
+.web-button--ghost {
+  border-color: var(--software-paper);
+  background: rgba(17, 17, 17, 0.6);
+  color: var(--software-paper);
+  box-shadow: 5px 5px 0 var(--software-lime);
+}
+
+.web-button--ghost:hover {
+  color: var(--software-paper);
+  box-shadow: 8px 8px 0 var(--software-lime);
+}
+
+/* ------------------------------------------------------------------ Retícula
+   Celdas apenas veladas: el fondo se sigue viendo y el texto se lee igual. */
+
+.web-page .software-grid {
+  border-color: var(--web-line);
+  background: var(--web-line);
+}
+
+.web-page .software-grid__cell {
+  background: rgba(17, 17, 17, 0.72);
+}
+
+.web-page .software-grid__cell h3 {
+  color: var(--software-paper);
+}
+
+/* ------------------------------------------------------------------ Proceso
+   Lista editorial, sin numeración: título y una frase por etapa. */
+
+.web-steps {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 0;
+  grid-template-columns: minmax(0, 1fr);
+  list-style: none;
+}
+
+.web-steps li {
+  border-top: var(--software-rule) solid var(--software-pink);
+  padding-top: 1.25rem;
+}
+
+.web-steps h3 {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.42rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.web-steps p {
+  margin: 0.75rem 0 0;
+  font-size: 0.96rem;
+  line-height: 1.62;
+  color: var(--software-muted);
+}
+
+@media (min-width: 640px) {
+  .web-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .web-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ----------------------------------------------------------------- Contacto */
+
+.web-contact h2 {
+  max-width: 18ch;
+}

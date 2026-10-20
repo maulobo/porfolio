@@ -13,9 +13,9 @@ export const serviceLinks: readonly ServiceLink[] = [
     status: "live",
   },
   {
-    name: "Sitios web y landings",
+    name: "Sitios web",
     path: "/servicios/web",
-    status: "soon",
+    status: "live",
   },
   {
     name: "Visibilidad en buscadores e IA",

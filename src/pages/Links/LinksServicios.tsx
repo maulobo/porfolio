@@ -3,7 +3,8 @@ import { Link } from "react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { track } from "../../lib/analytics";
 import { servicesSummary } from "./servicesSummary";
-import GridScan from "./GridScan";
+import GridScan from "../../components/common/gridScan/GridScan";
+import { gridScanPreset } from "../../components/common/gridScan/gridScanPreset";
 import "./links.css";
 
 /**
@@ -28,30 +29,7 @@ const LinksServicios = () => {
         barra del navegador no redimensiona el canvas a cada rato.
       */}
       <div className="fixed inset-x-0 top-0 h-lvh" aria-hidden="true">
-        <GridScan
-          linesColor="#4d4757"
-          scanColor="#a855f7"
-          cells={8}
-          depth={1.8}
-          scanDuration={2.4}
-          scanDelay={1.6}
-          clickEffect="ping"
-          lineThickness={1}
-          lineStyle="solid"
-          depthFade={0.6}
-          shading={0.7}
-          reflection={0.35}
-          points
-          scanDirection="forward"
-          scanWidth={1}
-          trail={0.5}
-          glow={0.6}
-          parallax={1}
-          autoScan
-          interactive
-          intro
-          lightMode={false}
-        />
+        <GridScan {...gridScanPreset} />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-7xl flex-col justify-center px-5 py-5 md:px-10 md:py-10 lg:py-8">

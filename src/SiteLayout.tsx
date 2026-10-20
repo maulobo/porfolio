@@ -9,7 +9,7 @@ import Home from "./pages/Home/Home";
 import Studio from "./pages/Studio/Studio";
 import ChatbotWidget from "./components/chatbot/ChatbotWidget";
 import Software from "./pages/Software/Software";
-import ServiciosWeb from "./pages/ComingSoon/ServiciosWeb";
+import ServiciosWeb from "./pages/Web/Web";
 import ServiciosVisibilidad from "./pages/ComingSoon/ServiciosVisibilidad";
 import ServiciosAudiovisual from "./pages/ComingSoon/ServiciosAudiovisual";
 
