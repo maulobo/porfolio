@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { ArrowRight, ArrowUpRight, LayoutGrid, Sparkle } from "lucide-react";
+import { ArrowRight, LayoutGrid, Sparkle } from "lucide-react";
+import { siWhatsapp } from "simple-icons";
 import { track } from "../../lib/analytics";
 import "./links.css";
 
@@ -112,15 +113,18 @@ const Links = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackButton("WhatsApp", 1, "whatsapp")}
-              className="group relative flex min-h-[4.5rem] items-center justify-between gap-3 border-[3px] border-[#111111] bg-[#d7ff4f] py-4 pl-5 pr-14 text-[#111111] shadow-[6px_6px_0_#ff2bf9] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[9px_9px_0_#ff2bf9] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff2bf9]"
+              className="group relative flex min-h-[4.5rem] items-center gap-3.5 border-[3px] border-[#111111] bg-[#25D366] py-4 pl-4 pr-14 text-[#111111] shadow-[6px_6px_0_#ff2bf9] transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[9px_9px_0_#ff2bf9] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff2bf9]"
             >
+              {/* Logo oficial de WhatsApp (simple-icons): se reconoce sin leer. */}
+              <svg viewBox="0 0 24 24" className="h-9 w-9 shrink-0 fill-current" aria-hidden="true">
+                <path d={siWhatsapp.path} />
+              </svg>
               <span className="flex flex-col">
-                <span className="text-lg font-semibold leading-tight">¿Necesitás un desarrollo?</span>
-                <span className="mt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.18rem] text-black/60">
-                  Escribinos por WhatsApp
+                <span className="text-lg font-semibold leading-tight">Comunicate por WhatsApp</span>
+                <span className="mt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.18rem] text-black/65">
+                  ¿Necesitás un desarrollo?
                 </span>
               </span>
-              <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
             </a>
             <div className="pointer-events-none absolute -right-5 -top-9 h-20 w-20">
               <Seal />
